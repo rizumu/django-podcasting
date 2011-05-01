@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0">
+    <rss xmlns:itunes="http://www.itunes.com/DTDs/Podcast-1.0.dtd" version="2.0">
+    <channel>
+        <title>{{ object.title }}</title>
+        <link>{{ object.link }}</link>
+        <description>{{ object.description|striptags }}</description>
+        {% if object.language %}<language>{{ object.language }}</language>{% endif %}
+        <copyright>&#x2117; &amp; &#xA9; {% now "Y" %} {{ object.organization }}. {{ object.copyright }}.</copyright>
+        {% if object.subtitle %}<itunes:subtitle>{{ object.subtitle }}</itunes:subtitle>{% endif %}
+        <itunes:author>{{ object.organization }}</itunes:author>
+        <itunes:summary>{{ object.description|striptags }}</itunes:summary>
+        <description>{{ object.description|striptags }}</description>
+        <itunes:owner>
+            <itunes:name>{% for author in object.authors.all %}{% if forloop.first %}{% else %}{% if forloop.last %} and {% else %}, {% endif %}{% endif %}{% if author.full_name %}{{ author.full_name }}{% else %}{{ author.username }}{% endif %}{% endfor %}</itunes:name>
+            <itunes:email>{% for author in object.author.all %}{{ author.email }}{% if forloop.last %}{% else %}, {% endif %}{% endfor %}</itunes:email>
+        </itunes:owner>
+        {% if object.image %}<itunes:image href="{{ object.image.url }}" />{% endif %}
+        {% if object.image %}<image>
+            <url>{{ object.image.url }}</url>
+            <title>{{ object.title }}</title>
+            <link>{{ object.link }}</link>
+        </image>{% endif %}
+        <itunes:category text="Music" />
+        <managingEditor>{% for author in object.author.all %}{% if forloop.first %}{% else %}{% if forloop.last %} and {% else %}, {% endif %}{% endif %}{{ author.email }}{% endfor %}</managingEditor>
+        {% if object.author.email or object.webmaster.email %}<webMaster>{% if object.webmaster.email %}{{ object.webmaster.email }}{% else %}{% endif %}</webMaster>{% endif %}
+        <lastBuildDate>{{ object.list.0.created|date:"r" }}</lastBuildDate>
+        <generator>Django Web Framework</generator>
+        <docs>http://blogs.law.harvard.edu/tech/rss</docs>
+        {% if object.explicit %}<itunes:explicit>{{ object.explicit|lower }}</itunes:explicit>{% endif %}
+        {% if object.block %}<itunes:block>yes</itunes:block>{% endif %}
+        {% if object.redirect %}<itunes:new-feed-url>{{ object.redirect }}</itunes:new-feed-url>{% endif %}
+
+        {% for episode in object.episode.published %}
+        <item>
+            <title>{{ episode.title }}</title>
+            <itunes:author>{% for author in object.authors.all %}{% if forloop.first %}{% else %}{% if forloop.last %} and {% else %}, {% endif %}{% endif %}{% if author.full_name %}{{ author.full_name }}{% else %}{{ author.username }}{% endif %}{% endfor %}</itunes:author>
+            <author>{% for author in object.author.all %}{{ author.email }}{% if forloop.last %}{% else %}, {% endif %}{% endfor %}</author>
+            {% if episode.subtitle %}<itunes:subtitle>{{ episode.subtitle }}</itunes:subtitle>{% endif %}
+            <itunes:summary>{{ episode.description|striptags }}</itunes:summary>
+            <enclosure url="{{ episode.url }}" length="{{ episode.size }}" type="{{ episode.mime }}" />
+            <pubDate>{{ episode.created|date:"r" }} GMT</pubDate>
+            {% if episode.minutes and episode.seconds %}<itunes:duration>{{ episode.minutes }}:{{ episode.seconds }}</itunes:duration>{% endif %}
+            {% if episode.keywords %}<itunes:keywords>{{ episode.keywords }}</itunes:keywords>{% endif %}
+            <link>{{ episode.url }}</link>
+            <description>{{ episode.description|striptags }}</description>
+            <guid>{{ episode.uuid }}</guid>
+            {% if episode.explicit %}<itunes:explicit>{{ episode.explicit|lower }}</itunes:explicit>{% endif %}
+            {% if episode.block %}<itunes:block>yes</itunes:block>{% endif %}
+        </item>
+        {% endfor %}
+    </channel>
+</rss>

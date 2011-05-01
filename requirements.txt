@@ -1,0 +1,10 @@
+# To quickly install all requirements
+# pip install -r requirements.txt
+
+# required
+django-licenses==0.2.3
+
+# optional
+django-imagekit==0.3.6
+django-taggit==0.9.3
+python-twitter==0.8.1

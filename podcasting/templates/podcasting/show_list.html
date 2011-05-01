@@ -1,0 +1,26 @@
+{% extends "podcasting/podcasting_base.html" %}
+
+{% block head_title %}Podcast Show List{% endblock %}
+
+{% block body_class %}page-show-list{% endblock %}
+
+{% block content %}
+<div class="block">
+    <div class="title-bar">
+        <h2>Podcast Show List</h2>
+    </div>
+
+    {% for show in show_list %}
+        <h4 class="podcast-title"><a href="{{ show.get_absolute_url }}">{{ show.title }}</a></h4>
+
+        <div class="podcast-org">{{ show.organization }}</div>
+
+        {% if show.image %}
+        <div class="image"><a href="{{ show.get_absolute_url }}"><img src="{{ show.image.url }}" width="{{ show.image.width }}" height="{{ show.image.height }}" alt="{{ show.organization }} {{ show.organization|striptags }}'s logo" /></a></div>
+        {% endif %}
+
+        <div class="podcast-summary">{% if show.summary %}{{ show.summary }}{% else %}{{ show.description|striptags }}{% endif %}</div>
+    {% endfor %}
+
+</div>
+{% endblock %}

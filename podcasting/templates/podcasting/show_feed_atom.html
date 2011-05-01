@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <title>{{ object.title }}</title>
+    {% if object.subtitle %}<subtitle>{{ object.subtitle }}</subtitle>{% endif %}
+    <link rel="alternate" type="text/html" href="{{ object.link }}"/>
+    <link rel="self" type="application/atom+xml" href="http://{{ object.site }}{{ object.get_absolute_url }}"/>
+    <id>urn:uuid:{{ object.uuid }}</id>
+    {% for episode in object.episode_set.published %}{% if forloop.first %}
+    <updated>{{ episode.modified|date:"Y-m-d" }}T{{ episode.modified|date:"H:i:s" }}Z</updated>
+    {% endif %}{% endfor %}
+    <author>
+       <name>{% for author in object.authors.all %}{% if forloop.first %}{% else %}{% if forloop.last %} and {% else %}, {% endif %}{% endif %}{% if author.full_name %}{{ author.full_name }}{% else %}{{ author.username }}{% endif %}{% endfor %}</name>
+    </author>
+    {% for episode in object.episode_set.published %}
+    <entry>
+        <title>{{ episode.title }}</title>
+        <link href="http:/{{ episode.site }}{{ episode.get_absolute_url }}"></link>
+        <link rel="enclosure"
+            type="{{ episode.mime }}"
+            href="{{ episode.url }}"
+            length="{{ episode.size }}" />
+        <id>urn:uuid:{{ episode.uuid }}</id>
+        <updated>{{ episode.modified|date:"Y-m-d" }}T{{ episode.modified|date:"H:i:s" }}Z</updated>
+        <summary type="{{ episode.get_description_type_display }}">{{ episode.description }}</summary>
+    </entry>
+    {% endfor %}
+</feed>

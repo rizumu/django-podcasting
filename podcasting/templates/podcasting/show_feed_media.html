@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0"
+    xmlns:media="http://search.yahoo.com/mrss/"
+    xmlns:dcterms="http://purl.org/dc/terms/"
+    xmlns:gm="http://www.google.com/schemas/gm/1.1"
+    xmlns:dcterms="http://purl.org/dc/terms/"
+    xmlns:creativeCommons="http://backend.userland.com/creativeCommonsRssModule"
+    xmlns:itunes="http://www.itunes.com/DTDs/Podcast-1.0.dtd">
+<channel>
+    <title>{{ object.title }}</title>
+    <description>{{ object.description }}</description>
+    <lastBuildDate>{{ object.list.0.created|date:"r" }}</lastBuildDate>
+    <link>{{ object.link }}</link>
+    {% ifequal object.copyright "All rights reserved" %}<media:copyright{% if object.copyright_url %} url="{{ object.copyright_url }}"{% endif %}>{% now "Y" %} {{ object.organization }}. {{ object.copyright }}.</media:copyright>
+    {% else %}
+    {% ifequal object.copyright "Public domain" %}<media:copyright{% if object.copyright_url %} url="{{ object.copyright_url }}"{% endif %}>{% now "Y" %} {{ object.organization }}. {{ object.copyright }}.</media:copyright>
+    {% else %}
+    <creativeCommons:license>{{ object.copyright }}</creativeCommons:license>{% endifequal %}{% endifequal %}
+
+    {% for episode in object.episode.published %}
+    <item>
+        <pubDate>{{ episode.created|date:"r" }} GMT</pubDate>
+        <media:content url="{{ episode.url }}" medium="audio" type="{{ episode.mime|lower }}" fileSize="{{ episode.size }}" lang="{{ episode.show.language|lower }}" bitrate="{{ episode.bitrate }}" samplingrate="{{ episode.sample }}" channels="{{ episode.channel }}" isDefault="true">
+            <media:title{% if episode.title_type %} type="{{ episode.title_type|lower }}"{% endif %}>{{ episode.title }}</media:title>
+            <media:description{% if episode.description_type %} type="{{ episode.description_type|lower }}"{% endif %}>{{ episode.description }}</media:description>
+            <media:credit role="productioncompany">{{ episode.show.organization }}</media:credit>
+            {% if episode.role %}<media:credit role="{{ episode.role|lower }}" scheme="urn:ebu">{{ episode.show.author.all.0.first_name }} {{ episode.show.author.all.0.last_name }}</media:credit>{% endif %}
+            Music
+            {% if episode.image %}<media:thumbnail url="{{ episode.image.url }}" width="{{ episode.image.width }}" height="{{ episode.image.height }}"/>{% endif %}
+            {% if episode.keywords %}<media:keywords>{{ episode.keywords }}</media:keywords>{% endif %}
+        </media:content>
+      </item>
+    {% endfor %}
+</channel>
+</rss>

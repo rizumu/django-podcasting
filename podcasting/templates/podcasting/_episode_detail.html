@@ -1,0 +1,56 @@
+{% if episode %}
+    <div class="block">
+        <div class="podcast-details">
+            <div class="title-bar mod">
+                <h2>{{ episode.title }}</h2>
+            </div>
+            <div class="date meta">{{ episode.activate_date|date:"F j, Y" }}</div>
+            {% for enclosure in episode.enclosure_set.all %}
+                {% if enclosure.mime == 'mp3' %}
+                    <div class="episode_icon down meta sep"><a href="{{ enclosure.url }}" class="tiptip" title="to download right click and select 'save link as'">
+                        Download / Stream</a>
+                    </div>
+                {% endif %}
+            {% endfor %}
+            {% if episode.tracklist %}
+                <div class="episode_icon list meta sep"><a href="#tracklist" rel="facebox">Tracklist</a></div>
+                <div id="tracklist" class="hidden">
+                    <h3>{{ episode.title }} :: Tracklist</h3>
+                    <div class="tracklist">{{ episode.tracklist|linenumbers|linebreaksbr }}</div>
+                </div>
+            {% endif %}
+            <div class="podcasting_info">
+                <div class="clear"></div>
+                <a href="{{ episode.image_550.url }}" rel="facebox" class="podcast-thumb">
+                    <img src="{{ episode.image_120.url }}" alt="{{ episode.name }}" width="episode.image.width" height="episode.image.height" class="left" />
+                </a>
+                {% if episode.alias_set.all %}
+                    {% for alias in episode.alias_set.all %}
+                        <a href="{{ alias.get_absolute_url }}">{{ alias }}</a>
+                    {% endfor %}
+                {% endif %}
+                <div>
+                    {{ episode.subtitle }}
+                    {% if episode.description %}
+                        <br /><a href="#details" rel="facebox">read more</a>
+                        <div id="details" class="hidden">
+                            <div class="">{{ episode.description }}</div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% if episode.show.enable_comments and episode.enable_comments %}
+                <div class="line"></div>
+                <div id="comments">
+                  {# comments code here #}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% else %}
+    <div class="block">
+        <div class="title-bar">
+            <h2>Coming soon</h2>
+        </div>
+    </div>
+{% endif %}
