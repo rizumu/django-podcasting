@@ -116,7 +116,7 @@ setup(
         "django-licenses==0.2.3",
     ],
     classifiers = [
-        "Development Status :: 0.9 - Beta",
+        "Development Status :: 4 - Beta",
         "Framework :: Django",
         "Intended Audience :: Developers",
         "License :: OSI Approved :: BSD License",
