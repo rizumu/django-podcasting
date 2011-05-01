@@ -123,7 +123,7 @@ Options
   shows. Taggit may be is added to your project at point any time and
   the ``django-podcasting`` app will recognize and support it.
 
-sage
+Usage
 =====
 At the moment there are not settings and the included templates are
 enough to get started. One area that may be confusing is connecting
