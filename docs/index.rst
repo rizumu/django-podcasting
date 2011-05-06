@@ -4,6 +4,14 @@ Django Podcasting
 
 Audio podcasting functionality for django sites.
 
+The source code for Django Podcasting can be found and contributed to on
+django-podcasting_. There you can also file tickets.
+
+The in-development version of Django Podcasting can be installed with
+pip install ``django-podcasting==dev`` or ``easy_install
+django-podcasting==dev``.
+
+
 History
 =======
 Django Podcasting started off as a heavily stripped down version of
@@ -14,7 +22,7 @@ rest of the world, whatever they may be.
 
 This application is currently in use on:
 
-    http://snowprayers.net/
+    http://snowprayers.net
 
     http://rizumu.us/
 
@@ -22,8 +30,8 @@ Differences
 ===========
 At the time I had no interset in the Video podcasting features of
 django-podcast_ and video introduces a lot of extra complexity into
-the project. Considering I was first studying compliance with the
-various specs and the `syndication feed framework
+the application, considering I was first studying compliance with
+the various specs and the `syndication feed framework
 <http://docs.djangoproject.com/en/dev/ref/contrib/syndication/>`_.
 
 This application also differs from django-podcast_ in that it uses
@@ -74,7 +82,7 @@ Features
   stored, simply save any valid url to an enclosure object.
 
 **Multiple enclosure types**
-  Want to serve .ogg, .flac, .mp3 or more? It's possible.
+  Want to offer versions in .ogg, .flac, and .mp3? It's possible.
 
 **UUID**
   Podcasting uses a UUID field for show and episode uniqueness rather
@@ -82,13 +90,13 @@ Features
 
 **Bundled Forms and Templates**
   Podcasting comes with some example forms to get you started with
-  allowing non Admin users to manage a show. Generic templates are
-  also bundled to get you started.
+  for allowing site users ability to manage a show. Generic templates
+  are also bundled to get you started.
 
 **Comments**
   To add commenting to you app, you must use a separate Django
   application. One of the simplest options is
-  django-Disqus_, but you should also into django-threadedcomments_
+  django-disqus_, but you should also look into django-threadedcomments_
   and Django's built in `comments framework
   <http://docs.djangoproject.com/en/dev/ref/contrib/comments/>`_.
 
@@ -105,37 +113,48 @@ Features
   episodes on twitter.
 
 **Draft Mode**
-  You may work on the new episode in a draft mode, and publish it when
-  ready.
+  You may work on the new episode in and publish it when ready, simply
+  by checking publish in the Admin. While in draft mode the episode's
+  ``get_absolute_url`` returns a link comprised of the show_slug and
+  the episode's ``uuid`` but once live, it uses
+  the show slug, friendlier publish date and episode slug.
 
-Options
-=======
+    http://snowprayers.net/podcasts/snowprayers/a04deb06-741f-11e0-a714-404096327b80/
+    http://snowprayers.net/podcasts/snowprayers/snowprayers-podcast-13/
+
+
+Optional Features
+=================
 
 **Thumbnailed Album Artwork**
   Install django-imagekit_ in your project provides to get sane
   defaults and model support for album artwork thumbnails. ImageKit
   may be is added to your project at point any time and the
   ``django-podcasting`` app will recognize and use it. Support for
-  other thumbnail libraries will be considered for inclusion.
+  other thumbnail libraries will be considered for inclusion. In fact
+  support for ImageKit was a tough decision, it may be dropped
+  entirely before 1.0 if a less intrusive alternative is found.
 
 **Taggable episodes and shows**
   Install django-taggit_ to provide tagging support for episodes and
   shows. Taggit may be is added to your project at point any time and
-  the ``django-podcasting`` app will recognize and support it.
+  the ``django-podcasting`` app will recognize and support it. Taggit
+  may become a requirement in 1.0 if there are no strong objections.
 
 Usage
 =====
-At the moment there are not settings and the included templates are
-enough to get started. One area that may be confusing is connecting
-with a commenting application. For the simplest option, take a look at
-django-disqus_.
+There has yet to be a need to configure anything via the
+``settings.py`` file and the included templates and forms should be
+enough to get started. One area that may be somewhat difficult is
+connecting with a commenting application. For the simplest option,
+take a look at django-disqus_.
 
 Future
 ======
 For the 0.9.x series I'd like to first see if others have interest in
 this application and fix any issues discovered with the current
 version. At the moment, multiple authors are supported in the
-application, but onlye one shows on the feed pages. This is a bug that
+application, but only one shows on the feed pages. This is a bug that
 I'd like to fix soon. Also I'd like to do one last double check of the
 specs to verify I've best matched all the options. Adding tests and
 more documentation is also of high importance at this time.
@@ -151,13 +170,14 @@ Contents
 
  installation
 
-.. _django-podcast: https://github.com/jefftriplett/django-podcast/
 .. _Atom: http://www.atomenabled.org/developers/syndication/
-.. _iTunes: http://www.apple.com/itunes/podcasts/specs.html
-.. _FeedBurner: http://www.feedburner.com/
-.. _django-disqus: https://github.com/arthurk/django-disqus
-.. _django-threadedcomments: https://github.com/HonzaKral/django-threadedcomments
+.. _django-disqus: https://github.com/arthurk/django-disqus/
+.. _django-threadedcomments: https://github.com/HonzaKral/django-threadedcomments/
 .. _django-licenses: https://bitbucket.org/jezdez/django-licenses/
 .. _django-imagekit: https://github.com/jdriscoll/django-imagekit/
+.. _django-podcast: https://github.com/jefftriplett/django-podcast/
+.. _django-podcasting: https://github.com/rizumu/django-podcasting/
 .. _django-taggit: https://github.com/alex/django-taggit/
+.. _FeedBurner: http://www.feedburner.com/
+.. _iTunes: http://www.apple.com/itunes/podcasts/specs.html
 .. _python-twitter: http://code.google.com/p/python-twitter/

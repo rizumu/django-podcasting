@@ -5,7 +5,7 @@ framework.
 More documentation about the usage and installation of Django Podcasting
 can be found on `django-podcasting.readthedocs.org`_.
 
-The source code for Django Compressor can be found and contributed to on
+The source code for Django Podcasting can be found and contributed to on
 `github.com/rizumu/django-podcasting`_. There you can also file tickets.
 
 The in-development version of Django Podcasting can be installed with
