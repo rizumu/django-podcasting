@@ -315,8 +315,8 @@ class Enclosure(models.Model):
     class Meta:
         ordering = ("episode", "mime")
         unique_together = ("episode", "mime")
-        verbose_name = _("Episode")
-        verbose_name_plural = _("Episodes")
+        verbose_name = _("Enclosure")
+        verbose_name_plural = _("Enclosures")
 
     def __unicode__(self):
         return u"%s - %s" % (self.episode, self.mime)
