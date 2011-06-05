@@ -137,7 +137,7 @@ class Show(ImageModel):
         ordering = ("organization", "slug")
 
     class IKOptions:
-        spec_module = "podcasting.specs"
+        spec_module = getattr(settings, "IMAGEKIT_PODCASTING_SPEC_MODULE", "podcasting.specs")
         cache_dir = "imagekit_cache"
         image_field = "original_image"
 
@@ -223,7 +223,7 @@ class Episode(ImageModel):
         ordering = ("-published", "slug")
 
     class IKOptions:
-        spec_module = "podcasting.specs"
+        spec_module = getattr(settings, "IMAGEKIT_PODCASTING_SPEC_MODULE", "podcasting.specs")
         cache_dir = "imagekit_cache"
         image_field = "original_image"
 
