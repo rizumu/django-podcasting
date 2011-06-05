@@ -13,9 +13,9 @@ class ThumbnailImageWidget(FileInput):
 
     def render(self, name, value, attrs=None):
         output = []
-        if value and hasattr(value.instance, "image_50"):
+        if value and hasattr(value.instance, "img_admin_sm"):
             output.append(('<a target="_blank" href="%s">'
                            '<img src="%s"/></a> '
-                           % (value.url, value.instance.image_50.url)))
+                           % (value.url, value.instance.img_admin_sm.url)))
         output.append(super(ThumbnailImageWidget, self).render(name, value, attrs))
         return mark_safe(u''.join(output))

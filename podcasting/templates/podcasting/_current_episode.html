@@ -4,7 +4,7 @@
             <div class="title-bar mod">
                 <h2>{{ podcasting_current_episode.title }}</h2>
             </div>
-            <div class="date meta">{{ podcasting_current_episode.activate_date|date:"F j, Y" }}</div>
+            <div class="date meta">{{ podcasting_current_episode.published|date:"F j, Y" }}</div>
             {% for enclosure in podcasting_current_episode.enclosure_set.all %}
                 {% if enclosure.mime == 'mp3' %}
                     <div class="episode_icon down meta sep"><a href="{{ enclosure.url }}" class="tiptip" title="to download right click and select 'save link as'">Download / Stream</a></div>
@@ -19,7 +19,7 @@
             {% endif %}
             <div class="podcasting_info">
                 <div class="clear"></div>
-                <a href="{{ podcasting_current_episode.image_550.url }}" rel="facebox" class="podcast-thumb"><img src="{{ podcasting_current_episode.image_120.url }}" alt="{{ podcasting_current_episode.name }}" width="podcasting_current_episode.image.width" height="episode.image.height" class="left" /></a>
+                <a href="{{ podcasting_current_episode.img_episode_lg.url }}" rel="facebox" class="podcast-thumb"><img src="{{ podcasting_current_episode.img_episode_sm.url }}" alt="{{ podcasting_current_episode.image_120.name }}" width="{{ podcasting_current_episode.image_120.width }}" height="{{ podcasting_current_episode.image_120.height }}" class="left" /></a>
                 <div>
                     {{ podcasting_current_episode.subtitle }}
                     {% if podcasting_current_episode.description %}
