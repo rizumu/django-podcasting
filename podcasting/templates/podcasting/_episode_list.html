@@ -1,0 +1,53 @@
+{% if episode_list %}
+    <div class="episode-list">
+        {% for episode in episode_list %}
+            <div class="podcast-episode mod">
+                <h2>{{ episode.title }}</h2>
+                <div class="meta">
+                    <span class="date">
+                        {{ episode.published|date:"F j, Y" }}
+                    </span>
+                    {% for enclosure in episode.enclosure_set.all %}
+                        {% if enclosure.mime == 'mp3' %}
+                            <span class="sep">
+                                <a href="{{ enclosure.url }}" class="tiptip download"
+                                    title="to download right click and select 'save link as'">
+                                    Download / Stream
+                                </a>
+                            </span>
+                        {% endif %}
+                    {% endfor %}
+                    {% if episode.tracklist %}
+                        <span class="sep">
+                            <a href="#tracklist-{{ episode.id }}" rel="facebox" class="list">Tracklist</a>
+                        </span>
+                        <div id="tracklist-{{ episode.id }}" class="hidden">
+                            <h3>{{ episode.title }} :: Tracklist</h3>
+                            <div class="tracklist">
+                                {{ episode.tracklist|linenumbers|linebreaksbr }}
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="episode-details">
+                    <a href="{{ episode.img_episode_lg.url }}" rel="facebox" class="episode-thumb">
+                        <img src="{{ episode.img_episode_sm.url }}"
+                            alt="{{ episode.img_episode_sm.name }}"
+                            width="{{ episode.img_episode_sm.width }}"
+                            height="{{ episode.img_episode_sm.height }}"
+                            class="left" />
+                    </a>
+                    <h6>{{ episode.subtitle }}</h6>
+                    {% if episode.description %}
+                        <p><a href="#details-{{ episode.id }}" rel="facebox">read more</a></p>
+                        <div id="details-{{ episode.id }}" class="hidden">
+                            <div>{{ episode.description }}</div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <h2>Coming soon...</h2>
+{% endif %}
