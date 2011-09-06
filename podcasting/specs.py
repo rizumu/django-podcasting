@@ -14,6 +14,9 @@ class Png(processors.Format):
 ### podcasting naming
 # img_admin_sm
 
+# img_show_sm
+# img_show_lg
+
 # img_episode_sm
 # img_episode_lg
 
@@ -24,6 +27,18 @@ class Png(processors.Format):
 class ResizeAdmin(processors.Resize):
     width = 50
     height = 50
+    crop = True
+    upscale = True
+
+class ResizeShowSm(processors.Resize):
+    width = 120
+    height = 120
+    crop = True
+    upscale = True
+
+class ResizeShowLg(processors.Resize):
+    width = 550
+    height = 550
     crop = True
     upscale = True
 
@@ -58,6 +73,16 @@ class PodcastAdmin(ImageSpec):
     access_as = "img_admin_sm"
     pre_cache = True
     processors = [Png, ResizeAdmin, EnchanceSmallImage]
+
+class PodcastShowSm(ImageSpec):
+    access_as = "img_show_sm"
+    pre_cache = True
+    processors = [Png, ResizeShowSm, EnchanceSmallImage]
+
+class PodcastShowLg(ImageSpec):
+    access_as = "img_show_lg"
+    pre_cache = True
+    processors = [Png, ResizeShowLg]
 
 class PodcastEpisodeSm(ImageSpec):
     access_as = "img_episode_sm"
