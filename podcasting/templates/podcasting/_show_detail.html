@@ -1,0 +1,16 @@
+{% if show %}
+    <div class="podcast-show">
+        <h2>{{ show.title }}</h2>
+        <a href="{{ show.img_show_lg.url }}" rel="facebox">
+            <img src="{{ show.img_show_sm.url }}" alt="" class="left" />
+        </a>
+        <h4>{{ show.subtitle }}</h4>
+        <p><a href="{{ show.link }}">{{ show.link }}</a></p>
+        <div class="show-description">{{ show.description }}</div>
+    </div>
+
+    {% include 'podcasting/_episode_list.html' %}
+
+{% else %}
+    <h2>There is no such show.</h2>
+{% endif %}

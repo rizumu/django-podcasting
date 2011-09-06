@@ -1,58 +1,10 @@
-{% extends "site_base.html" %}
+{% extends "podcasting/podcasting_base.html" %}
 
-{% block head_title %}archive{% endblock %}
+{% block head_title %}{{ show.title }}{% endblock %}
 
-{% block body_class %}page-episode-list{% endblock %}
+{% block body_class %}show-detail{% endblock %}
 
 {% block content %}
-    <div class="block">
-        {% if show %}
-            {% for episode in show.episode_set.published %}
-
-                <div class="block">
-                    <div class="podcast-details">
-                        <div class="title-bar mod">
-                            <h2>{{ episode.title }}</h2>
-                        </div>
-                        <div class="date meta">{{ episode.activate_date|date:"F j, Y" }}</div>
-                        {% for enclosure in episode.enclosure_set.all %}
-                            {% if enclosure.mime == 'mp3' %}
-                                <div class="episode_icon down meta sep"><a href="{{ enclosure.url }}" class="tiptip" title="to download right click and select 'save link as'">Download / Stream</a></div>
-                            {% endif %}
-                        {% endfor %}
-                        {% if episode.tracklist %}
-                            <div class="episode_icon list meta sep"><a href="#tracklist-{{ episode.id }}" rel="facebox">Tracklist</a></div>
-                            <div id="tracklist-{{ episode.id }}" class="hidden">
-                                <h3>{{ episode.title }} :: Tracklist</h3>
-                                <div class="tracklist">{{ episode.tracklist|linenumbers|linebreaksbr }}</div>
-                            </div>
-                        {% endif %}
-                        <div class="podcasting_info">
-                            <div class="clear"></div>
-                            <a href="{{ episode.img_episode_lg.url }}" rel="facebox" class="podcast-thumb"><img src="{{ episode.img_episode_sm.url }}" alt="{{ episode.name }}" width="episode.image.width" height="episode.image.height" class="left" /></a>
-                            <div>
-                                {{ episode.subtitle }}
-                                {% if episode.description %}
-                                    <br /><a href="#details-{{ episode.id }}" rel="facebox">read more</a>
-                                    <div id="details-{{ episode.id }}" class="hidden">
-                                        <div class="">{{ episode.description }}</div>
-                                    </div>
-                                {% endif %}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="clear"></div>
-                {% if not forloop.last %}<div class="hr-ln"></div>{% endif %}
-
-            {% endfor %}
-        {% else %}
-            <div class="block">
-                <div class="title-bar">
-                    <h2>Coming soon</h2>
-                </div>
-            </div>
-        {% endif %}
-    </div>
+    {% include 'podcasting/_show_detail.html' %}
+    {% block show_detail_extra %}{% endblock %}
 {% endblock %}
-
