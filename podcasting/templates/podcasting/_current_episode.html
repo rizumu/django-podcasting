@@ -1,41 +1,49 @@
 {% if podcasting_current_episode %}
-    <div class="block">
-        <div class="podcast-details">
-            <div class="title-bar mod">
-                <h2>{{ podcasting_current_episode.title }}</h2>
-            </div>
-            <div class="date meta">{{ podcasting_current_episode.published|date:"F j, Y" }}</div>
+    <div class="podcast-episode mod">
+        <h2>{{ podcasting_current_episode.title }}</h2>
+        <div class="meta">
+            <span class="date">
+                {{ podcasting_current_episode.published|date:"F j, Y" }}
+            </span>
             {% for enclosure in podcasting_current_episode.enclosure_set.all %}
                 {% if enclosure.mime == 'mp3' %}
-                    <div class="episode_icon down meta sep"><a href="{{ enclosure.url }}" class="tiptip" title="to download right click and select 'save link as'">Download / Stream</a></div>
+                    <span class="sep">
+                        <a href="{{ enclosure.url }}" class="tiptip download"
+                            title="to download right click and select 'save link as'">
+                            Download / Stream
+                        </a>
+                    </span>
                 {% endif %}
             {% endfor %}
             {% if podcasting_current_episode.tracklist %}
-                <div class="episode_icon list meta sep"><a href="#tracklist" rel="facebox">Tracklist</a></div>
+                <span class="sep">
+                    <a href="#tracklist" rel="facebox" class="list">Tracklist</a>
+                </span>
                 <div id="tracklist" class="hidden">
                     <h3>{{ podcasting_current_episode.title }} :: Tracklist</h3>
-                    <div class="tracklist">{{ podcasting_current_episode.tracklist|linenumbers|linebreaksbr }}</div>
+                    <div class="tracklist">
+                        {{ podcasting_current_episode.tracklist|linenumbers|linebreaksbr }}
+                    </div>
                 </div>
             {% endif %}
-            <div class="podcasting_info">
-                <div class="clear"></div>
-                <a href="{{ podcasting_current_episode.img_episode_lg.url }}" rel="facebox" class="podcast-thumb"><img src="{{ podcasting_current_episode.img_episode_sm.url }}" alt="{{ podcasting_current_episode.image_120.name }}" width="{{ podcasting_current_episode.image_120.width }}" height="{{ podcasting_current_episode.image_120.height }}" class="left" /></a>
-                <div>
-                    {{ podcasting_current_episode.subtitle }}
-                    {% if podcasting_current_episode.description %}
-                        <br /><a href="#details" rel="facebox">read more</a>
-                        <div id="details" class="hidden">
-                            <div class="">{{ podcasting_current_episode.description }}</div>
-                        </div>
-                    {% endif %}
+        </div>
+        <div class="episode-details">
+            <a href="{{ podcasting_current_episode.img_episode_lg.url }}" rel="facebox" class="episode-thumb">
+                <img src="{{ podcasting_current_episode.img_episode_sm.url }}"
+                    alt="{{ podcasting_current_episode.img_episode_sm.name }}"
+                    width="{{ podcasting_current_episode.img_episode_sm.width }}"
+                    height="{{ podcasting_current_episode.img_episode_sm.height }}"
+                    class="left" />
+            </a>
+            <h6>{{ podcasting_current_episode.subtitle }}</h6>
+            {% if podcasting_current_episode.description %}
+                <p><a href="#details" rel="facebox">read more</a></p>
+                <div id="details" class="hidden">
+                    <div>{{ podcasting_current_episode.description }}</div>
                 </div>
-            </div>
+            {% endif %}
         </div>
     </div>
 {% else %}
-    <div class="block">
-        <div class="title-bar">
-            <h2 class="coming-soon">Coming soon</h2>
-        </div>
-    </div>
+    <h2 class="coming-soon">Coming soon...</h2>
 {% endif %}
