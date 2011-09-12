@@ -1,6 +1,8 @@
 Installation
 ============
 
+* Requires Django 1.3 or greater
+
 * Install Django Podcasting with your favorite Python package manager::
 
     pip install django-podcasting
