@@ -36,9 +36,9 @@ class ITunesElements(object):
         handler.addQuickElement(u"itunes:name", show.authors.all()[0].get_full_name())
         handler.addQuickElement(u"itunes:email", show.authors.all()[0].email)
         handler.endElement(u"itunes:owner")
-        handler.addQuickElement(u"itunes:image", attrs={"href": show.img_podcast_itunes_lg.url})
+        handler.addQuickElement(u"itunes:image", attrs={"href": show.img_itunes_lg.url})
         handler.startElement(u"image", {})
-        handler.addQuickElement(u"url", show.img_podcast_itunes_sm.url)
+        handler.addQuickElement(u"url", show.img_itunes_sm.url)
         handler.addQuickElement(u"title", self.feed["title"])
         handler.addQuickElement(u"link", self.feed["link"])
         handler.endElement(u"image")
@@ -71,9 +71,9 @@ class ITunesElements(object):
         handler.addQuickElement(u"itunes:explicit", episode.get_explicit_display())
         if episode.block:
             handler.addQuickElement(u"itunes:block", "yes")
-        handler.addQuickElement(u"itunes:image", attrs={"href": episode.img_podcast_itunes_lg.url})
+        handler.addQuickElement(u"itunes:image", attrs={"href": episode.img_itunes_lg.url})
         handler.startElement(u"image", {})
-        handler.addQuickElement(u"url", episode.img_podcast_itunes_sm.url)
+        handler.addQuickElement(u"url", episode.img_itunes_sm.url)
         handler.addQuickElement(u"title", episode.title)
         handler.addQuickElement(u"link", episode.get_absolute_url())
         handler.endElement(u"image")
@@ -88,11 +88,13 @@ class AtomITunesFeedGenerator(ITunesElements, Atom1Feed):
         atom_attrs.update(self.namespace_attributes())
         return atom_attrs
 
+
 class RssITunesFeedGenerator(ITunesElements, Rss201rev2Feed):
     def rss_attributes(self):
         rss_attrs = super(RssITunesFeedGenerator, self).rss_attributes()
         rss_attrs.update(self.namespace_attributes())
         return rss_attrs
+
 
 class ShowFeed(Feed):
     """
@@ -130,8 +132,7 @@ class ShowFeed(Feed):
 
     def item_link(self, episode):
         return reverse("podcasting_episode_detail",
-                       kwargs={"show_slug": episode.show.slug,"slug": episode.slug})
-
+                       kwargs={"show_slug": episode.show.slug, "slug": episode.slug})
 
     # def item_author_link(self, episode):
     #     return "todo" #this one doesn't add anything in atom or rss
