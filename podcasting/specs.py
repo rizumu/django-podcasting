@@ -11,18 +11,19 @@ class Png(processors.Format):
     format = 'PNG'
     extension = 'png'
 
-### podcasting naming
-# img_admin_sm
+"""
+podcasting naming:
+    img_admin_sm
 
-# img_show_sm
-# img_show_lg
+    img_show_sm
+    img_show_lg
 
-# img_episode_sm
-# img_episode_lg
+    img_episode_sm
+    img_episode_lg
 
-
-# img_itunes_sm
-# img_itunes_lg
+    img_itunes_sm
+    img_itunes_lg
+"""
 
 class ResizeAdmin(processors.Resize):
     width = 50
@@ -30,11 +31,13 @@ class ResizeAdmin(processors.Resize):
     crop = True
     upscale = True
 
+
 class ResizeShowSm(processors.Resize):
     width = 120
     height = 120
     crop = True
     upscale = True
+
 
 class ResizeShowLg(processors.Resize):
     width = 550
@@ -42,11 +45,13 @@ class ResizeShowLg(processors.Resize):
     crop = True
     upscale = True
 
+
 class ResizeEpisodeSm(processors.Resize):
     width = 120
     height = 120
     crop = True
     upscale = True
+
 
 class ResizeEpisodeLg(processors.Resize):
     width = 550
@@ -54,11 +59,13 @@ class ResizeEpisodeLg(processors.Resize):
     crop = True
     upscale = True
 
+
 class ResizeItunesSm(processors.Resize):
     width = 144
     height = 144
     crop = True
     upscale = True
+
 
 class ResizeItunesLg(processors.Resize):
     width = 1000
@@ -66,41 +73,46 @@ class ResizeItunesLg(processors.Resize):
     crop = True
     upscale = True
 
-
 ##############################################################################
+
 
 class PodcastAdmin(ImageSpec):
     access_as = "img_admin_sm"
     pre_cache = True
     processors = [Png, ResizeAdmin, EnchanceSmallImage]
 
+
 class PodcastShowSm(ImageSpec):
     access_as = "img_show_sm"
     pre_cache = True
     processors = [Png, ResizeShowSm, EnchanceSmallImage]
+
 
 class PodcastShowLg(ImageSpec):
     access_as = "img_show_lg"
     pre_cache = True
     processors = [Png, ResizeShowLg]
 
+
 class PodcastEpisodeSm(ImageSpec):
     access_as = "img_episode_sm"
     pre_cache = True
     processors = [Png, ResizeEpisodeSm, EnchanceSmallImage]
+
 
 class PodcastEpisodeLg(ImageSpec):
     access_as = "img_episode_lg"
     pre_cache = True
     processors = [Png, ResizeEpisodeLg]
 
+
 class PodcastItunesSm(ImageSpec):
     access_as = "img_itunes_sm"
     pre_cache = True
     processors = [Png, ResizeItunesSm, EnchanceSmallImage]
 
+
 class PodcastItunesLg(ImageSpec):
     access_as = "img_itunes_lg"
     pre_cache = True
     processors = [Png, ResizeItunesLg]
-
