@@ -115,7 +115,6 @@ setup(
     packages=find_packages(),
     package_data=find_package_data("podcasting", only_in_packages=False),
     install_requires=[
-        "Django>=1.3",
         "django-licenses==0.2.4",
     ],
     classifiers=[
