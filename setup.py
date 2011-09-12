@@ -4,6 +4,7 @@ from fnmatch import fnmatchcase
 from distutils.util import convert_path
 from setuptools import setup, find_packages
 
+
 def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
@@ -18,6 +19,8 @@ standard_exclude_directories = (".*", "CVS", "_darcs", "./build",
 # Note: you may want to copy this into your setup.py file verbatim, as
 # you can't import this from another package, when you don't know if
 # that package is installed yet.
+
+
 def find_package_data(
     where=".", package="",
     exclude=standard_exclude,
@@ -101,21 +104,21 @@ README = read("README.rst")
 VERSION = __import__("podcasting").__version__
 
 setup(
-    name = "django-podcasting",
-    version = VERSION,
-    url = "http://django-podcasting.readthedocs.org/",
-    license = "BSD",
-    description = "Audio podcasting functionality for django sites.",
-    long_description = README,
-    author = "Thomas Schreiber",
-    author_email = "tom@insatsu.us",
-    packages = find_packages(),
-    package_data = find_package_data("podcasting", only_in_packages=False),
+    name="django-podcasting",
+    version=VERSION,
+    url="http://django-podcasting.readthedocs.org/",
+    license="BSD",
+    description="Audio podcasting functionality for django sites.",
+    long_description=README,
+    author="Thomas Schreiber",
+    author_email="tom@insatsu.us",
+    packages=find_packages(),
+    package_data=find_package_data("podcasting", only_in_packages=False),
     install_requires=[
         "Django>=1.3",
-        "django-licenses==0.2.3",
+        "django-licenses==0.2.4",
     ],
-    classifiers = [
+    classifiers=[
         "Development Status :: 4 - Beta",
         "Framework :: Django",
         "Intended Audience :: Developers",
@@ -124,5 +127,5 @@ setup(
         "Programming Language :: Python",
         "Topic :: Software Development :: Libraries :: Python Modules",
     ],
-    zip_safe = False,
+    zip_safe=False,
 )
