@@ -8,7 +8,7 @@ class EpisodeManager(object):
     """Returns public episodes that are currently activated."""
 
     def itunespublished(self):
-        return self.get_query_set().exclude(Q(publised=None) | Q(block=True))
+        return self.get_query_set().exclude(Q(published=None) | Q(block=True))
 
     def published(self):
         return self.exclude(published=None)
