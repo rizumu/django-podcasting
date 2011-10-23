@@ -4,6 +4,7 @@ from datetime import datetime
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.db import models
+from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext_lazy as _
 
 from django.contrib.auth.models import User
@@ -34,12 +35,12 @@ from podcasting.utils.twitter import can_tweet
 
 def get_show_upload_folder(self, filename):
     "If requested, will make the path prexix a setting."
-    return "content/img/podcasts/{0}/{1}".format(self.slug, filename)
+    return "content/img/podcasts/{0}/{1}".format(self.slug, slugify(filename))
 
 
 def get_episode_upload_folder(self, filename):
     "If requested, will make the path prexix a setting."
-    return "content/img/podcasts/{0}/episodes/{1}".format(self.show.slug, filename)
+    return "content/img/podcasts/{0}/episodes/{1}".format(self.show.slug, slugify(filename))
 
 
 class Show(ImageModel):
