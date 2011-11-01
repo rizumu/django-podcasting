@@ -13,7 +13,7 @@ from django.contrib.sites.models import Site
 # Handle optional external dependencies
 try:
     from imagekit.models import ImageSpec
-    from imagekit.processors import resize, Adjust
+    from imagekit.processors import resize
 except:
     ImageSpec = None
 
