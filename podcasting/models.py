@@ -107,11 +107,11 @@ class Show(models.Model):
         saved to file's <strong>metadata</strong></a> before enclosure uploading!"""))
 
     if ImageSpec:
-        img_show_admin = ImageSpec([resize.Crop(50, 50)], image_field="original_image", format="PNG")
-        img_show_sm = ImageSpec([resize.Crop(120, 120)], image_field="original_image", format="PNG")
-        img_show_lg = ImageSpec([resize.Crop(550, 550)], image_field="original_image", format="PNG")
-        img_itunes_sm = ImageSpec([resize.Crop(144, 144)], image_field="original_image", format="PNG")
-        img_itunes_lg = ImageSpec([resize.Crop(1000, 1000)], image_field="original_image", format="PNG")
+        img_show_admin = ImageSpec([resize.Crop(50, 50)], image_field="original_image")
+        img_show_sm = ImageSpec([resize.Crop(120, 120)], image_field="original_image")
+        img_show_lg = ImageSpec([resize.Crop(550, 550)], image_field="original_image")
+        img_itunes_sm = ImageSpec([resize.Crop(144, 144)], image_field="original_image")
+        img_itunes_lg = ImageSpec([resize.Crop(1000, 1000)], image_field="original_image")
 
     feedburner = models.URLField(_("feedburner url"), blank=True,
         help_text=_("""Fill this out after saving this show and at least one
@@ -209,11 +209,11 @@ class Episode(models.Model):
         saved to file's <strong>metadata</strong></a> before enclosure uploading!"""))
 
     if ImageSpec:
-        img_admin_sm = ImageSpec([resize.Crop(50, 50)], image_field="original_image", format="PNG")
-        img_episode_sm = ImageSpec([resize.Crop(120, 120)], image_field="original_image", format="PNG")
-        img_episode_lg = ImageSpec([resize.Crop(550, 550)], image_field="original_image", format="PNG")
-        img_itunes_sm = ImageSpec([resize.Crop(144, 144)], image_field="original_image", format="PNG")
-        img_itunes_lg = ImageSpec([resize.Crop(1000, 1000)], image_field="original_image", format="PNG")
+        img_admin_sm = ImageSpec([resize.Crop(50, 50)], image_field="original_image")
+        img_episode_sm = ImageSpec([resize.Crop(120, 120)], image_field="original_image")
+        img_episode_lg = ImageSpec([resize.Crop(550, 550)], image_field="original_image")
+        img_itunes_sm = ImageSpec([resize.Crop(144, 144)], image_field="original_image")
+        img_itunes_lg = ImageSpec([resize.Crop(1000, 1000)], image_field="original_image")
 
     hours = models.SmallIntegerField(_("hours"), max_length=2, default=0)
     minutes = models.SmallIntegerField(_("minutes"), max_length=2, default=0, choices=SIXTY_CHOICES)
