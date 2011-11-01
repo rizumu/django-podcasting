@@ -2,14 +2,17 @@ from django.utils.translation import ugettext_lazy as _
 
 from django.contrib import admin
 
+from imagekit.admin import AdminThumbnail
+
 from podcasting.forms import AdminEpisodeForm
 from podcasting.models import Show, Episode, Enclosure
 from podcasting.utils.twitter import can_tweet
 
 
 class ShowAdmin(admin.ModelAdmin):
-    list_display = ("title", "slug", "show_site", "active_flag")
+    list_display = ("title", "slug", "show_site", "active_flag", "admin_thumbnail")
     list_filter = ("title", "published", "site")
+    admin_thumbnail = AdminThumbnail(image_field="original_image")
 
     if can_tweet():
         fields.append("tweet_text")
@@ -27,8 +30,9 @@ class ShowAdmin(admin.ModelAdmin):
 class EpisodeAdmin(admin.ModelAdmin):
     form = AdminEpisodeForm
 
-    list_display = ("title", "show", "slug", "episode_site", "published_flag")
+    list_display = ("title", "show", "slug", "episode_site", "published_flag", "admin_thumbnail")
     list_filter = ("show", "published")
+    admin_thumbnail = AdminThumbnail(image_field="original_image")
 
     if can_tweet():
         readonly_fields = ("tweet_text",)

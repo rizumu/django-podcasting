@@ -32,7 +32,7 @@ Optional Dependencies
 django-imagekit_
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-    pip install django-imagekit==0.3.6
+    pip install django-imagekit==1.0
 
 django-taggit_
 ^^^^^^^^^^^^^^^^^^^^^^^^^

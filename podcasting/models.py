@@ -12,9 +12,11 @@ from django.contrib.sites.models import Site
 
 # Handle optional external dependencies
 try:
-    from imagekit.models import ImageModel
-except ImportError:
-    from django.db.models import Model as ImageModel
+    from imagekit.models import ImageSpec
+    from imagekit.processors import resize, Adjust
+except:
+    ImageSpec = None
+
 from licenses.fields import LicenseField
 
 if "taggit" in settings.INSTALLED_APPS:
@@ -43,7 +45,7 @@ def get_episode_upload_folder(self, filename):
     return "content/img/podcasts/{0}/episodes/{1}".format(self.show.slug, slugify(filename))
 
 
-class Show(ImageModel):
+class Show(models.Model):
     """
     A podcast show, which has many episodes.
     """
@@ -91,7 +93,7 @@ class Show(ImageModel):
         Describe your subject matter, media format, episode schedule, and other
         relevant info so that they know what they'll be getting when they
         subscribe. In addition, make a list of the most relevant search terms
-        that you want your podcast to match, then build them into your
+        that you want yourp podcast to match, then build them into your
         description. Note that iTunes removes podcasts that include lists of
         irrelevant words in the itunes:summary, description, or
         itunes:keywords tags. This field can be up to 4000 characters."""))
@@ -103,6 +105,13 @@ class Show(ImageModel):
         For episode artwork to display in iTunes, image must be
         <a href="http://answers.yahoo.com/question/index?qid=20080501164348AAjvBvQ">
         saved to file's <strong>metadata</strong></a> before enclosure uploading!"""))
+
+    if ImageSpec:
+        img_show_admin = ImageSpec([resize.Crop(50, 50)], image_field="original_image", format="PNG")
+        img_show_sm = ImageSpec([resize.Crop(120, 120)], image_field="original_image", format="PNG")
+        img_show_lg = ImageSpec([resize.Crop(550, 550)], image_field="original_image", format="PNG")
+        img_itunes_sm = ImageSpec([resize.Crop(144, 144)], image_field="original_image", format="PNG")
+        img_itunes_lg = ImageSpec([resize.Crop(1000, 1000)], image_field="original_image", format="PNG")
 
     feedburner = models.URLField(_("feedburner url"), blank=True,
         help_text=_("""Fill this out after saving this show and at least one
@@ -137,11 +146,6 @@ class Show(ImageModel):
         verbose_name_plural = _("Shows")
         ordering = ("organization", "slug")
 
-    class IKOptions:
-        spec_module = getattr(settings, "IMAGEKIT_PODCASTING_SPEC_MODULE", "podcasting.specs")
-        cache_dir = "imagekit_cache"
-        image_field = "original_image"
-
     def __unicode__(self):
         return u"%s" % (self.title)
 
@@ -156,7 +160,7 @@ class Show(ImageModel):
         return reverse("podcasting_show_detail", kwargs={"slug": self.slug})
 
 
-class Episode(ImageModel):
+class Episode(models.Model):
     """
     An individual podcast episode and it's unique attributes.
     """
@@ -203,6 +207,14 @@ class Episode(ImageModel):
         For episode artwork to display in iTunes, image must be
         <a href="http://answers.yahoo.com/question/index?qid=20080501164348AAjvBvQ">
         saved to file's <strong>metadata</strong></a> before enclosure uploading!"""))
+
+    if ImageSpec:
+        img_admin_sm = ImageSpec([resize.Crop(50, 50)], image_field="original_image", format="PNG")
+        img_episode_sm = ImageSpec([resize.Crop(120, 120)], image_field="original_image", format="PNG")
+        img_episode_lg = ImageSpec([resize.Crop(550, 550)], image_field="original_image", format="PNG")
+        img_itunes_sm = ImageSpec([resize.Crop(144, 144)], image_field="original_image", format="PNG")
+        img_itunes_lg = ImageSpec([resize.Crop(1000, 1000)], image_field="original_image", format="PNG")
+
     hours = models.SmallIntegerField(_("hours"), max_length=2, default=0)
     minutes = models.SmallIntegerField(_("minutes"), max_length=2, default=0, choices=SIXTY_CHOICES)
     seconds = models.SmallIntegerField(_("seconds"), max_length=2, default=0, choices=SIXTY_CHOICES)
@@ -222,11 +234,6 @@ class Episode(ImageModel):
         verbose_name = _("Episode")
         verbose_name_plural = _("Episodes")
         ordering = ("-published", "slug")
-
-    class IKOptions:
-        spec_module = getattr(settings, "IMAGEKIT_PODCASTING_SPEC_MODULE", "podcasting.specs")
-        cache_dir = "imagekit_cache"
-        image_field = "original_image"
 
     def __unicode__(self):
         return u"%s" % (self.title)

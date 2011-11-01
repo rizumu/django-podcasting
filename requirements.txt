@@ -2,9 +2,9 @@
 # pip install -r requirements.txt
 
 # required
-django-licenses==0.2.3
+django-licenses==0.2.4
 
 # optional
-django-imagekit==0.3.6
+django-imagekit==1.0
 django-taggit==0.9.3
 python-twitter==0.8.1
