@@ -275,8 +275,8 @@ class Episode(models.Model):
     def tweet(self):
         if can_tweet():
             account = twitter.Api(
-                username = settings.TWITTER_USERNAME,
-                password = settings.TWITTER_PASSWORD,
+                username=settings.TWITTER_USERNAME,
+                password=settings.TWITTER_PASSWORD,
             )
             account.PostUpdate(self.as_tweet())
         else:
