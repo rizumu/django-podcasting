@@ -37,12 +37,12 @@ from podcasting.utils.twitter import can_tweet
 
 def get_show_upload_folder(self, filename):
     "If requested, will make the path prexix a setting."
-    return "content/img/podcasts/{0}/{1}".format(self.slug, slugify(filename))
+    return "img/podcasts/{0}/{1}".format(self.slug, slugify(filename))
 
 
 def get_episode_upload_folder(self, filename):
     "If requested, will make the path prexix a setting."
-    return "content/img/podcasts/{0}/episodes/{1}".format(self.show.slug, slugify(filename))
+    return "img/podcasts/{0}/episodes/{1}".format(self.show.slug, slugify(filename))
 
 
 class Show(models.Model):
@@ -98,7 +98,7 @@ class Show(models.Model):
         irrelevant words in the itunes:summary, description, or
         itunes:keywords tags. This field can be up to 4000 characters."""))
 
-    original_image = models.ImageField(_("original image"), upload_to="content/img/podcasts/",
+    original_image = models.ImageField(_("original image"), upload_to="img/podcasts/",
         help_text=_("""An attractive, original square JPEG (.jpg) or PNG (.png)
         image of exactly 1000x1000 pixels at 72 pixels per inch. Image will be
         scaled down to 50x50 pixels at smallest in iTunes.<br /><br />
