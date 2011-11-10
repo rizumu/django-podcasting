@@ -155,7 +155,7 @@ class Show(models.Model):
         return u"%s" % (self.title)
 
     def save(self, **kwargs):
-        self.updated_at = datetime.now()
+        self.updated = datetime.now()
         super(Show, self).save(**kwargs)
 
     def get_share_url(self):
@@ -249,7 +249,7 @@ class Episode(models.Model):
         return u"%s" % (self.title)
 
     def save(self, **kwargs):
-        self.updated_at = datetime.now()
+        self.updated = datetime.now()
         super(Episode, self).save(**kwargs)
 
     def get_absolute_url(self):
