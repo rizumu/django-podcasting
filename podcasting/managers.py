@@ -13,11 +13,14 @@ class EpisodeManager(object):
     def published(self):
         return self.exclude(published=None)
 
-    def current(self):
-        return self.published().order_by("-published")
-
     def onsite(self):
-        return self.filter(site=Site.objects.get_current())
+        return self.filter(show__site=Site.objects.get_current())
+
+    def current(self):
+        try:
+            return self.published().order_by("-published")[0]
+        except IndexError:
+            return None
 
 
 class ShowManager(object):
