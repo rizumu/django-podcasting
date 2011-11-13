@@ -209,7 +209,7 @@ class Episode(models.Model):
     # iTunes specific fields
     original_image = models.ImageField(_("original image"), upload_to=get_episode_upload_folder,
         help_text=_("""An attractive, original square JPEG (.jpg) or PNG (.png)
-        image of exactly 1000x1000 pixels at 72 pixels per inch. Image will be
+        image of 300x300 pixles to 1000x1000 pixels at 72 pixels per inch. Image will be
         scaled down to 50x50 pixels at smallest in iTunes.<br /><br />
         For episode artwork to display in iTunes, image must be
         <a href="http://answers.yahoo.com/question/index?qid=20080501164348AAjvBvQ">
@@ -319,7 +319,7 @@ class Enclosure(models.Model):
         <a href="http://answers.yahoo.com/question/index?qid=20080501164348AAjvBvQ">
         saved to file's <strong>metadata</strong></a> before enclosure uploading!<br /><br />
         For best results, choose an attractive, original square JPEG (.jpg) or PNG (.png)
-        image of exactly 1000x1000 pixels at 72 pixels per inch. Image will be
+        image of 300x300 pixels to 1000x1000 pixels at 72 pixels per inch. Image will be
         scaled down to 50x50 pixels at smallest in iTunes."""))
 
     size = models.PositiveIntegerField(_("size"), help_text=_("""The length attribute is the
