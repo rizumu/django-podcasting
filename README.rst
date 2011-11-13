@@ -6,7 +6,7 @@ podcasting functionality for websites running on the Django Web
 framework.
 
 More documentation about the usage and installation of Django Podcasting
-can be found on `<http://django-podcasting.readthedocs.org/>`_.
+can be found on `django-podcasting.readthedocs.org`_.
 
 The source code for Django Podcasting can be found and contributed to on
 `github.com/rizumu/django-podcasting`_. There you can also file
@@ -18,6 +18,7 @@ To find out what's new in this version of django-podcasting, please see
 The `in-development version`_ of Django Podcasting can be installed with
 ``pip install django-podcasting==dev`` or ``easy_install django-podcasting==dev``.
 
-.. _github.com/rizumu/django-podcasting: https://github.com/rizumu/django-podcasting
+.. _github.com/rizumu/django-podcasting: https://github.com/rizumu/django-podcasting/
+.. _django-podcasting.readthedocs.org: http://django-podcasting.readthedocs.org/
 .. _in-development version: http://github.com/jezdez/django_compressor/tarball/develop#egg=django_compressor-dev
 .. _the changelog: http://django-podcasting.readthedocs.org/en/latest/changelog.html
