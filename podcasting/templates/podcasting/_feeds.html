@@ -1,0 +1,12 @@
+{% load url from future %}
+
+<div class="podcast-feeds">
+    {% if show.feedburner %}
+        <a href="{{ show.feedburner }}" target="_blank">Feedburner</a>
+    {% endif %}
+    {% if show.itunes %}
+        <a href="{{ show.itunes }}" target="_blank">iTunes</a>
+    {% endif %}
+    <a href="{% url 'podcasts_show_feed_atom' show.slug 'mp3' %}" target="_blank">Atom</a>
+    <a href="{% url 'podcasts_show_feed_rss' show.slug 'mp3' %}" target="_blank">RSS</a>
+</div>
