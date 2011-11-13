@@ -8,9 +8,9 @@
         <p><a href="{{ show.link }}">{{ show.link }}</a></p>
         <div class="show-description">{{ show.description }}</div>
     </div>
-
-    {% include 'podcasting/_episode_list.html' %}
-
+    {% with show.episode_set.published as episode_list %}
+        {% include 'podcasting/_episode_list.html' %}
+    {% endwith %}
 {% else %}
     <h2>There is no such show.</h2>
 {% endif %}
