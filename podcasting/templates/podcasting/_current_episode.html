@@ -2,7 +2,11 @@
 
 {% if show %}
     <div class="podcast-episode mod">
-        <h2>{{ show.episode_set.current.title }}</h2>
+        <h2>
+            <a href="{{ show.episode_set.current.get_absolute_url }}">
+                {{ show.episode_set.current.title }}
+            </a>
+        </h2>
         <div class="meta">
             <span class="date">
                 {{ show.episode_set.current.published|date:"F j, Y" }}
