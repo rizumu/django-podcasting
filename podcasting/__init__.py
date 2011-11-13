@@ -1,4 +1,5 @@
 # If you change this version, change it also in docs/conf.py
+# Packging guide: http://guide.python-distribute.org/quickstart.html
 VERSION = (0, 9, 1, "f", 0) # following PEP 386
 DEV_N = None
 
