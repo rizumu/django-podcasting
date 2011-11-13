@@ -29,10 +29,14 @@ Installation
 Optional Dependencies
 ---------------------
 
+To quickly install all requirements
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    pip install -r requirements.txt
+
 django-imagekit_
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-    pip install django-imagekit==1.0
+    pip install django-imagekit==1.0.3
 
 django-taggit_
 ^^^^^^^^^^^^^^^^^^^^^^^^^

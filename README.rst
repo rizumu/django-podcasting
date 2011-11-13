@@ -1,3 +1,6 @@
+Django Podcasting
+=================
+
 Django Podcasting is a reusable application which provides audio
 podcasting functionality for websites running on the Django Web
 framework.

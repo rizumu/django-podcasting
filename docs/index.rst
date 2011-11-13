@@ -63,7 +63,7 @@ Features
 **Feeds**
   Supports Atom_, `RSS 2.0 <http://cyber.law.harvard.edu/rss/rss.html>`_,
   iTunes_, and FeedBurner_ by attempting to match as best as possible
-  their detailed specifications and additionally utilizing Django's 
+  their detailed specifications and additionally utilizing Django's
   `syndication feed framework
   <http://docs.djangoproject.com/en/dev/ref/contrib/syndication/>`_.
 
@@ -73,9 +73,11 @@ Features
   for great flexibility in the relationships between shows and sites
   in a multi-site application.
 
-**Licensing** 
-  Requires django-licenses_ which provides a light weight mechanism
-  for adding licenses to the shows.   
+**Licensing**
+
+  To publish a podcast to iTunes it is required to set a
+  license. Podcasting requires django-licenses_ which provides a light
+  weight mechanism for adding licenses to the shows.
 
 **Serve your media from anywhere**
   Podcasting assumes nothing about where your media file will be
@@ -126,14 +128,14 @@ Features
 Optional Features
 =================
 
-**Thumbnailed Album Artwork**
-  Install django-imagekit_ in your project provides to get sane
-  defaults and model support for album artwork thumbnails. ImageKit
-  may be is added to your project at point any time and the
-  ``django-podcasting`` app will recognize and use it. Support for
-  other thumbnail libraries will be considered for inclusion. In fact
-  support for ImageKit was a tough decision, it may be dropped
-  entirely before 1.0 if a less intrusive alternative is found.
+**Thumbnailed Album Artwork** Install django-imagekit_ in your project
+  provides to get sane defaults and model support for album artwork
+  thumbnails. ImageKit may be is added to your project at point any
+  time and the ``django-podcasting`` app will recognize and use it. It
+  is highly advised to use ``django-imagekit`` because thumbnailing is
+  nontrivial. Support for other thumbnail libraries such as
+  `sorl-thumbnail` will be considered for inclusion. Imagekit
+  may become a requirement in 1.0 if there are no strong objections.
 
 **Taggable episodes and shows**
   Install django-taggit_ to provide tagging support for episodes and
@@ -159,8 +161,8 @@ I'd like to fix soon. Also I'd like to do one last double check of the
 specs to verify I've best matched all the options. Adding tests and
 more documentation is also of high importance at this time.
 
-If there is desire I'd like to eventually add in video support
-after a 1.0 (audio only) version has been released.
+If there is desire, video support after a 1.0 (audio only) version has
+been released is possible.
 
 Contents
 ========
