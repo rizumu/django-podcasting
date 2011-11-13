@@ -12,7 +12,7 @@ from podcasting.utils.twitter import can_tweet
 class ShowAdmin(admin.ModelAdmin):
     list_display = ("title", "slug", "show_site", "active_flag", "admin_thumbnail")
     list_filter = ("title", "published", "site")
-    admin_thumbnail = AdminThumbnail(image_field="admin_thumb")
+    admin_thumbnail = AdminThumbnail(image_field="admin_thumb_sm")
 
     if can_tweet():
         fields.append("tweet_text")
@@ -32,7 +32,7 @@ class EpisodeAdmin(admin.ModelAdmin):
 
     list_display = ("title", "show", "slug", "episode_site", "published_flag", "admin_thumbnail")
     list_filter = ("show", "published")
-    admin_thumbnail = AdminThumbnail(image_field="admin_thumb")
+    admin_thumbnail = AdminThumbnail(image_field="admin_thumb_sm")
 
     if can_tweet():
         readonly_fields = ("tweet_text",)
