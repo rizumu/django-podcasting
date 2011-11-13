@@ -14,8 +14,9 @@ The source code for Django Podcasting can be found and contributed to on
 To find out what's new in this version of django-podcasting, please see 
 `the changelog`_
 
-The `in-development version`_ of Django Podcasting can be installed with
-``pip install django-podcasting==dev`` or ``easy_install django-podcasting==dev``.
+The `in-development version`_ of Django Podcasting can be installed with::
+
+    pip install django-podcasting==dev
 
 .. _github.com/rizumu/django-podcasting: https://github.com/rizumu/django-podcasting/
 .. _django-podcasting.readthedocs.org: http://django-podcasting.readthedocs.org/
