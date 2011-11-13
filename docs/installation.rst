@@ -7,6 +7,11 @@ Installation
 
     pip install django-podcasting
 
+* To install the in-development version of Django Podcasting::
+
+    pip install ``django-podcasting==dev``
+
+
 * Add ``'podcasting'`` and ``'licenses``, and the optional apps of your
   choice to the ``INSTALLED_APPS`` setting in your ``settings.py``::
 

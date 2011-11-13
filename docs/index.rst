@@ -7,11 +7,6 @@ Audio podcasting functionality for django sites.
 The source code for Django Podcasting can be found and contributed to on
 django-podcasting_. There you can also file tickets.
 
-The in-development version of Django Podcasting can be installed with
-pip install ``django-podcasting==dev`` or ``easy_install
-django-podcasting==dev``.
-
-
 History
 =======
 Django Podcasting started off as a heavily stripped down version of
@@ -35,7 +30,7 @@ the various specs and the `syndication feed framework
 <http://docs.djangoproject.com/en/dev/ref/contrib/syndication/>`_.
 
 This application also differs from django-podcast_ in that it uses
-UUID identifiers, support multiple authors,makes use of Django's 
+UUID identifiers, support multiple authors,makes use of Django's
 `sites framework
 <http://docs.djangoproject.com/en/dev/ref/contrib/sites/>`_ and
 `syndication feed framework
@@ -155,11 +150,7 @@ Future
 ======
 For the 0.9.x series I'd like to first see if others have interest in
 this application and fix any issues discovered with the current
-version. At the moment, multiple authors are supported in the
-application, but only one shows on the feed pages. This is a bug that
-I'd like to fix soon. Also I'd like to do one last double check of the
-specs to verify I've best matched all the options. Adding tests and
-more documentation is also of high importance at this time.
+version.
 
 If there is desire, video support after a 1.0 (audio only) version has
 been released is possible.
@@ -171,6 +162,7 @@ Contents
  :maxdepth: 1
 
  installation
+ changelog
 
 .. _Atom: http://www.atomenabled.org/developers/syndication/
 .. _django-disqus: https://github.com/arthurk/django-disqus/

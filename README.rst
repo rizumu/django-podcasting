@@ -11,6 +11,9 @@ can be found on `django-podcasting.readthedocs.org`_.
 The source code for Django Podcasting can be found and contributed to on
 `github.com/rizumu/django-podcasting`_. There you can also file tickets.
 
-The in-development version of Django Podcasting can be installed with
-pip install ``django-podcasting==dev`` or ``easy_install
-django-podcasting==dev``.
+To find out what's new in this version of django-podcasting, please see `the changelog
+<http://django-podcasting.readthedocs.org/en/latest/changelog.html>`_
+
+You can also install the `in-development version
+<https://github.com/rizumu/django-podcasting/tarball/master#egg=podcasting-dev>`_ using
+pip, with `pip install fabric==dev`.
