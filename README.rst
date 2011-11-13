@@ -21,5 +21,5 @@ The `in-development version`_ of Django Podcasting can be installed with::
 .. _github.com/rizumu/django-podcasting: https://github.com/rizumu/django-podcasting/
 .. _django-podcasting.readthedocs.org: http://django-podcasting.readthedocs.org/
 .. _file issues: https://github.com/rizumu/django-podcasting/issues/
-.. _in-development version: https://github.com/rizumu/django-podcasting/tarball/develop#egg=django-podcasting-dev
+.. _in-development version: https://github.com/rizumu/django-podcasting/tarball/master#egg=django-podcasting-dev
 .. _the changelog: http://django-podcasting.readthedocs.org/en/latest/changelog.html
