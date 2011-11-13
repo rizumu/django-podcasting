@@ -1,3 +1,5 @@
+{% load i18n %}
+
 {% if episode %}
     <div class="podcast-episode mod">
         <h2>{{ episode.title }}</h2>
@@ -9,8 +11,8 @@
                 {% if enclosure.mime == 'mp3' %}
                     <span class="sep">
                         <a href="{{ enclosure.url }}" class="tiptip download"
-                            title="to download right click and select 'save link as'">
-                            Download / Stream
+                            title="{% trans "to download right click and select 'save link as'" %}">
+                            {% trans "Download / Stream" %}
                         </a>
                     </span>
                 {% endif %}
@@ -32,12 +34,12 @@
 
             {% if episode.tracklist %}
                 <div class="tracklist">
-                    <h3>Tracklist</h3>
+                    <h3>{% trans "Tracklist" %}</h3>
                     {{ episode.tracklist|linenumbers|linebreaksbr }}
                 </div>
             {% endif %}
         </div>
     </div>
 {% else %}
-    <h2 class="coming-soon">Coming soon...</h2>
+    <h2 class="coming-soon">{% trans "Coming soon..." %}</h2>
 {% endif %}

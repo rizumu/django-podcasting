@@ -1,49 +1,51 @@
-{% if podcasting_current_episode %}
+{% load i18n %}
+
+{% if show %}
     <div class="podcast-episode mod">
-        <h2>{{ podcasting_current_episode.title }}</h2>
+        <h2>{{ show.episode_set.current.title }}</h2>
         <div class="meta">
             <span class="date">
-                {{ podcasting_current_episode.published|date:"F j, Y" }}
+                {{ show.episode_set.current.published|date:"F j, Y" }}
             </span>
-            {% for enclosure in podcasting_current_episode.enclosure_set.all %}
+            {% for enclosure in show.episode_set.current.enclosure_set.all %}
                 {% if enclosure.mime == 'mp3' %}
                     <span class="sep">
                         <a href="{{ enclosure.url }}" class="tiptip download"
-                            title="to download right click and select 'save link as'">
-                            Download / Stream
+                            title="{% trans "to download right click and select 'save link as'" %}">
+                            {% trans "Download / Stream" %}
                         </a>
                     </span>
                 {% endif %}
             {% endfor %}
-            {% if podcasting_current_episode.tracklist %}
+            {% if show.episode_set.current.tracklist %}
                 <span class="sep">
-                    <a href="#tracklist" rel="facebox" class="list">Tracklist</a>
+                    <a href="#tracklist" rel="facebox" class="list">{% trans "Tracklist" %}</a>
                 </span>
                 <div id="tracklist" class="hidden">
-                    <h3>{{ podcasting_current_episode.title }} :: Tracklist</h3>
+                    <h3>{{ show.episode_set.current.title }} :: {% trans "Tracklist" %}</h3>
                     <div class="tracklist">
-                        {{ podcasting_current_episode.tracklist|linenumbers|linebreaksbr }}
+                        {{ show.episode_set.current.tracklist|linenumbers|linebreaksbr }}
                     </div>
                 </div>
             {% endif %}
         </div>
         <div class="episode-details">
-            <a href="{{ podcasting_current_episode.img_episode_lg.url }}" rel="facebox" class="episode-thumb">
-                <img src="{{ podcasting_current_episode.img_episode_sm.url }}"
-                    alt="{{ podcasting_current_episode.img_episode_sm.name }}"
-                    width="{{ podcasting_current_episode.img_episode_sm.width }}"
-                    height="{{ podcasting_current_episode.img_episode_sm.height }}"
+            <a href="{{ show.episode_set.current.img_episode_lg.url }}" rel="facebox" class="episode-thumb">
+                <img src="{{ show.episode_set.current.img_episode_sm.url }}"
+                    alt="{{ show.episode_set.current.img_episode_sm.name }}"
+                    width="{{ show.episode_set.current.img_episode_sm.width }}"
+                    height="{{ show.episode_set.current.img_episode_sm.height }}"
                     class="left" />
             </a>
-            <h6>{{ podcasting_current_episode.subtitle }}</h6>
-            {% if podcasting_current_episode.description %}
-                <p><a href="#details" rel="facebox">read more</a></p>
+            <h6>{{ show.episode_set.current.subtitle }}</h6>
+            {% if show.episode_set.current.description %}
+                <p><a href="#details" rel="facebox">{% trans "read more" %}</a></p>
                 <div id="details" class="hidden">
-                    <div>{{ podcasting_current_episode.description }}</div>
+                    <div>{{ show.episode_set.current.description }}</div>
                 </div>
             {% endif %}
         </div>
     </div>
 {% else %}
-    <h2 class="coming-soon">Coming soon...</h2>
+    <h2 class="coming-soon">{% trans "Coming soon..." %}</h2>
 {% endif %}

@@ -1,3 +1,5 @@
+{% load i18n %}
+
 <?xml version="1.0" encoding="utf-8"?>
 <rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0">
     <rss xmlns:itunes="http://www.itunes.com/DTDs/Podcast-1.0.dtd" version="2.0">
@@ -22,7 +24,7 @@
             <link>{{ object.link }}</link>
         </image>{% endif %}
         <itunes:category text="Music" />
-        <managingEditor>{% for author in object.author.all %}{% if forloop.first %}{% else %}{% if forloop.last %} and {% else %}, {% endif %}{% endif %}{{ author.email }}{% endfor %}</managingEditor>
+        <managingEditor>{% for author in object.author.all %}{% if forloop.first %}{% else %}{% if forloop.last %} {% trans "and" %} {% else %}, {% endif %}{% endif %}{{ author.email }}{% endfor %}</managingEditor>
         {% if object.author.email or object.webmaster.email %}<webMaster>{% if object.webmaster.email %}{{ object.webmaster.email }}{% else %}{% endif %}</webMaster>{% endif %}
         <lastBuildDate>{{ object.list.0.created|date:"r" }}</lastBuildDate>
         <generator>Django Web Framework</generator>
@@ -34,7 +36,7 @@
         {% for episode in object.episode.published %}
         <item>
             <title>{{ episode.title }}</title>
-            <itunes:author>{% for author in object.authors.all %}{% if forloop.first %}{% else %}{% if forloop.last %} and {% else %}, {% endif %}{% endif %}{% if author.full_name %}{{ author.full_name }}{% else %}{{ author.username }}{% endif %}{% endfor %}</itunes:author>
+            <itunes:author>{% for author in object.authors.all %}{% if forloop.first %}{% else %}{% if forloop.last %} {% trans "and" %} {% else %}, {% endif %}{% endif %}{% if author.full_name %}{{ author.full_name }}{% else %}{{ author.username }}{% endif %}{% endfor %}</itunes:author>
             <author>{% for author in object.author.all %}{{ author.email }}{% if forloop.last %}{% else %}, {% endif %}{% endfor %}</author>
             {% if episode.subtitle %}<itunes:subtitle>{{ episode.subtitle }}</itunes:subtitle>{% endif %}
             <itunes:summary>{{ episode.description|striptags }}</itunes:summary>

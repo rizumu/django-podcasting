@@ -1,12 +1,13 @@
 {% load url from future %}
+{% load i18n %}
 
 <div class="podcast-feeds">
     {% if show.feedburner %}
-        <a href="{{ show.feedburner }}" target="_blank">Feedburner</a>
+        <a href="{{ show.feedburner }}" target="_blank">{% trans "Feedburner" %}</a>
     {% endif %}
     {% if show.itunes %}
-        <a href="{{ show.itunes }}" target="_blank">iTunes</a>
+        <a href="{{ show.itunes }}" target="_blank">{% trans "iTunes" %}</a>
     {% endif %}
-    <a href="{% url 'podcasts_show_feed_atom' show.slug 'mp3' %}" target="_blank">Atom</a>
-    <a href="{% url 'podcasts_show_feed_rss' show.slug 'mp3' %}" target="_blank">RSS</a>
+    <a href="{% url 'podcasts_show_feed_atom' show.slug 'mp3' %}" target="_blank">{% trans "Atom" %}</a>
+    <a href="{% url 'podcasts_show_feed_rss' show.slug 'mp3' %}" target="_blank">{% trans "RSS" %}</a>
 </div>

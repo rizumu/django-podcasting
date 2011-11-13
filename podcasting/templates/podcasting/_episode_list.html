@@ -1,5 +1,7 @@
+{% load i18n %}
+
 {% if episode_list %}
-    <div class="podcast-episode-list">
+    <div class="episode-list">
         {% for episode in episode_list %}
             <div class="podcast-episode mod">
                 <h2>{{ episode.title }}</h2>
@@ -11,18 +13,18 @@
                         {% if enclosure.mime == 'mp3' %}
                             <span class="sep">
                                 <a href="{{ enclosure.url }}" class="tiptip download"
-                                    title="to download right click and select 'save link as'">
-                                    Download / Stream
+                                    title="{% trans "to download right click and select 'save link as'" %}">
+                                    {% trans "Download / Stream" %}
                                 </a>
                             </span>
                         {% endif %}
                     {% endfor %}
                     {% if episode.tracklist %}
                         <span class="sep">
-                            <a href="#tracklist-{{ episode.id }}" rel="facebox" class="list">Tracklist</a>
+                            <a href="#tracklist-{{ episode.id }}" rel="facebox" class="list">{% trans "Tracklist" %}</a>
                         </span>
                         <div id="tracklist-{{ episode.id }}" class="hidden">
-                            <h3>{{ episode.title }} :: Tracklist</h3>
+                            <h3>{{ episode.title }} :: {% trans "Tracklist" %}</h3>
                             <div class="tracklist">
                                 {{ episode.tracklist|linenumbers|linebreaksbr }}
                             </div>
@@ -39,7 +41,7 @@
                     </a>
                     <h6>{{ episode.subtitle }}</h6>
                     {% if episode.description %}
-                        <p><a href="#details-{{ episode.id }}" rel="facebox">read more</a></p>
+                        <p><a href="#details-{{ episode.id }}" rel="facebox">{% trans "read more" %}</a></p>
                         <div id="details-{{ episode.id }}" class="hidden">
                             <div>{{ episode.description }}</div>
                         </div>
@@ -49,5 +51,5 @@
         {% endfor %}
     </div>
 {% else %}
-    <h2>Coming soon...</h2>
+    <h2>{% trans "Coming soon..." %}</h2>
 {% endif %}

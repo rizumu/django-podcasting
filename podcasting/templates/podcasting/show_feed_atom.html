@@ -1,3 +1,5 @@
+{% load i18n %}
+
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <title>{{ object.title }}</title>
@@ -9,7 +11,7 @@
     <updated>{{ episode.modified|date:"Y-m-d" }}T{{ episode.modified|date:"H:i:s" }}Z</updated>
     {% endif %}{% endfor %}
     <author>
-       <name>{% for author in object.authors.all %}{% if forloop.first %}{% else %}{% if forloop.last %} and {% else %}, {% endif %}{% endif %}{% if author.full_name %}{{ author.full_name }}{% else %}{{ author.username }}{% endif %}{% endfor %}</name>
+       <name>{% for author in object.authors.all %}{% if forloop.first %}{% else %}{% if forloop.last %} {% trans "and" %} {% else %}, {% endif %}{% endif %}{% if author.full_name %}{{ author.full_name }}{% else %}{{ author.username }}{% endif %}{% endfor %}</name>
     </author>
     {% for episode in object.episode_set.published %}
     <entry>

@@ -1,3 +1,5 @@
+{% load i18n %}
+
 {% if show %}
     <div class="podcast-show">
         <h2>{{ show.title }}</h2>
@@ -9,8 +11,8 @@
         <div class="show-description">{{ show.description }}</div>
     </div>
     {% with show.episode_set.published as episode_list %}
-        {% include 'podcasting/_episode_list.html' %}
+        {% include "podcasting/_episode_list.html" %}
     {% endwith %}
 {% else %}
-    <h2>There is no such show.</h2>
+    <h2>{% trans "There is no such show." %}</h2>
 {% endif %}

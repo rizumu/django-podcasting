@@ -1,5 +1,7 @@
+{% load i18n %}
+
 <div class="podcast-show-list">
-    <h2>Podcast Shows</h2>
+    <h2>{% trans "Podcast Shows" %}</h2>
 
     {% for show in show_list %}
         <div class="podcast-show">
@@ -12,6 +14,6 @@
             <div class="show-description">{{ show.description }}</div>
         </div>
     {% empty %}
-        <h2>There are no shows.</h2>
+        <h2>{% trans "There are no shows." %}</h2>
     {% endfor %}
 </div>

@@ -1,10 +1,12 @@
+{% load i18n %}
+
 {% extends "podcasting/podcasting_base.html" %}
 
-{% block head_title %}current edition{% endblock %}
+{% block head_title %}{% trans "Current Edition" %}{% endblock %}
 
 {% block body_class %}page-current-episode{% endblock %}
 
 {% block content %}
-    {% include 'podcasting/_current_episode.html' %}
+    {% include "podcasting/_current_episode.html" %}
     {% block current_episode_extra %}{% endblock %}
 {% endblock %}
