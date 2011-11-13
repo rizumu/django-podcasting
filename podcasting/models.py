@@ -79,7 +79,7 @@ class Show(models.Model):
     enable_comments = models.BooleanField(default=True)
 
     authors = models.ManyToManyField(User, related_name="show_authors",
-        help_text=_("""Remember to save the user"s name and e-mail address in the
+        help_text=_("""Remember to save the user's name and e-mail address in the
         <a href="../../../auth/user/">User application</a>.<br />"""))
 
     title = models.CharField(_("title"), max_length=255)
@@ -107,8 +107,10 @@ class Show(models.Model):
         saved to file's <strong>metadata</strong></a> before enclosure uploading!"""))
 
     if ImageSpec:
-        img_show_admin = ImageSpec([resize.Crop(50, 50)], image_field="original_image",
-                                   quality=100, pre_cache=True)
+        admin_thumb_sm = ImageSpec([resize.Crop(50, 50)], image_field="original_image",
+                                    quality=100, pre_cache=True)
+        admin_thumb_lg = ImageSpec([resize.Crop(450, 450)], image_field="original_image",
+                                    quality=100, pre_cache=True)
         img_show_sm = ImageSpec([resize.Crop(120, 120)], image_field="original_image",
                                 quality=100, pre_cache=True)
         img_show_lg = ImageSpec([resize.Crop(550, 550)], image_field="original_image",
@@ -181,7 +183,7 @@ class Episode(models.Model):
     enable_comments = models.BooleanField(default=True)
 
     authors = models.ManyToManyField(User, related_name="episode_authors",
-        help_text=_("""Remember to save the user"s name and e-mail address in the
+        help_text=_("""Remember to save the user's name and e-mail address in the
         <a href="../../../auth/user/">User application</a>."""))
 
     title = models.CharField(_("title"), max_length=255)
@@ -214,8 +216,10 @@ class Episode(models.Model):
         saved to file's <strong>metadata</strong></a> before enclosure uploading!"""))
 
     if ImageSpec:
-        img_admin_sm = ImageSpec([resize.Crop(50, 50)], image_field="original_image",
+        admin_thumb_sm = ImageSpec([resize.Crop(50, 50)], image_field="original_image",
                                  quality=100, pre_cache=True)
+        admin_thumb_lg = ImageSpec([resize.Crop(450, 450)], image_field="original_image",
+                                    quality=100, pre_cache=True)
         img_episode_sm = ImageSpec([resize.Crop(120, 120)], image_field="original_image",
                                    quality=100, pre_cache=True)
         img_episode_lg = ImageSpec([resize.Crop(550, 550)], image_field="original_image",
