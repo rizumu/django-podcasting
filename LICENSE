@@ -21,7 +21,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 
-django_compressor contains code from Jeff Triplet's django-podcast
+django-podcasting contains code from Jeff Triplet's django-podcast
 ------------------------------------------------------------------
 Copyright (c) 2008, django-podcast Project Members
 
