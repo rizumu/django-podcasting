@@ -325,7 +325,7 @@ class Enclosure(models.Model):
     size = models.PositiveIntegerField(_("size"), help_text=_("""The length attribute is the
         file size in bytes. Find this information in the files properties
         (on a Mac, ``Get Info`` and refer to the size row)"""))
-    mime = models.CharField(_("mime"), "Format", max_length=4, choices=MIME_CHOICES,
+    mime = models.CharField(_("mime format"), max_length=4, choices=MIME_CHOICES,
         default="mp3", help_text=_("Please contact support for a non mp3 filetype!"))
     bitrate = models.CharField(_("bit rate"), max_length=5, default="192",
         help_text=_("Measured in kilobits per second (kbps), often 128 or 192."))
