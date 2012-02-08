@@ -69,9 +69,9 @@ class Show(models.Model):
     owner = models.ForeignKey(User, related_name="podcast_shows",
         help_text=_("""Make certain the user account has a name and e-mail address."""))
 
-    editor_email = models.EmailField(_("email"), blank=True,
+    editor_email = models.EmailField(_("editor email"), blank=True,
         help_text="Email address of the person responsible for the feed's content.")
-    webmaster_email = models.EmailField(_("email"), blank=True,
+    webmaster_email = models.EmailField(_("webmaster email"), blank=True,
         help_text="Email address of the person responsible for channel publishing.")
 
     license = LicenseField()
