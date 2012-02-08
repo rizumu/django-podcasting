@@ -51,7 +51,7 @@ class ITunesElements(object):
         episode = item["episode"]
         handler.addQuickElement(u"guid", str(episode.uuid), attrs={"isPermaLink": "false"})
         handler.addQuickElement(u"copyright", "{0} {1} {2}".format(episode.show.license.name, episode.show.license.url, datetime.date.today().year))
-        handler.addQuickElement(u"itunes:author", episode.author_text))
+        handler.addQuickElement(u"itunes:author", episode.author_text)
         handler.addQuickElement(u"itunes:subtitle", episode.subtitle)
         handler.addQuickElement(u"itunes:summary", episode.description)
         handler.addQuickElement(u"itunes:duration", "%02d:%02d:%02d" % (episode.hours, episode.minutes, episode.seconds))
