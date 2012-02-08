@@ -62,12 +62,17 @@ class Show(models.Model):
 
     site = models.ForeignKey(Site, default=settings.SITE_ID)
 
-    ttl = models.PositiveIntegerField(_("TTL"), default=1440,
+    ttl = models.PositiveIntegerField(_("ttl"), default=1440,
         help_text=_("""``Time to Live,`` the number of minutes a channel can be
         cached before refreshing."""))
-    webmaster = models.ForeignKey(User, related_name="webmaster",
-        help_text=_("""Remember to save the user"s name and e-mail address in the
-        <a href="../../../auth/user/">User application</a>."""))
+
+    owner = models.ForeignKey(User, related_name="owner",
+        help_text=_("""Make certain the user account has a name and e-mail address."""))
+
+    editor_email = models.EmailField(_("email"), blank=True,
+        help_text="Email address of the person responsible for the feed's content.")
+    webmaster_email = models.EmailField(_("email"), blank=True,
+        help_text="Email address of the person responsible for channel publishing.")
 
     license = LicenseField()
 
@@ -78,9 +83,11 @@ class Show(models.Model):
 
     enable_comments = models.BooleanField(default=True)
 
-    authors = models.ManyToManyField(User, related_name="show_authors",
-        help_text=_("""Remember to save the user's name and e-mail address in the
-        <a href="../../../auth/user/">User application</a>.<br />"""))
+    author_text = models.CharField("author text", max_length=255, help_text=_("""
+        This tag contains the name of the person or company that is most widely attributed to
+        publishing the Podcast and will be displayed immediately underneath the title of the Podcast.
+        The suggested format is: 'email@example.com (Full Name)' but 'Full Name' only, is acceptable.
+        Multiple authors should be comma separated."""))
 
     title = models.CharField(_("title"), max_length=255)
     slug = AutoSlugField(_("slug"), populate_from="title")
@@ -182,9 +189,10 @@ class Episode(models.Model):
 
     enable_comments = models.BooleanField(default=True)
 
-    authors = models.ManyToManyField(User, related_name="episode_authors",
-        help_text=_("""Remember to save the user's name and e-mail address in the
-        <a href="../../../auth/user/">User application</a>."""))
+    author_text = models.CharField("author text", max_length=255, help_text=_("""
+        The person or musician name(s) featured on this specific episode.
+        The suggested format is: 'email@example.com (Full Name)' but 'Full Name' only, is acceptable.
+        Multiple authors should be comma separated."""))
 
     title = models.CharField(_("title"), max_length=255)
     slug = AutoSlugField(_("slug"), populate_from="title")

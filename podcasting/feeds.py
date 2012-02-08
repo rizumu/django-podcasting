@@ -9,32 +9,18 @@ from django.contrib.syndication.views import Feed
 from podcasting.models import Enclosure, Show
 
 
-def fmt_person(person):
-    return "{0} ({1})".format(person.email, person.get_full_name())
-
-
-def fmt_people(people):
-    fmt = fmt_person(people[0])
-    count = len(people)
-    for i, person in enumerate(people, start=1):
-        if count > 1 and count != i:
-            fmt += ", {0}".format(person)
-        if count > 1 and count == i:
-            fmt += "and {0}".format(person)
-    return fmt
-
-
 class ITunesElements(object):
+
     def add_root_elements(self, handler):
         """ Add additional elements to the show object"""
         super(ITunesElements, self).add_root_elements(handler)
         show = self.feed["show"]
         handler.addQuickElement(u"guid", str(show.uuid), attrs={"isPermaLink": "false"})
         handler.addQuickElement(u"itunes:subtitle", self.feed["subtitle"])
-        handler.addQuickElement(u"itunes:author", fmt_people(show.authors.all()))
+        handler.addQuickElement(u"itunes:author", show.author_text)
         handler.startElement(u"itunes:owner", {})
-        handler.addQuickElement(u"itunes:name", show.authors.all()[0].get_full_name())
-        handler.addQuickElement(u"itunes:email", show.authors.all()[0].email)
+        handler.addQuickElement(u"itunes:name", show.owner.get_full_name())
+        handler.addQuickElement(u"itunes:email", show.owner.email)
         handler.endElement(u"itunes:owner")
         handler.addQuickElement(u"itunes:image", attrs={"href": show.img_itunes_lg.url})
         handler.startElement(u"image", {})
@@ -48,8 +34,10 @@ class ITunesElements(object):
         if show.redirect:
             handler.addQuickElement(u"itunes:new-feed-url", show.redirect)
         handler.addQuickElement(u"keywords", show.keywords)
-        handler.addQuickElement(u"managingEditor", fmt_people(show.authors.all()))
-        handler.addQuickElement(u"webMaster", fmt_person(show.webmaster))
+        if show.editor_email:
+            handler.addQuickElement(u"managingEditor", show.editor_email)
+        if show.webmaster_email:
+            handler.addQuickElement(u"webMaster", show.webmaster_email)
         try:
             handler.addQuickElement(u"lastBuildDate", rfc2822_date(show.episode_set.published()[1].published))
         except IndexError:
@@ -63,7 +51,7 @@ class ITunesElements(object):
         episode = item["episode"]
         handler.addQuickElement(u"guid", str(episode.uuid), attrs={"isPermaLink": "false"})
         handler.addQuickElement(u"copyright", "{0} {1} {2}".format(episode.show.license.name, episode.show.license.url, datetime.date.today().year))
-        handler.addQuickElement(u"itunes:author", fmt_people(episode.authors.all()))
+        handler.addQuickElement(u"itunes:author", episode.author_text))
         handler.addQuickElement(u"itunes:subtitle", episode.subtitle)
         handler.addQuickElement(u"itunes:summary", episode.description)
         handler.addQuickElement(u"itunes:duration", "%02d:%02d:%02d" % (episode.hours, episode.minutes, episode.seconds))
@@ -188,11 +176,10 @@ class AtomShowFeed(ShowFeed):
         return show.subtitle
 
     def author_name(self, show):
-        "Managing editor?"
-        return show.authors.all()[0].get_full_name()
+        return show.owner.get_full_name()
 
     def author_email(self, show):
-        return show.authors.all()[0].email
+        return show.owner.email
 
     def author_link(self, show):
         return show.link

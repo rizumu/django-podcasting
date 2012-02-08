@@ -31,24 +31,19 @@ class BaseShowForm(forms.ModelForm):
         model = Show
         fields = [
             "original_image",
-            "webmaster",
+            "author_text",
+            "owner",
+            "editor_email",
+            "webmaster_email",
             "title", "subtitle", "description",
             "twitter_tweet_prefix",
             "feedburner", "itunes",
             "keywords", "organization", "license",
-            "explicit", "link", "authors",
+            "explicit", "link",
             "publish",
         ]
         if "taggit" in settings.INSTALLED_APPS:
             fields.append("tags")
-
-    def save(self):
-        instance = super(BaseShowForm, self).save()
-
-        for author in self.cleaned_data["authors"]:
-            instance.authors.add(author)
-
-        return instance
 
 
 class ShowAddForm(BaseShowForm):
@@ -96,7 +91,7 @@ class BaseEpisodeForm(forms.ModelForm):
         model = Episode
         fields = [
             "original_image",
-            "authors",
+            "author_text",
             "title", "subtitle",
             "description", "keywords",
             "tracklist",
@@ -109,9 +104,6 @@ class BaseEpisodeForm(forms.ModelForm):
 
     def save(self):
         instance = super(BaseEpisodeForm, self).save()
-
-        for author in self.cleaned_data["authors"]:
-            instance.authors.add(author)
 
         if can_tweet() and self.cleaned_data["tweet"]:
             instance.tweet()
@@ -239,9 +231,6 @@ class AdminEpisodeForm(forms.ModelForm):
 
     def save(self):
         episode = super(AdminEpisodeForm, self).save(commit=False)
-
-        for author in self.cleaned_data["authors"]:
-            episode.authors.add(author)
 
         episode.save()
 
