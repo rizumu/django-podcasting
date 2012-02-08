@@ -108,17 +108,17 @@ class Show(models.Model):
 
     if ImageSpec:
         admin_thumb_sm = ImageSpec([resize.Crop(50, 50)], image_field="original_image",
-                                    quality=100, pre_cache=True)
+                                   pre_cache=True, options={"quality": 100})
         admin_thumb_lg = ImageSpec([resize.Crop(450, 450)], image_field="original_image",
-                                    quality=100, pre_cache=True)
+                                   pre_cache=True, options={"quality": 100})
         img_show_sm = ImageSpec([resize.Crop(120, 120)], image_field="original_image",
-                                quality=100, pre_cache=True)
+                                pre_cache=True, options={"quality": 100})
         img_show_lg = ImageSpec([resize.Crop(550, 550)], image_field="original_image",
-                                quality=100, pre_cache=True)
+                                pre_cache=True, options={"quality": 100})
         img_itunes_sm = ImageSpec([resize.Crop(144, 144)], image_field="original_image",
-                                  quality=100, pre_cache=True)
+                                  pre_cache=True, options={"quality": 100})
         img_itunes_lg = ImageSpec([resize.Crop(1000, 1000)], image_field="original_image",
-                                  quality=100, pre_cache=True)
+                                  pre_cache=True, options={"quality": 100})
 
     feedburner = models.URLField(_("feedburner url"), blank=True,
         help_text=_("""Fill this out after saving this show and at least one
@@ -217,17 +217,17 @@ class Episode(models.Model):
 
     if ImageSpec:
         admin_thumb_sm = ImageSpec([resize.Crop(50, 50)], image_field="original_image",
-                                 quality=100, pre_cache=True)
+                                   pre_cache=True, options={"quality": 100})
         admin_thumb_lg = ImageSpec([resize.Crop(450, 450)], image_field="original_image",
-                                    quality=100, pre_cache=True)
+                                   pre_cache=True, options={"quality": 100})
         img_episode_sm = ImageSpec([resize.Crop(120, 120)], image_field="original_image",
-                                   quality=100, pre_cache=True)
+                                   pre_cache=True, options={"quality": 100})
         img_episode_lg = ImageSpec([resize.Crop(550, 550)], image_field="original_image",
-                                   quality=100, pre_cache=True)
+                                   pre_cache=True, options={"quality": 100})
         img_itunes_sm = ImageSpec([resize.Crop(144, 144)], image_field="original_image",
-                                  quality=100, pre_cache=True)
+                                  pre_cache=True, options={"quality": 100})
         img_itunes_lg = ImageSpec([resize.Crop(1000, 1000)], image_field="original_image",
-                                  quality=100, pre_cache=True)
+                                  pre_cache=True, options={"quality": 100})
 
     hours = models.SmallIntegerField(_("hours"), max_length=2, default=0)
     minutes = models.SmallIntegerField(_("minutes"), max_length=2, default=0, choices=SIXTY_CHOICES)
