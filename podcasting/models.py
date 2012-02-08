@@ -66,7 +66,7 @@ class Show(models.Model):
         help_text=_("""``Time to Live,`` the number of minutes a channel can be
         cached before refreshing."""))
 
-    owner = models.ForeignKey(User, related_name="owner",
+    owner = models.ForeignKey(User, related_name="podcast_shows",
         help_text=_("""Make certain the user account has a name and e-mail address."""))
 
     editor_email = models.EmailField(_("email"), blank=True,
