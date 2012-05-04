@@ -5,9 +5,6 @@ from distutils.util import convert_path
 from setuptools import setup, find_packages
 
 
-def read(fname):
-    return open(os.path.join(os.path.dirname(__file__), fname)).read()
-
 # Provided as an attribute, so you can append to these instead
 # of replicating them:
 standard_exclude = ("*.py", "*.pyc", "*$py.class", "*~", ".*", "*.bak")
@@ -100,7 +97,6 @@ leading ``./``), and all searching is case-insensitive.
     return out
 
 
-README = read("README.rst")
 VERSION = __import__("podcasting").__version__
 
 setup(
@@ -109,7 +105,7 @@ setup(
     url="http://django-podcasting.readthedocs.org/",
     license="BSD",
     description="Audio podcasting functionality for django sites.",
-    long_description=README,
+    long_description=open("README.rst").read(),
     author="Thomas Schreiber",
     author_email="tom@insatsu.us",
     packages=find_packages(),
