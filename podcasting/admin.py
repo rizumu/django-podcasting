@@ -4,23 +4,25 @@ from django.contrib import admin
 
 from imagekit.admin import AdminThumbnail
 
-from podcasting.forms import AdminEpisodeForm
+from podcasting.forms import AdminShowForm, AdminEpisodeForm
 from podcasting.models import Show, Episode, Enclosure
 from podcasting.utils.twitter import can_tweet
 
 
 class ShowAdmin(admin.ModelAdmin):
-    list_display = ("title", "slug", "show_site", "active_flag", "admin_thumbnail")
+    form = AdminShowForm
+
+    list_display = ("title", "slug", "show_site", "published_flag", "admin_thumbnail")
     list_filter = ("title", "published", "site")
     admin_thumbnail = AdminThumbnail(image_field="admin_thumb_sm")
 
     if can_tweet():
         fields.append("tweet_text")
 
-    def active_flag(self, obj):
+    def published_flag(self, obj):
         return bool(obj.published)
-    active_flag.short_description = "Active"
-    active_flag.boolean = True
+    published_flag.short_description = _("Published")
+    published_flag.boolean = True
 
     def show_site(self, obj):
         return obj.site.name
