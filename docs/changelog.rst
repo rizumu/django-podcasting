@@ -1,5 +1,10 @@
 Changelog
 =========
+v0.9.3
+------
+- Bump imagekit version to 2.0.1
+
+- Add the missing publish option for shows in admin #9
 
 v0.9.2
 ------
