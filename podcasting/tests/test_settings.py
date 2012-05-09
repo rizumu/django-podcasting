@@ -2,9 +2,10 @@ INSTALLED_APPS = (
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sites",
+    "django_nose",
     "licenses",
     "podcasting",
-    "tests",
+    "podcasting.tests",
 )
 
 DATABASES = {
@@ -17,4 +18,6 @@ DATABASES = {
 
 SITE_ID = 1
 
-ROOT_URLCONF = "tests.urls"
+ROOT_URLCONF = "podcasting.tests.urls"
+
+TEST_RUNNER = "django_nose.NoseTestSuiteRunner"
