@@ -124,4 +124,6 @@ setup(
         "Topic :: Software Development :: Libraries :: Python Modules",
     ],
     zip_safe=False,
+    test_suite="tests.runtests.runtests",
+    tests_require=["Django>=1.3", "milkman==0.4.5"],
 )
