@@ -9,8 +9,11 @@ from podcasting.models import Show, Episode, Enclosure
 class PodcastTests(TestCase):
     def setUp(self):
         self.show = milkman.deliver(Show, title="snowprayers")
+        self.show.save()
         self.episode = milkman.deliver(Episode, show=self.show, title="Episode 1")
+        self.episode.save()
         self.enclosure = milkman.deliver(Enclosure, episode=self.episode)
+        self.enclosure.save()
 
     def test_podcast(self):
         self.assertEquals(self.show, self.enclosure.episode.show)
