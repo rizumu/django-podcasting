@@ -18,7 +18,7 @@ class PodcastTests(TestCase):
             self.episodes.append(episode)
         self.episode = milkman.deliver(Episode, show=self.show, title="Episode")
         self.episode.save()
-        long_title = "".join(['x' for i in range(51)])
+        long_title = "".join(["x" for i in range(51)])
         self.long_episode1 = milkman.deliver(Episode, show=self.show,
                                             title=long_title)
         self.long_episode1.save()
