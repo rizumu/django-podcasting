@@ -25,9 +25,10 @@ class PodcastTests(TestCase):
         self.assertEquals(self.show, self.enclosure.episode.show)
 
     def test_autoslug(self):
-         """Test normal slug generation"""
+         """Test normal slug generation. Slug has to be lower case."""
          self.assertEqual(self.episode.get_absolute_url(),
-                          "/podcasts/snowprayers/episode/")
+                          "/podcasts/snowprayers/episode/",
+                          "Slug not generated as expected.")
          self.episode.save()
          self.assertEqual(self.episode.get_absolute_url(),
                           "/podcasts/snowprayers/episode/",
@@ -46,4 +47,3 @@ class PodcastTests(TestCase):
             self.assertEqual(self.episodes[i].get_absolute_url(),
                              "/podcasts/snowprayers/episode-1-{0}/".format(i+1)
             )
-
