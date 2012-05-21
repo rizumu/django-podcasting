@@ -15,12 +15,23 @@ class PodcastTests(TestCase):
             episode = milkman.deliver(Episode, show=self.show, title="Episode 1")
             episode.save()
             self.episodes.append(episode)
+        self.episode = milkman.deliver(Episode, show=self.show, title="Episode")
+        self.episode.save()
 
         self.enclosure = milkman.deliver(Enclosure, episode=self.episodes[0])
         self.enclosure.save()
 
     def test_podcast(self):
         self.assertEquals(self.show, self.enclosure.episode.show)
+
+    def test_autoslug(self):
+         """Test normal slug generation"""
+         self.assertEqual(self.episode.get_absolute_url(),
+                          "/podcasts/snowprayers/episode/")
+         self.episode.save()
+         self.assertEqual(self.episode.get_absolute_url(),
+                          "/podcasts/snowprayers/episode/",
+                          "Slug changed after additional episode.save()!")
 
     def test_slug_append_int_if_already_exists(self):
         """Test that the slug is created properly
