@@ -151,7 +151,6 @@ class AutoSlugField(SlugField):
             slug = self._slug_strip(getattr(model_instance, self.attname))
             next = slug.split(self.separator)[-1]
             if next.isdigit():
-                slug = self.separator.join(slug.split(self.separator)[:-1])
                 next = int(next)
             else:
                 next = 2
