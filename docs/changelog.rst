@@ -1,5 +1,9 @@
 Changelog
 =========
+master
+------
+- Fix autoslug
+
 v0.9.3
 ------
 - Bump imagekit version to 2.0.1
