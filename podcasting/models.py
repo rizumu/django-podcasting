@@ -110,8 +110,10 @@ class Show(models.Model):
 
     original_image = models.ImageField(_("original image"), upload_to=get_show_upload_folder,
         help_text=_("""An attractive, original square JPEG (.jpg) or PNG (.png)
-        image of exactly 1000x1000 pixels at 72 pixels per inch. Image will be
-        scaled down to 50x50 pixels at smallest in iTunes.<br /><br />
+        image of exactly 1400x1400 pixels at 72 pixels per inch. Image will be
+        scaled down to 50x50 pixels at smallest in iTunes. For reference see the
+        <a href="http://www.apple.com/itunes/podcasts/specs.html#metadata">iTunes
+        Podcast specs</a>.<br /><br />
         For episode artwork to display in iTunes, image must be
         <a href="http://answers.yahoo.com/question/index?qid=20080501164348AAjvBvQ">
         saved to file's <strong>metadata</strong></a> before enclosure uploading!"""))
@@ -127,7 +129,7 @@ class Show(models.Model):
                                 options={"quality": 100})
         img_itunes_sm = ImageSpec([ResizeToFill(144, 144)], image_field="original_image",
                                   options={"quality": 100})
-        img_itunes_lg = ImageSpec([ResizeToFill(1000, 1000)], image_field="original_image",
+        img_itunes_lg = ImageSpec([ResizeToFill(1400, 1400)], image_field="original_image",
                                   options={"quality": 100})
 
     feedburner = models.URLField(_("feedburner url"), blank=True,
@@ -220,8 +222,10 @@ class Episode(models.Model):
     # iTunes specific fields
     original_image = models.ImageField(_("original image"), upload_to=get_episode_upload_folder,
         help_text=_("""An attractive, original square JPEG (.jpg) or PNG (.png)
-        image of 300x300 pixles to 1000x1000 pixels at 72 pixels per inch. Image will be
-        scaled down to 50x50 pixels at smallest in iTunes.<br /><br />
+        image of 300x300 pixles to 1400x1400 pixels at 72 pixels per inch. Image will be
+        scaled down to 50x50 pixels at smallest in iTunes. For reference see the
+        <a href="http://www.apple.com/itunes/podcasts/specs.html#metadata">iTunes
+        Podcast specs</a>.<br /><br />
         For episode artwork to display in iTunes, image must be
         <a href="http://answers.yahoo.com/question/index?qid=20080501164348AAjvBvQ">
         saved to file's <strong>metadata</strong></a> before enclosure uploading!"""))
@@ -237,7 +241,7 @@ class Episode(models.Model):
                                    options={"quality": 100})
         img_itunes_sm = ImageSpec([ResizeToFill(144, 144)], image_field="original_image",
                                   options={"quality": 100})
-        img_itunes_lg = ImageSpec([ResizeToFill(1000, 1000)], image_field="original_image",
+        img_itunes_lg = ImageSpec([ResizeToFill(1400, 1400)], image_field="original_image",
                                   options={"quality": 100})
 
     hours = models.SmallIntegerField(_("hours"), max_length=2, default=0)
@@ -330,7 +334,7 @@ class Enclosure(models.Model):
         <a href="http://answers.yahoo.com/question/index?qid=20080501164348AAjvBvQ">
         saved to file's <strong>metadata</strong></a> before enclosure uploading!<br /><br />
         For best results, choose an attractive, original square JPEG (.jpg) or PNG (.png)
-        image of 300x300 pixels to 1000x1000 pixels at 72 pixels per inch. Image will be
+        image of 300x300 pixels to 1400x1400 pixels at 72 pixels per inch. Image will be
         scaled down to 50x50 pixels at smallest in iTunes."""))
 
     size = models.PositiveIntegerField(_("size"), help_text=_("""The length attribute is the
