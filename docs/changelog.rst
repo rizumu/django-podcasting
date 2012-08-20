@@ -4,13 +4,22 @@ master
 ------
 - Fix autoslug
 
-v0.9.3
+0.9.4
+-------
+- Bump django-licenses version to 0.2.5
+- Increase imagekit maxsize for fields because iTunes spec now allows
+  artwork up to 1400x1400px
+- Fix for autoslug: https://github.com/rizumu/django-podcasting/pull/11
+- Update authors
+- Use django-nose for tests
+
+0.9.3
 ------
 - Bump imagekit version to 2.0.1
 
 - Add the missing publish option for shows in admin #9
 
-v0.9.2
+0.9.2
 ------
 
 - Fix upload path for images, slugify was stripping the extension.
@@ -24,7 +33,7 @@ v0.9.2
 
 - Bump imagekit version to 1.1.0
 
-v0.9.1
+0.9.1
 ------
 
 - Many small fixes.
@@ -33,7 +42,7 @@ v0.9.1
 
 - Better forms and internationalized templates.
 
-v0.9.0
+0.9.0
 ------
 
 - First release.
