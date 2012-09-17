@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import os
-from datetime import datetime
 
 from django.conf import settings
 from django.core.urlresolvers import reverse
@@ -59,8 +58,8 @@ class Show(models.Model):
     )
     uuid = UUIDField(_("id"), unique=True)
 
-    created = models.DateTimeField(_("created"), default=datetime.now, editable=False)
-    updated = models.DateTimeField(null=True, blank=True, editable=False)
+    created = models.DateTimeField(_("created"), auto_now_add=True, editable=False)
+    updated = models.DateTimeField(_("updated"), auto_now=True, editable=False)
     published = models.DateTimeField(null=True, blank=True, editable=False)
 
     site = models.ForeignKey(Site, default=settings.SITE_ID)
@@ -168,10 +167,6 @@ class Show(models.Model):
     def __unicode__(self):
         return u"%s" % (self.title)
 
-    def save(self, **kwargs):
-        self.updated = datetime.now()
-        super(Show, self).save(**kwargs)
-
     def get_share_url(self):
         return "http://%s%s" % (Site.objects.get_current(), self.get_absolute_url())
 
@@ -186,8 +181,8 @@ class Episode(models.Model):
     SIXTY_CHOICES = tuple((x, x) for x in range(60))
     uuid = UUIDField("ID", unique=True)
 
-    created = models.DateTimeField(_("created"), default=datetime.now, editable=False)
-    updated = models.DateTimeField(null=True, blank=True, editable=False)
+    created = models.DateTimeField(_("created"), auto_now_add=True, editable=False)
+    updated = models.DateTimeField(_("updated"), auto_now=True, editable=False)
     published = models.DateTimeField(null=True, blank=True, editable=False)
 
     show = models.ForeignKey(Show)
@@ -266,10 +261,6 @@ class Episode(models.Model):
 
     def __unicode__(self):
         return u"%s" % (self.title)
-
-    def save(self, **kwargs):
-        self.updated = datetime.now()
-        super(Episode, self).save(**kwargs)
 
     def get_absolute_url(self):
         return reverse("podcasting_episode_detail", kwargs={"show_slug": self.show.slug, "slug": self.slug})

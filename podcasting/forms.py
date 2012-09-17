@@ -1,10 +1,11 @@
-from datetime import datetime
+try:
+    from django.utils.timezone import now
+except ImportError:
+    from datetime.datetime import now
 
 from django import forms
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
-
-from django.contrib.auth.models import User
 
 try:
     import imagekit
@@ -50,7 +51,7 @@ class ShowAddForm(BaseShowForm):
 
     def clean_publish(self):
         if self.cleaned_data["publish"]:
-            self.instance.published = datetime.now()
+            self.instance.published = now()
 
 
 class ShowChangeForm(BaseShowForm):
@@ -67,7 +68,7 @@ class ShowChangeForm(BaseShowForm):
         if self.instance.published:
             return
         if self.cleaned_data["publish"]:
-            self.instance.published = datetime.now()
+            self.instance.published = now()
 
 
 class BaseEpisodeForm(forms.ModelForm):
@@ -116,7 +117,7 @@ class BaseEpisodeForm(forms.ModelForm):
                                           Uncheck, save this episode, and add an encoslure before publishing."))
         elif not self.instance.show.published:
             raise forms.ValidationError(_("The show for this episode is not yet published"))
-        self.instance.published = datetime.now()
+        self.instance.published = now()
 
 
 class EpisodeChangeForm(BaseEpisodeForm):
@@ -188,7 +189,7 @@ class AdminShowForm(forms.ModelForm):
         if self.instance.published:
             return
         if self.cleaned_data["publish"]:
-            self.instance.published = datetime.now()
+            self.instance.published = now()
 
 
 class AdminEpisodeForm(forms.ModelForm):
@@ -217,7 +218,7 @@ class AdminEpisodeForm(forms.ModelForm):
                                           Uncheck, save this episode, and add an encoslure before publishing."))
         elif not self.instance.show.published:
             raise forms.ValidationError(_("The show for this episode is not yet published"))
-        self.instance.published = datetime.now()
+        self.instance.published = now()
 
     def clean_publish(self):
         # clean_publish is called twice, skip the first time when instance is unset

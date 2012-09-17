@@ -1,12 +1,11 @@
 """
 Django Extensions model fields
 """
-import datetime
 import re
 import uuid
 
 from django.template.defaultfilters import slugify
-from django.db.models import CharField, DateTimeField, SlugField, SubfieldBase
+from django.db.models import CharField, SlugField
 
 
 class UUIDVersionError(Exception):
