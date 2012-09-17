@@ -7,7 +7,12 @@ from django.db import models
 from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext_lazy as _
 
-from django.contrib.auth.models import User
+try:
+    from django.contrib.auth import get_user_model
+    auth_user_model = get_user_model()
+except ImportError:
+    from django.contrib.auth.models import User
+    auth_user_model = User
 from django.contrib.sites.models import Site
 
 # Handle optional external dependencies
@@ -68,7 +73,7 @@ class Show(models.Model):
         help_text=_("""``Time to Live,`` the number of minutes a channel can be
         cached before refreshing."""))
 
-    owner = models.ForeignKey(User, related_name="podcast_shows",
+    owner = models.ForeignKey(auth_user_model, related_name="podcast_shows",
         help_text=_("""Make certain the user account has a name and e-mail address."""))
 
     editor_email = models.EmailField(_("editor email"), blank=True,
