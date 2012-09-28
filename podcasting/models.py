@@ -7,20 +7,19 @@ from django.db import models
 from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext_lazy as _
 
-try:
-    from django.contrib.auth import get_user_model
-    auth_user_model = get_user_model()
-except ImportError:
-    from django.contrib.auth.models import User
-    auth_user_model = User
 from django.contrib.sites.models import Site
+
+# until the 1.4 shim is released
+# https://groups.google.com/d/msg/django-developers/EI-ihJ4CLqw/ZE8kw-JhQtAJ
+if not hasattr(settings, "AUTH_USER_MODEL"):
+    settings.AUTH_USER_MODEL = "auth.User"
 
 # Handle optional external dependencies
 try:
     from imagekit.models import ImageSpec
     from imagekit.processors import ResizeToFill
-except:
-    ImageSpec = None
+except ImportError:
+    ResizeToFill = None
 
 from licenses.fields import LicenseField
 
@@ -73,7 +72,7 @@ class Show(models.Model):
         help_text=_("""``Time to Live,`` the number of minutes a channel can be
         cached before refreshing."""))
 
-    owner = models.ForeignKey(auth_user_model, related_name="podcast_shows",
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="podcast_shows",
         help_text=_("""Make certain the user account has a name and e-mail address."""))
 
     editor_email = models.EmailField(_("editor email"), blank=True,
@@ -122,7 +121,7 @@ class Show(models.Model):
         <a href="http://answers.yahoo.com/question/index?qid=20080501164348AAjvBvQ">
         saved to file's <strong>metadata</strong></a> before enclosure uploading!"""))
 
-    if ImageSpec:
+    if ResizeToFill:
         admin_thumb_sm = ImageSpec([ResizeToFill(50, 50)], image_field="original_image",
                                    options={"quality": 100})
         admin_thumb_lg = ImageSpec([ResizeToFill(450, 450)], image_field="original_image",
