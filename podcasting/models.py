@@ -19,7 +19,7 @@ try:
     from imagekit.models import ImageSpec
     from imagekit.processors import ResizeToFill
 except ImportError:
-    ResizeToFill = None
+    ResizeToFill = ImageSpec = None
 
 from licenses.fields import LicenseField
 
