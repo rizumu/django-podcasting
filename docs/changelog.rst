@@ -1,8 +1,14 @@
 Changelog
 =========
+
+
 master
 ------
+- Support Django 1.5's customizable user model. This change makes
+  django-podacasting usuable only on Django versions 1.4 and greater.
 - Fix autoslug
+- Fix for non ImageKit installs
+- Support Django 1.4's timezone-aware datetimes
 
 0.9.4
 -------
