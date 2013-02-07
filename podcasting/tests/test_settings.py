@@ -21,3 +21,5 @@ SITE_ID = 1
 ROOT_URLCONF = "podcasting.tests.urls"
 
 TEST_RUNNER = "django_nose.NoseTestSuiteRunner"
+
+SECRET_KEY = "notasecret"
