@@ -16,10 +16,10 @@ if not hasattr(settings, "AUTH_USER_MODEL"):
 
 # Handle optional external dependencies
 try:
-    from imagekit.models import ImageSpec
+    from imagekit.models import ImageSpecField
     from imagekit.processors import ResizeToFill
 except ImportError:
-    ResizeToFill = ImageSpec = None
+    ResizeToFill = ImageSpecField = None
 
 from licenses.fields import LicenseField
 
@@ -122,18 +122,18 @@ class Show(models.Model):
         saved to file's <strong>metadata</strong></a> before enclosure uploading!"""))
 
     if ResizeToFill:
-        admin_thumb_sm = ImageSpec([ResizeToFill(50, 50)], image_field="original_image",
-                                   options={"quality": 100})
-        admin_thumb_lg = ImageSpec([ResizeToFill(450, 450)], image_field="original_image",
-                                   options={"quality": 100})
-        img_show_sm = ImageSpec([ResizeToFill(120, 120)], image_field="original_image",
-                                options={"quality": 100})
-        img_show_lg = ImageSpec([ResizeToFill(550, 550)], image_field="original_image",
-                                options={"quality": 100})
-        img_itunes_sm = ImageSpec([ResizeToFill(144, 144)], image_field="original_image",
-                                  options={"quality": 100})
-        img_itunes_lg = ImageSpec([ResizeToFill(1400, 1400)], image_field="original_image",
-                                  options={"quality": 100})
+        admin_thumb_sm = ImageSpecField([ResizeToFill(50, 50)], image_field="original_image",
+                                        options={"quality": 100})
+        admin_thumb_lg = ImageSpecField([ResizeToFill(450, 450)], image_field="original_image",
+                                        options={"quality": 100})
+        img_show_sm = ImageSpecField([ResizeToFill(120, 120)], image_field="original_image",
+                                     options={"quality": 100})
+        img_show_lg = ImageSpecField([ResizeToFill(550, 550)], image_field="original_image",
+                                     options={"quality": 100})
+        img_itunes_sm = ImageSpecField([ResizeToFill(144, 144)], image_field="original_image",
+                                       options={"quality": 100})
+        img_itunes_lg = ImageSpecField([ResizeToFill(1400, 1400)], image_field="original_image",
+                                       options={"quality": 100})
 
     feedburner = models.URLField(_("feedburner url"), blank=True,
         help_text=_("""Fill this out after saving this show and at least one
@@ -229,19 +229,19 @@ class Episode(models.Model):
         <a href="http://answers.yahoo.com/question/index?qid=20080501164348AAjvBvQ">
         saved to file's <strong>metadata</strong></a> before enclosure uploading!"""))
 
-    if ImageSpec:
-        admin_thumb_sm = ImageSpec([ResizeToFill(50, 50)], image_field="original_image",
-                                   options={"quality": 100})
-        admin_thumb_lg = ImageSpec([ResizeToFill(450, 450)], image_field="original_image",
-                                   options={"quality": 100})
-        img_episode_sm = ImageSpec([ResizeToFill(120, 120)], image_field="original_image",
-                                   options={"quality": 100})
-        img_episode_lg = ImageSpec([ResizeToFill(550, 550)], image_field="original_image",
-                                   options={"quality": 100})
-        img_itunes_sm = ImageSpec([ResizeToFill(144, 144)], image_field="original_image",
-                                  options={"quality": 100})
-        img_itunes_lg = ImageSpec([ResizeToFill(1400, 1400)], image_field="original_image",
-                                  options={"quality": 100})
+    if ImageSpecField:
+        admin_thumb_sm = ImageSpecField([ResizeToFill(50, 50)], image_field="original_image",
+                                        options={"quality": 100})
+        admin_thumb_lg = ImageSpecField([ResizeToFill(450, 450)], image_field="original_image",
+                                        options={"quality": 100})
+        img_episode_sm = ImageSpecField([ResizeToFill(120, 120)], image_field="original_image",
+                                        options={"quality": 100})
+        img_episode_lg = ImageSpecField([ResizeToFill(550, 550)], image_field="original_image",
+                                        options={"quality": 100})
+        img_itunes_sm = ImageSpecField([ResizeToFill(144, 144)], image_field="original_image",
+                                       options={"quality": 100})
+        img_itunes_lg = ImageSpecField([ResizeToFill(1400, 1400)], image_field="original_image",
+                                       options={"quality": 100})
 
     hours = models.SmallIntegerField(_("hours"), max_length=2, default=0)
     minutes = models.SmallIntegerField(_("minutes"), max_length=2, default=0, choices=SIXTY_CHOICES)
