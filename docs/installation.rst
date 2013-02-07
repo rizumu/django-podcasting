@@ -41,7 +41,7 @@ To quickly install all requirements
 django-imagekit_
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-    pip install django-imagekit==1.0.3
+    pip install django-imagekit==2.0.2
 
 django-taggit_
 ^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -51,7 +51,7 @@ django-taggit_
 python-twitter_
 ^^^^^^^^^^^^^^^^^^^^
 
-    pip install python-twitter==0.8.1
+    pip install python-twitter==0.8.2
 
 .. _django-licenses: https://bitbucket.org/jezdez/django-licenses/
 .. _django-imagekit: https://github.com/jdriscoll/django-imagekit/
