@@ -165,8 +165,8 @@ class EnclosureForm(forms.ModelForm):
 
         try:
             self.instance.validate_unique(exclude=exclude)
-        except forms.ValidationError, e:
-            self._update_errors(e.message_dict)
+        except forms.ValidationError as err:
+            self._update_errors(err.message_dict)
 
 
 class AdminShowForm(forms.ModelForm):
