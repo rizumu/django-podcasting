@@ -3,7 +3,7 @@ from django.conf import settings
 try:
     import twitter
 except ImportError:
-    twitter = None
+    twitter = None  # noqa
 
 
 def can_tweet():

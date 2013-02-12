@@ -1,18 +1,22 @@
 # If you change this version, change it also in docs/conf.py
 # Packging guide: http://guide.python-distribute.org/quickstart.html
-VERSION = (0, 9, 4, "f", 0) # following PEP 386
-DEV_N = None
+__version_info__ = {
+    "major": 0,
+    "minor": 9,
+    "micro": 4,
+    "releaselevel": "final",
+    "serial": 0,
+}
 
 
 def get_version():
-    version = "%s.%s" % (VERSION[0], VERSION[1])
-    if VERSION[2]:
-        version = "%s.%s" % (version, VERSION[2])
-    if VERSION[3] != "f":
-        version = "%s%s%s" % (version, VERSION[3], VERSION[4])
-        if DEV_N:
-            version = "%s.dev%s" % (version, DEV_N)
-    return version
+    vers = ["{major}.{minor}".format(**__version_info__)]
+
+    if __version_info__["micro"]:
+        vers.append(".{micro}".format(**__version_info__))
+    if __version_info__["releaselevel"] != "final":
+        vers.append("{releaselevel}{serial}".format(**__version_info__))
+    return "".join(vers)
 
 
 __version__ = get_version()

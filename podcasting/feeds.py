@@ -1,9 +1,9 @@
 import datetime
 
 from django.core.urlresolvers import reverse
-from django.db.models import permalink
 from django.utils.feedgenerator import rfc2822_date, Rss201rev2Feed, Atom1Feed
 from django.shortcuts import get_object_or_404
+
 from django.contrib.syndication.views import Feed
 
 from podcasting.models import Enclosure, Show
@@ -39,7 +39,8 @@ class ITunesElements(object):
         if show.webmaster_email:
             handler.addQuickElement(u"webMaster", show.webmaster_email)
         try:
-            handler.addQuickElement(u"lastBuildDate", rfc2822_date(show.episode_set.published()[1].published))
+            handler.addQuickElement(u"lastBuildDate",
+                                    rfc2822_date(show.episode_set.published()[1].published))
         except IndexError:
             pass
         handler.addQuickElement(u"generator", "Django Web Framework")
@@ -50,11 +51,15 @@ class ITunesElements(object):
         super(ITunesElements, self).add_item_elements(handler, item)
         episode = item["episode"]
         handler.addQuickElement(u"guid", str(episode.uuid), attrs={"isPermaLink": "false"})
-        handler.addQuickElement(u"copyright", "{0} {1} {2}".format(episode.show.license.name, episode.show.license.url, datetime.date.today().year))
+        handler.addQuickElement(u"copyright", "{0} {1} {2}".format(episode.show.license.name,
+                                                                   episode.show.license.url,
+                                                                   datetime.date.today().year))
         handler.addQuickElement(u"itunes:author", episode.author_text)
         handler.addQuickElement(u"itunes:subtitle", episode.subtitle)
         handler.addQuickElement(u"itunes:summary", episode.description)
-        handler.addQuickElement(u"itunes:duration", "%02d:%02d:%02d" % (episode.hours, episode.minutes, episode.seconds))
+        handler.addQuickElement(u"itunes:duration", "%02d:%02d:%02d" % (episode.hours,
+                                                                        episode.minutes,
+                                                                        episode.seconds))
         handler.addQuickElement(u"itunes:keywords", episode.keywords)
         handler.addQuickElement(u"itunes:explicit", episode.get_explicit_display())
         if episode.block:

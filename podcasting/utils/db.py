@@ -1,6 +1,5 @@
 from types import ClassType
 
-from django.db import models
 from django.db.models.manager import Manager
 from django.db.models.query import QuerySet
 
@@ -31,7 +30,8 @@ def manager_from(*mixins, **kwds):
         if isinstance(mixin, (ClassType, type)):
             bases.append(mixin)
         else:
-            try: methods[mixin.__name__] = mixin
+            try:
+                methods[mixin.__name__] = mixin
             except AttributeError:
                 raise TypeError('Mixin must be class or function, not %s' %
                                 mixin.__class__)
@@ -43,6 +43,7 @@ def manager_from(*mixins, **kwds):
     new_manager_cls = type('Manager_%d' % id, tuple(bases), methods)
     # and finally override new manager's get_query_set
     super_get_query_set = manager_cls.get_query_set
+
     def get_query_set(self):
         # first honor the super manager's get_query_set
         qs = super_get_query_set(self)
@@ -53,5 +54,6 @@ def manager_from(*mixins, **kwds):
                             'unique class for queryset instance')
         qs.__class__ = new_queryset_cls
         return qs
+
     new_manager_cls.get_query_set = get_query_set
     return new_manager_cls()

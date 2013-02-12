@@ -17,7 +17,7 @@ class ShowAdmin(admin.ModelAdmin):
     admin_thumbnail = AdminThumbnail(image_field="admin_thumb_sm")
 
     if can_tweet():
-        fields.append("tweet_text")
+        fields.append("tweet_text")  # noqa
 
     def published_flag(self, obj):
         return bool(obj.published)

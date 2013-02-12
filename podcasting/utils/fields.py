@@ -13,12 +13,15 @@ class UUIDVersionError(Exception):
 
 
 class UUIDField(CharField):
-    """ UUIDField
+    """UUIDField
 
-    By default uses UUID version 1 (generate from host ID, sequence number and current time)
+    By default uses UUID version 1 (generate from host ID, sequence
+    number and current time)
 
-    The field support all uuid versions which are natively supported by the uuid python module.
-    For more information see: http://docs.python.org/lib/module-uuid.html
+    The field support all uuid versions which are natively supported
+    by the uuid python module. For more information see:
+    http://docs.python.org/lib/module-uuid.html
+
     """
 
     def __init__(self, verbose_name=None, name=None, auto=True,
@@ -29,9 +32,9 @@ class UUIDField(CharField):
             kwargs.setdefault('editable', False)
         self.auto = auto
         self.version = version
-        if version==1:
+        if version == 1:
             self.node, self.clock_seq = node, clock_seq
-        elif version==3 or version==5:
+        elif version == 3 or version == 5:
             self.namespace, self.name = namespace, name
         CharField.__init__(self, verbose_name, name, **kwargs)
 
@@ -41,7 +44,7 @@ class UUIDField(CharField):
     def contribute_to_class(self, cls, name):
         if self.primary_key:
             assert not cls._meta.has_auto_field, "A model can't have more than one\
-                AutoField: %s %s %s; have %s" % (self,cls,name,cls._meta.auto_field)
+                AutoField: %s %s %s; have %s" % (self, cls, name, cls._meta.auto_field)
             super(UUIDField, self).contribute_to_class(cls, name)
             cls._meta.has_auto_field = True
             cls._meta.auto_field = self
@@ -49,15 +52,15 @@ class UUIDField(CharField):
             super(UUIDField, self).contribute_to_class(cls, name)
 
     def create_uuid(self):
-        if not self.version or self.version==4:
+        if not self.version or self.version == 4:
             return uuid.uuid4()
-        elif self.version==1:
+        elif self.version == 1:
             return uuid.uuid1(self.node, self.clock_seq)
-        elif self.version==2:
+        elif self.version == 2:
             raise UUIDVersionError("UUID version 2 is not supported.")
-        elif self.version==3:
+        elif self.version == 3:
             return uuid.uuid3(self.namespace, self.name)
-        elif self.version==5:
+        elif self.version == 5:
             return uuid.uuid5(self.namespace, self.name)
         else:
             raise UUIDVersionError("UUID version %s is not valid." % self.version)

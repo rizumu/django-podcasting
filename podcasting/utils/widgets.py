@@ -16,7 +16,8 @@ class CustomAdminThumbnailWidget(ClearableFileInput):
         thumb_sm_url = None
         thumb_lg_url = None
 
-        if value and hasattr(value.instance, "admin_thumb_sm") and hasattr(value.instance, "admin_thumb_lg"):
+        if (value and hasattr(value.instance, "admin_thumb_sm")
+                and hasattr(value.instance, "admin_thumb_lg")):
             thumb_sm_url = value.instance.admin_thumb_sm.url
             thumb_lg_url = value.instance.admin_thumb_lg.url
         if value:

@@ -1,4 +1,3 @@
-from django.conf import settings
 from django.db.models import Q
 
 from django.contrib.sites.models import Site

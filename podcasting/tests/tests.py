@@ -1,5 +1,4 @@
 from django.test import TestCase
-from django.core.urlresolvers import reverse
 
 from milkman.dairy import milkman
 
@@ -20,7 +19,7 @@ class PodcastTests(TestCase):
         self.episode.save()
         long_title = "".join(["x" for i in range(51)])
         self.long_episode1 = milkman.deliver(Episode, show=self.show,
-                                            title=long_title)
+                                             title=long_title)
         self.long_episode1.save()
 
         self.long_episode2 = milkman.deliver(Episode, show=self.show,
@@ -53,16 +52,14 @@ class PodcastTests(TestCase):
                           "/podcasts/snowprayers/episode-1/")
         for i in range(1, 10):
             self.assertEqual(self.episodes[i].get_absolute_url(),
-                             "/podcasts/snowprayers/episode-1-{0}/".format(i+1)
-            )
+                             "/podcasts/snowprayers/episode-1-{0}/".format(i+1))
 
     def test_shortend_slug(self):
         """Test if slug get's shortened to max_length"""
         self.assertTrue(len(self.long_episode1.slug) == 50,
-                         "Length of slug not <= 50 char!")
+                        "Length of slug not <= 50 char!")
         self.assertTrue(len(self.long_episode2.slug) == 50,
                         "Length of slug not <= 50 char!")
         self.assertTrue(self.long_episode2.slug.endswith("-2"),
                         "Slug doesn't end with '-2' since same title does exist"
                         " in other episode already!")
-
