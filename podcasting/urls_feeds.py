@@ -2,7 +2,9 @@ from django.conf.urls import patterns, url
 from podcasting.feeds import RssShowFeed, AtomShowFeed
 
 
-urlpatterns = patterns("",
+urlpatterns = patterns(
+    "",
+
     # Episode list feed by show (RSS 2.0 and iTunes)
     url(r"^(?P<show_slug>[-\w]+)/itunes/(?P<mime_type>[-\w]+)/rss/$",
         RssShowFeed(), name="podcasts_show_feed_rss"),
