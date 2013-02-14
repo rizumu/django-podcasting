@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+
 import json
 import os
 import urllib2
@@ -8,6 +8,7 @@ from django.core.exceptions import ImproperlyConfigured
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.template.defaultfilters import slugify
+from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
 from django.contrib.sites.models import Site
@@ -54,6 +55,7 @@ def get_episode_upload_folder(instance, pathname):
     return "img/podcasts/{0}/episodes/{1}{2}".format(instance.show.slug, slugify(root), ext)
 
 
+@python_2_unicode_compatible
 class Show(models.Model):
     """
     A podcast show, which has many episodes.
@@ -199,8 +201,8 @@ class Show(models.Model):
         verbose_name_plural = _("Shows")
         ordering = ("organization", "slug")
 
-    def __unicode__(self):
-        return u"%s" % (self.title)
+    def __str__(self):
+        return self.title
 
     def get_share_url(self):
         return "http://%s%s" % (Site.objects.get_current(), self.get_absolute_url())
@@ -209,6 +211,7 @@ class Show(models.Model):
         return reverse("podcasting_show_detail", kwargs={"slug": self.slug})
 
 
+@python_2_unicode_compatible
 class Episode(models.Model):
     """
     An individual podcast episode and it's unique attributes.
@@ -301,8 +304,8 @@ class Episode(models.Model):
         verbose_name_plural = _("Episodes")
         ordering = ("-published", "slug")
 
-    def __unicode__(self):
-        return u"%s" % (self.title)
+    def __str__(self):
+        return self.title
 
     def get_absolute_url(self):
         return reverse("podcasting_episode_detail",
@@ -352,6 +355,7 @@ class Episode(models.Model):
         return "%s..." % self.description[:512]
 
 
+@python_2_unicode_compatible
 class Enclosure(models.Model):
     """
     An enclosure is one, of possibly many, files/filetypes of an episode.
@@ -395,5 +399,5 @@ class Enclosure(models.Model):
         verbose_name = _("Enclosure")
         verbose_name_plural = _("Enclosures")
 
-    def __unicode__(self):
-        return u"%s - %s" % (self.episode, self.mime)
+    def __str__(self):
+        return "{} - {}".format(self.episode, self.mime)
