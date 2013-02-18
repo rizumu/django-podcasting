@@ -205,7 +205,7 @@ class Show(models.Model):
         return self.title
 
     def get_share_url(self):
-        return "http://%s%s" % (Site.objects.get_current(), self.get_absolute_url())
+        return "http://{0}{1}".format(Site.objects.get_current(), self.get_absolute_url())
 
     def get_absolute_url(self):
         return reverse("podcasting_show_detail", kwargs={"slug": self.slug})
@@ -315,13 +315,13 @@ class Episode(models.Model):
         if not self.tweet_text:
             current_site = Site.objects.get_current()
             api_url = "http://api.tr.im/api/trim_url.json"
-            u = urllib2.urlopen("%s?url=http://%s%s" % (
+            u = urllib2.urlopen("{0}?url=http://{1}{2}".format(
                 api_url,
                 current_site.domain,
                 self.get_absolute_url(),
             ))
             result = json.loads(u.read())
-            self.tweet_text = u"%s %s — %s" % (
+            self.tweet_text = "{0} {1} - {2}".format(
                 self.show.episode_twitter_tweet_prefix,
                 self.title,
                 result["url"],
@@ -346,13 +346,13 @@ class Episode(models.Model):
             return 0
 
     def get_share_url(self):
-        return "http://%s%s" % (Site.objects.get_current(), self.get_absolute_url())
+        return "http://{0}{1}".format(Site.objects.get_current(), self.get_absolute_url())
 
     def get_share_title(self):
         return self.title
 
     def get_share_description(self):
-        return "%s..." % self.description[:512]
+        return "{0}...".format(self.description[:512])
 
 
 @python_2_unicode_compatible
