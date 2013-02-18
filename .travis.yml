@@ -9,7 +9,7 @@ env:
   - DJANGO_VERSION=1.4.3
 
 install:
-  - pip install -q Django==$DJANGO_VERSION --use-mirrors
+  - pip install -q git+git://github.com/django/django.git@$DJANGO_VERSION#egg=Django --use-mirrors
   - pip install flake8 --use-mirrors
   - pip install -q -r requirements.txt --use-mirrors
   - pip install -e . --use-mirrors
