@@ -51,7 +51,7 @@ django-taggit_
 python-twitter_
 ^^^^^^^^^^^^^^^^^^^^
 
-    pip install python-twitter==0.8.2
+    pip install python-twitter==0.8.7
 
 .. _django-licenses: https://bitbucket.org/jezdez/django-licenses/
 .. _django-imagekit: https://github.com/jdriscoll/django-imagekit/
