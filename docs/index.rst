@@ -7,6 +7,7 @@ Audio podcasting functionality for django sites.
 The source code for Django Podcasting can be found and contributed to on
 django-podcasting_. There you can also file tickets.
 
+
 History
 =======
 Django Podcasting started off as a heavily stripped down version of
@@ -15,11 +16,12 @@ differences to be useful to others as a reusable applciation outside
 of my sandbox. I hope it inspires you to share your sounds with the
 rest of the world, whatever they may be.
 
-This application is currently in use on:
+This application can seen running on:
 
     http://snowprayers.net
 
-    http://rizumu.us/
+    http://rizu.mu
+
 
 Differences
 ===========
@@ -40,17 +42,20 @@ though writing additional views and urls to work with 1.2 would be a trivial
 task. There are also other less significant diffences which may or may not
 be of relavance to your project.
 
+
 Nomenclature
 ============
 An individual podcast is a ``show``. A ``show`` has many ``episodes``:
 001, 002, etc. An ``episode`` may link to multiple ``enclosures`` of
 varying types.
 
+
 Requirements
 ============
 ``django-podcasting`` requires ``django-licenses`` which is included
 in the setup.py and Django 1.3 or greater due to its choice in
 class-based views.
+
 
 Features
 ========
@@ -138,6 +143,7 @@ Optional Features
   the ``django-podcasting`` app will recognize and support it. Taggit
   may become a requirement in 1.0 if there are no strong objections.
 
+
 Usage
 =====
 There has yet to be a need to configure anything via the
@@ -145,6 +151,7 @@ There has yet to be a need to configure anything via the
 enough to get started. One area that may be somewhat difficult is
 connecting with a commenting application. For the simplest option,
 take a look at django-disqus_.
+
 
 Future
 ======
@@ -154,6 +161,7 @@ version.
 
 If there is desire, video support after a 1.0 (audio only) version has
 been released is possible.
+
 
 Contents
 ========

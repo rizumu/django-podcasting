@@ -4,6 +4,9 @@ Changelog
 
 master
 ------
+- Remove settings.SITE_ID default from Site field.
+- Setup Travis CI.
+- Flake8.
 - Support Django 1.5's customizable user model. This change makes
   django-podacasting usuable only on Django versions 1.4 and greater.
 - Fix autoslug
