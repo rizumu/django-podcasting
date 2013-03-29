@@ -71,7 +71,7 @@ class Show(models.Model):
     updated = models.DateTimeField(_("updated"), auto_now=True, editable=False)
     published = models.DateTimeField(null=True, blank=True, editable=False)
 
-    site = models.ForeignKey(Site, default=settings.SITE_ID)
+    site = models.ForeignKey(Site)
 
     ttl = models.PositiveIntegerField(
         _("ttl"), default=1440,
