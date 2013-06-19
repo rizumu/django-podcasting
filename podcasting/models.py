@@ -210,6 +210,13 @@ class Show(models.Model):
     def get_absolute_url(self):
         return reverse("podcasting_show_detail", kwargs={"slug": self.slug})
 
+    @property
+    def current_episode(self):
+        try:
+            return self.episode_set.published().order_by("-published")[0]
+        except IndexError:
+            return None
+
 
 @python_2_unicode_compatible
 class Episode(models.Model):
