@@ -10,6 +10,7 @@ django-podcasting_. There you can also file tickets.
 
 History
 =======
+
 Django Podcasting started off as a heavily stripped down version of
 the wonderful django-podcast_. Eventually this app grew enough
 differences to be useful to others as a reusable applciation outside
@@ -25,6 +26,7 @@ This application can seen running on:
 
 Differences
 ===========
+
 At the time I had no interset in the Video podcasting features of
 django-podcast_ and video introduces a lot of extra complexity into
 the application, considering I was first studying compliance with
@@ -45,13 +47,18 @@ be of relavance to your project.
 
 Nomenclature
 ============
-An individual podcast is a ``show``. A ``show`` has many ``episodes``:
-001, 002, etc. An ``episode`` may link to multiple ``enclosures`` of
-varying types.
+
+An individual podcast is a ``show``.
+
+A ``show`` has many ``episodes`` 001, 002, etc.
+
+An ``episode`` has one or many ``enclosures`` formats for example
+.flac, .wav or .mp3.
 
 
 Requirements
 ============
+
 ``django-podcasting`` requires ``django-licenses`` which is included
 in the setup.py and Django 1.3 or greater due to its choice in
 class-based views.
