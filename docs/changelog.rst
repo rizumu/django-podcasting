@@ -4,6 +4,8 @@ Changelog
 
 master
 ------
+- Upgrade imagekit to 3.0.1
+- Bump python-twitter to 1.0 and django-taggit to 0.10a1
 - Remove settings.SITE_ID default from Site field.
 - Setup Travis CI.
 - Flake8.

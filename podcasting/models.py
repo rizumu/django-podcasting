@@ -142,23 +142,23 @@ class Show(models.Model):
             enclosure uploading!"""))
 
     if ResizeToFill:
-        admin_thumb_sm = ImageSpecField([ResizeToFill(50, 50)],
-                                        image_field="original_image",
+        admin_thumb_sm = ImageSpecField(source="original_image",
+                                        processors=[ResizeToFill(50, 50)],
                                         options={"quality": 100})
-        admin_thumb_lg = ImageSpecField([ResizeToFill(450, 450)],
-                                        image_field="original_image",
+        admin_thumb_lg = ImageSpecField(source="original_image",
+                                        processors=[ResizeToFill(450, 450)],
                                         options={"quality": 100})
-        img_show_sm = ImageSpecField([ResizeToFill(120, 120)],
-                                     image_field="original_image",
+        img_show_sm = ImageSpecField(source="original_image",
+                                     processors=[ResizeToFill(120, 120)],
                                      options={"quality": 100})
         img_show_lg = ImageSpecField([ResizeToFill(550, 550)],
-                                     image_field="original_image",
+                                     source="original_image",
                                      options={"quality": 100})
-        img_itunes_sm = ImageSpecField([ResizeToFill(144, 144)],
-                                       image_field="original_image",
+        img_itunes_sm = ImageSpecField(source="original_image",
+                                       processors=[ResizeToFill(144, 144)],
                                        options={"quality": 100})
-        img_itunes_lg = ImageSpecField([ResizeToFill(1400, 1400)],
-                                       image_field="original_image",
+        img_itunes_lg = ImageSpecField(source="original_image",
+                                       processors=[ResizeToFill(1400, 1400)],
                                        options={"quality": 100})
 
     feedburner = models.URLField(
@@ -275,17 +275,23 @@ class Episode(models.Model):
             saved to file's <strong>metadata</strong></a> before enclosure uploading!"""))
 
     if ImageSpecField:
-        admin_thumb_sm = ImageSpecField([ResizeToFill(50, 50)], image_field="original_image",
+        admin_thumb_sm = ImageSpecField(source="original_image",
+                                        processors=[ResizeToFill(50, 50)],
                                         options={"quality": 100})
-        admin_thumb_lg = ImageSpecField([ResizeToFill(450, 450)], image_field="original_image",
+        admin_thumb_lg = ImageSpecField(source="original_image",
+                                        processors=[ResizeToFill(450, 450)],
                                         options={"quality": 100})
-        img_episode_sm = ImageSpecField([ResizeToFill(120, 120)], image_field="original_image",
+        img_episode_sm = ImageSpecField(source="original_image",
+                                        processors=[ResizeToFill(120, 120)],
                                         options={"quality": 100})
-        img_episode_lg = ImageSpecField([ResizeToFill(550, 550)], image_field="original_image",
+        img_episode_lg = ImageSpecField(source="original_image",
+                                        processors=[ResizeToFill(550, 550)],
                                         options={"quality": 100})
-        img_itunes_sm = ImageSpecField([ResizeToFill(144, 144)], image_field="original_image",
+        img_itunes_sm = ImageSpecField(source="original_image",
+                                       processors=[ResizeToFill(144, 144)],
                                        options={"quality": 100})
-        img_itunes_lg = ImageSpecField([ResizeToFill(1400, 1400)], image_field="original_image",
+        img_itunes_lg = ImageSpecField(source="original_image",
+                                       processors=[ResizeToFill(1400, 1400)],
                                        options={"quality": 100})
 
     hours = models.SmallIntegerField(_("hours"), max_length=2, default=0)

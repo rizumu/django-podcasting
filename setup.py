@@ -110,10 +110,10 @@ setup(
         "django-licenses==0.2.5",
     ],
     tests_require=[
-        "django-nose==1.0",
+        "django-nose==1.1",
         "Django>=1.3",
         "milkman==0.4.5",
-        "PIL==1.1.7",
+        "Pillow==2.1.0",
     ],
     test_suite="podcasting.tests.runtests.runtests",
     classifiers=[
