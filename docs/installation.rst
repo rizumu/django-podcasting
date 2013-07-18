@@ -41,7 +41,7 @@ To quickly install all requirements
 django-imagekit_
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-    pip install django-imagekit==3.0.1
+    pip install django-imagekit==3.0.2
 
 django-taggit_
 ^^^^^^^^^^^^^^^^^^^^^^^^^
