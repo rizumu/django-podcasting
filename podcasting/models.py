@@ -1,4 +1,3 @@
-
 import json
 import os
 import urllib2
@@ -374,7 +373,12 @@ class Enclosure(models.Model):
     An enclosure is one, of possibly many, files/filetypes of an episode.
     """
     MIME_CHOICES = (
+        ("aiff", "audio/aiff"),
+        ("flac", "audio/flac"),
         ("mp3", "audio/mpeg"),
+        ("mp4", "audio/mp4"),
+        ("ogg", "audio/ogg"),
+        ("flac", "audio/flac"),
     )
 
     episode = models.ForeignKey(Episode)
