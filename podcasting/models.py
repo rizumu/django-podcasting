@@ -414,3 +414,18 @@ class Enclosure(models.Model):
 
     def __str__(self):
         return "{} - {}".format(self.episode, self.mime)
+
+
+@python_2_unicode_compatible
+class Video(models.Model):
+    """
+    Associate a video to an Episode.
+
+    This is *not* a replacement for a video podcast, but simply a way
+    to embed video content via url in an episode description.
+    """
+    episode = models.ForeignKey(Episode)
+    url = models.URLField(_("url"), help_text=_("URL of the video file"))
+
+    def __str__(self):
+        return "{} - {}".format(self.episode, self.url)
