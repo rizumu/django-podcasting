@@ -431,5 +431,11 @@ class Video(models.Model):
     episode = models.ForeignKey(Episode)
     url = models.URLField(_("url"), help_text=_("URL of the video file"))
 
+    class Meta:
+        ordering = ("episode", "url")
+        unique_together = ("episode", "url")
+        verbose_name = _("Video")
+        verbose_name_plural = _("Videos")
+
     def __str__(self):
         return "{} - {}".format(self.episode, self.url)
