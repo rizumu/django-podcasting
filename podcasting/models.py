@@ -150,8 +150,8 @@ class Show(models.Model):
         img_show_sm = ImageSpecField(source="original_image",
                                      processors=[ResizeToFill(120, 120)],
                                      options={"quality": 100})
-        img_show_lg = ImageSpecField([ResizeToFill(550, 550)],
-                                     source="original_image",
+        img_show_lg = ImageSpecField(source="original_image",
+                                     processors=[ResizeToFill(550, 550)],
                                      options={"quality": 100})
         img_itunes_sm = ImageSpecField(source="original_image",
                                        processors=[ResizeToFill(144, 144)],
