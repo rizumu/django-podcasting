@@ -2,7 +2,10 @@ from django.utils.translation import ugettext_lazy as _
 
 from django.contrib import admin
 
-from imagekit.admin import AdminThumbnail
+try:
+    from imagekit.admin import AdminThumbnail
+except ImportError:
+    AdminThumbnail = None
 
 from podcasting.forms import AdminShowForm, AdminEpisodeForm
 from podcasting.models import Show, Episode, Enclosure
@@ -12,9 +15,11 @@ from podcasting.utils.twitter import can_tweet
 class ShowAdmin(admin.ModelAdmin):
     form = AdminShowForm
 
-    list_display = ("title", "slug", "show_site", "published_flag", "admin_thumbnail")
-    list_filter = ("title", "published", "site")
-    admin_thumbnail = AdminThumbnail(image_field="admin_thumb_sm")
+    list_display = ["title", "slug", "show_site", "published_flag"]
+    list_filter = ["title", "published", "site"]
+    if AdminThumbnail:
+        list_display.append("admin_thumbnail")
+        admin_thumbnail = AdminThumbnail(image_field="admin_thumb_sm")
 
     if can_tweet():
         fields.append("tweet_text")  # noqa
@@ -32,9 +37,11 @@ class ShowAdmin(admin.ModelAdmin):
 class EpisodeAdmin(admin.ModelAdmin):
     form = AdminEpisodeForm
 
-    list_display = ("title", "show", "slug", "episode_site", "published_flag", "admin_thumbnail")
-    list_filter = ("show", "published")
-    admin_thumbnail = AdminThumbnail(image_field="admin_thumb_sm")
+    list_display = ["title", "show", "slug", "episode_site", "published_flag"]
+    list_filter = ["show", "published"]
+    if AdminThumbnail:
+        list_display.append("admin_thumbnail")
+        admin_thumbnail = AdminThumbnail(image_field="admin_thumb_sm")
 
     if can_tweet():
         readonly_fields = ("tweet_text",)
