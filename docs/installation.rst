@@ -16,12 +16,8 @@ Installation
   choice to the ``INSTALLED_APPS`` setting in your ``settings.py``::
 
     INSTALLED_APPS = (
-        # other apps
         "podcasting",
         "licenses",
-        "imagekit",
-        "taggit",
-        "python-twitter",
     )
 
 * Add the following to your main ``urls.py``::
@@ -34,26 +30,32 @@ Installation
 Optional Dependencies
 ---------------------
 
-To quickly install all requirements
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    pip install -r requirements.txt
+You may chose between the following two thumbnail libraries or none,
+if imagekit is installed django-podcsating will use that, otherwise it
+will check for sorl.:
 
 django-imagekit_
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^
 
-    pip install django-imagekit==3.0.2
+    pip install django-imagekit==3.0.4
+
+sorl-thumbnail_
+^^^^^^^^^^^^^^^
+
+    pip install sorl-thumbnail==11.12
 
 django-taggit_
-^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^
 
-    pip install django-taggit==0.10a1
+    pip install django-taggit==0.11.1
 
 python-twitter_
-^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^
 
-    pip install python-twitter==1.0
+    pip install python-twitter==1.1
 
 .. _django-licenses: https://bitbucket.org/jezdez/django-licenses/
 .. _django-imagekit: https://github.com/jdriscoll/django-imagekit/
+.. _sorl-thumbnail: https://github.com/sorl/sorl-thumbnail
 .. _django-taggit: https://github.com/alex/django-taggit/
 .. _python-twitter: http://code.google.com/p/python-twitter/

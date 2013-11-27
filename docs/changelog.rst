@@ -4,7 +4,12 @@ Changelog
 
 master
 ------
-- Upgrade imagekit to 3.0.2
+- Add support for sorl
+- Extend the Admin widget to support sorl, imagekit and css for thumbnailing.
+- Add a simple Video model for attaching extrnal video-urls to an
+  episode.
+- Add more mime type choices for enclosures.
+- Upgrade imagekit to 3.0.4
 - Bump python-twitter to 1.0 and django-taggit to 0.10a1
 - Remove settings.SITE_ID default from Site field.
 - Setup Travis CI.
