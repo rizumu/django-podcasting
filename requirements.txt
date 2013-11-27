@@ -1,6 +1,0 @@
-# To quickly install all optional requirements
-# pip install -r requirements.txt
-
-django-imagekit==3.0.2
-django-taggit==0.10a1
-python-twitter==1.0
