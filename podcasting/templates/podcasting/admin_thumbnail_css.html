@@ -1,0 +1,9 @@
+{% load i18n %}
+
+{% if original_image %}
+    <a href="{{ original_image.url }}" target="_blank">
+        <img src="{{ original_image.url }}" style="height: 50px; width: 50px" />
+    </a>
+{% else %}
+    <p>{% trans "No image" %}</p>
+{% endif %}
