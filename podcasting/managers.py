@@ -1,9 +1,10 @@
 from django.db.models import Q
+from django.db.models.query import QuerySet
 
 from django.contrib.sites.models import Site
 
 
-class EpisodeManager(object):
+class EpisodeManager(QuerySet):
     """Returns public episodes that are currently activated."""
 
     def itunespublished(self):
@@ -22,7 +23,7 @@ class EpisodeManager(object):
             return None
 
 
-class ShowManager(object):
+class ShowManager(QuerySet):
     """Returns shows that are on the current site."""
 
     def published(self):

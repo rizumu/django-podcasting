@@ -107,13 +107,14 @@ setup(
     packages=find_packages(),
     package_data=find_package_data("podcasting", only_in_packages=False),
     install_requires=[
-        "django-licenses==0.2.5",
+        "django-licenses>=0.2.5",
+        "django-model-utils>=1.5.0",
     ],
     tests_require=[
-        "django-nose==1.1",
+        "django-nose>=1.1",
         "Django>=1.3",
-        "milkman==0.4.5",
-        "Pillow==2.1.0",
+        "milkman>=0.4.5",
+        "Pillow>=2.2.0",
     ],
     test_suite="podcasting.tests.runtests.runtests",
     classifiers=[

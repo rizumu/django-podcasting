@@ -1,6 +1,9 @@
 import json
 import os
-import urllib2
+try:
+    from urllib2 import urlopen
+except:
+    from urllib.request import urlopen
 
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
@@ -16,6 +19,8 @@ from django.contrib.sites.models import Site
 # https://groups.google.com/d/msg/django-developers/EI-ihJ4CLqw/ZE8kw-JhQtAJ
 if not hasattr(settings, "AUTH_USER_MODEL"):
     settings.AUTH_USER_MODEL = "auth.User"
+
+from model_utils.managers import PassThroughManager
 
 # Handle optional external dependencies
 try:
@@ -37,7 +42,6 @@ except ImportError:
     twitter = None  # noqa
 
 from podcasting.managers import EpisodeManager, ShowManager
-from podcasting.utils.db import manager_from
 from podcasting.utils.fields import AutoSlugField, UUIDField
 from podcasting.utils.twitter import can_tweet
 
@@ -192,7 +196,7 @@ class Show(models.Model):
         help_text=_("Enter a short ``tweet_text`` prefix for new episodes on this show."),
         blank=True)
 
-    objects = manager_from(ShowManager)
+    objects = PassThroughManager.for_queryset_class(ShowManager)()
     tags = TaggableManager()
 
     class Meta:
@@ -308,7 +312,7 @@ class Episode(models.Model):
         help_text=_("Check to block this episode from iTunes because <br />its "
                     "content might cause the entire show to be <br />removed from iTunes."""))
 
-    objects = manager_from(EpisodeManager)
+    objects = PassThroughManager.for_queryset_class(EpisodeManager)()
     tags = TaggableManager()
 
     class Meta:
@@ -327,7 +331,7 @@ class Episode(models.Model):
         if not self.tweet_text:
             current_site = Site.objects.get_current()
             api_url = "http://api.tr.im/api/trim_url.json"
-            u = urllib2.urlopen("{0}?url=http://{1}{2}".format(
+            u = urlopen("{0}?url=http://{1}{2}".format(
                 api_url,
                 current_site.domain,
                 self.get_absolute_url(),
