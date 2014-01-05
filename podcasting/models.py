@@ -2,7 +2,7 @@ import json
 import os
 try:
     from urllib2 import urlopen
-except:
+except ImportError:
     from urllib.request import urlopen
 
 from django.conf import settings
