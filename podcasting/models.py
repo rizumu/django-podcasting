@@ -40,14 +40,14 @@ except ImportError:
 
 if not custom_image_field:
     try:
-        from sorl.thumbnail import ImageField
+        from sorl.thumbnail import ImageField  # noqa
         custom_image_field = True
     except ImportError:
         custom_image_field = False
 
 if not custom_image_field:
     # image-kit uses the standard ImageField as well
-    from django.db.models import ImageField
+    from django.db.models import ImageField  # noqa
 
 if "taggit" in settings.INSTALLED_APPS:
     from taggit.managers import TaggableManager
