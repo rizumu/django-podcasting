@@ -16,9 +16,37 @@ The source code for Django Podcasting can be found and contributed to on
 To find out what's new in this version of django-podcasting, please see
 `the changelog`_
 
-The `in-development version`_ of Django Podcasting can be installed with::
+
+Quick Installation Guide
+========================
+
+Please visit `django-podcasting.readthedocs.org`_ for the full
+installation guide including optional thumbnailing, tagging and
+twitter support.
+
+* Requires Django 1.4 or greater
+
+* Install Django Podcasting with your favorite Python package manager::
+
+    pip install django-podcasting
+
+* To install the `in-development version`_ of Django Podcasting::
 
     pip install django-podcasting==dev
+
+
+* Add ``"podcasting"`` and ``"licenses"``, and the optional apps of your
+  choice to the ``INSTALLED_APPS`` setting in your ``settings.py``::
+
+    INSTALLED_APPS = (
+        "podcasting",
+        "licenses",
+    )
+
+* Add the following to your main ``urls.py``::
+
+    url(r"^podcasts/", include("podcasting.urls")),
+    url(r"^feeds/podcasts/", include("podcasting.urls_feeds")),
 
 .. _github.com/rizumu/django-podcasting: https://github.com/rizumu/django-podcasting/
 .. _django-podcasting.readthedocs.org: http://django-podcasting.readthedocs.org/

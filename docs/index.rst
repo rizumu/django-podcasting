@@ -136,13 +136,13 @@ versions of the following libraries, if you find an issue please
 report it on github.
 
 **Thumbnailed Album Artwork** Install django-imagekit_,
-  easy-thumbnails_ or sorl-thumbnails_ (partial support) in your
-  project to get sane defaults and model support for album artwork
-  thumbnails. Either may be is added to your project at point any time
-  and the ``django-podcasting`` app will recognize and use it. It is
-  highly advised to use a thumbnailing app because thumbnailing
-  podcast artwork for iTunes is nontrivial. Support for other
-  thumbnail libraries will be considered for inclusion.
+  easy-thumbnails_ or sorl-thumbnails_ in your project to get sane
+  defaults and model support for album artwork thumbnails. Either may
+  be is added to your project at point any time and the
+  ``django-podcasting`` app will recognize and use it. It is highly
+  advised to use a thumbnailing app because thumbnailing podcast
+  artwork for iTunes is nontrivial. Support for other thumbnail
+  libraries will be considered for inclusion.
 
 **Taggable episodes and shows**
   Install django-taggit_ to provide tagging support for episodes and
