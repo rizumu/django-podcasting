@@ -117,10 +117,6 @@ Features
   Show model to ``True`` and ``enable_comments`` on the Episode model
   to ``False``.
 
-**Share to Twitter**
-  Django Pocasting can optionally provide the ability to announce new
-  episodes on twitter.
-
 **Draft Mode**
   You may work on the new episode in and publish it when ready, simply
   by checking publish in the Admin. While in draft mode the episode's
@@ -135,20 +131,28 @@ Features
 Optional Features
 =================
 
-**Thumbnailed Album Artwork** Install django-imagekit_ in your project
-  provides to get sane defaults and model support for album artwork
-  thumbnails. ImageKit may be is added to your project at point any
-  time and the ``django-podcasting`` app will recognize and use it. It
-  is highly advised to use ``django-imagekit`` because thumbnailing is
-  nontrivial. Support for other thumbnail libraries such as
-  `sorl-thumbnail` will be considered for inclusion. Imagekit
-  may become a requirement in 1.0 if there are no strong objections.
+The following features are expected to work with the most recent
+versions of the following libraries, if you find an issue please
+report it on github.
+
+**Thumbnailed Album Artwork** Install django-imagekit_,
+  easy-thumbnails_ or sorl-thumbnails_ (partial support) in your
+  project to get sane defaults and model support for album artwork
+  thumbnails. Either may be is added to your project at point any time
+  and the ``django-podcasting`` app will recognize and use it. It is
+  highly advised to use a thumbnailing app because thumbnailing
+  podcast artwork for iTunes is nontrivial. Support for other
+  thumbnail libraries will be considered for inclusion.
 
 **Taggable episodes and shows**
   Install django-taggit_ to provide tagging support for episodes and
   shows. Taggit may be is added to your project at point any time and
   the ``django-podcasting`` app will recognize and support it. Taggit
   may become a requirement in 1.0 if there are no strong objections.
+
+**Share to Twitter**
+  Django Pocasting can optionally provide the ability to announce new
+  episodes on twitter. Install python-twitter_ to get started.
 
 
 Usage
@@ -184,6 +188,8 @@ Contents
 .. _django-threadedcomments: https://github.com/HonzaKral/django-threadedcomments/
 .. _django-licenses: https://bitbucket.org/jezdez/django-licenses/
 .. _django-imagekit: https://github.com/jdriscoll/django-imagekit/
+.. _easy-thumbnails: https://github.com/SmileyChris/easy-thumbnails/
+.. _sorl: https://github.com/mariocesar/sorl-thumbnail/
 .. _django-podcast: https://github.com/jefftriplett/django-podcast/
 .. _django-podcasting: https://github.com/rizumu/django-podcasting/
 .. _django-taggit: https://github.com/alex/django-taggit/

@@ -1,10 +1,32 @@
 import datetime
 
+from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.utils.feedgenerator import rfc2822_date, Rss201rev2Feed, Atom1Feed
 from django.shortcuts import get_object_or_404
 
 from django.contrib.syndication.views import Feed
+
+try:
+    import imagekit
+    easy_thumbnails = False
+    sorl = False
+except:
+    pass
+
+try:
+    import easy_thumbnails
+    imagekit = False  # noqa
+    sorl = False
+except:
+    pass
+
+try:
+    import sorl
+    imagekit = False
+    easy_thumbnails = False  # noqa
+except:
+    pass
 
 from podcasting.models import Enclosure, Show
 
@@ -15,6 +37,18 @@ class ITunesElements(object):
         """ Add additional elements to the show object"""
         super(ITunesElements, self).add_root_elements(handler)
         show = self.feed["show"]
+        if imagekit:
+            itunes_sm_url = show.img_itunes_sm.url
+            itunes_lg_url = show.img_itunes_lg.url
+        elif easy_thumbnails:
+            aliases = settings.THUMBNAIL_ALIASES["podcasting.Show.original_image"]
+            itunes_sm_url = show.original_image.get_thumbnail(aliases["itunes_sm"]).url
+            itunes_lg_url = show.original_image.get_thumbnail(aliases["itunes_lg"]).url
+        elif sorl:
+            raise NotImplementedError()
+        else:
+            itunes_sm_url = ""
+            itunes_lg_url = ""
         handler.addQuickElement(u"guid", str(show.uuid), attrs={"isPermaLink": "false"})
         handler.addQuickElement(u"itunes:subtitle", self.feed["subtitle"])
         handler.addQuickElement(u"itunes:author", show.author_text)
@@ -22,9 +56,9 @@ class ITunesElements(object):
         handler.addQuickElement(u"itunes:name", show.owner.get_full_name())
         handler.addQuickElement(u"itunes:email", show.owner.email)
         handler.endElement(u"itunes:owner")
-        handler.addQuickElement(u"itunes:image", attrs={"href": show.img_itunes_lg.url})
+        handler.addQuickElement(u"itunes:image", attrs={"href": itunes_lg_url})
         handler.startElement(u"image", {})
-        handler.addQuickElement(u"url", show.img_itunes_sm.url)
+        handler.addQuickElement(u"url", itunes_sm_url)
         handler.addQuickElement(u"title", self.feed["title"])
         handler.addQuickElement(u"link", self.feed["link"])
         handler.endElement(u"image")
@@ -50,6 +84,18 @@ class ITunesElements(object):
         """ Add additional elements to the episode object"""
         super(ITunesElements, self).add_item_elements(handler, item)
         episode = item["episode"]
+        if imagekit:
+            itunes_sm_url = episode.img_itunes_sm.url
+            itunes_lg_url = episode.img_itunes_lg.url
+        elif easy_thumbnails:
+            aliases = settings.THUMBNAIL_ALIASES["podcasting.Episode.original_image"]
+            itunes_sm_url = episode.original_image.get_thumbnail(aliases["itunes_sm"]).url
+            itunes_lg_url = episode.original_image.get_thumbnail(aliases["itunes_lg"]).url
+        elif sorl:
+            raise NotImplementedError()
+        else:
+            itunes_sm_url = ""
+            itunes_lg_url = ""
         handler.addQuickElement(u"guid", str(episode.uuid), attrs={"isPermaLink": "false"})
         handler.addQuickElement(u"copyright", "{0} {1} {2}".format(episode.show.license.name,
                                                                    episode.show.license.url,
@@ -64,9 +110,9 @@ class ITunesElements(object):
         handler.addQuickElement(u"itunes:explicit", episode.get_explicit_display())
         if episode.block:
             handler.addQuickElement(u"itunes:block", "yes")
-        handler.addQuickElement(u"itunes:image", attrs={"href": episode.img_itunes_lg.url})
+        handler.addQuickElement(u"itunes:image", attrs={"href": itunes_lg_url})
         handler.startElement(u"image", {})
-        handler.addQuickElement(u"url", episode.img_itunes_sm.url)
+        handler.addQuickElement(u"url", itunes_sm_url)
         handler.addQuickElement(u"title", episode.title)
         handler.addQuickElement(u"link", episode.get_absolute_url())
         handler.endElement(u"image")
