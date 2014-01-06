@@ -29,6 +29,11 @@ try:
 except ImportError:
     ResizeToFill = ImageSpecField = None
 
+try:
+    from easy_thumbnails.fields import ThumbnailerImageField
+except:
+    ThumbnailerImageField = None  # noqa
+
 from licenses.fields import LicenseField
 
 if "taggit" in settings.INSTALLED_APPS:
@@ -131,10 +136,14 @@ class Show(models.Model):
             description, or itunes:keywords tags. This field can be up
             to 4000 characters."""))
 
-    original_image = models.ImageField(
-        _("original image"), upload_to=get_show_upload_folder,
-        help_text=_(""" For best results, choose an attractive, original, and square JPEG
-            (.jpg) or PNG (.png) image at a size of 1400x1400 pixels.
+    if ThumbnailerImageField:
+        original_image = ThumbnailerImageField(
+            _("original image"), upload_to=get_show_upload_folder)
+    else:
+        original_image = models.ImageField(
+            _("original image"), upload_to=get_show_upload_folder)
+    original_image.help_text = _(""" For best results, choose an attractive, original,
+            and square JPEG (.jpg) or PNG (.png) image at a size of 1400x1400 pixels.
             The image will be scaled down to 50x50 pixels at smallest
             in iTunes. For reference see the <a
             href="http://www.apple.com/itunes/podcasts/specs.html#metadata">iTunes
@@ -142,7 +151,7 @@ class Show(models.Model):
             display in iTunes, image must be <a
             href="http://answers.yahoo.com/question/index?qid=20080501164348AAjvBvQ">
             saved to file's <strong>metadata</strong></a> before
-            enclosure uploading!"""))
+            enclosure uploading!""")
 
     if ResizeToFill:
         admin_thumb_sm = ImageSpecField(source="original_image",
@@ -265,17 +274,22 @@ class Episode(models.Model):
 
     tweet_text = models.CharField(_("tweet text"), max_length=140, editable=False)
 
-    # iTunes specific fields
-    original_image = models.ImageField(
-        _("original image"), upload_to=get_episode_upload_folder,
-        help_text=_("""For best results choose an attractive, original, and square
-            JPEG (.jpg) or PNG (.png) image at a size of 1400x1400 pixels. Image will be
-            scaled down to 50x50 pixels at smallest in iTunes. For reference see the
-            <a href="http://www.apple.com/itunes/podcasts/specs.html#metadata">iTunes
-            Podcast specs</a>.<br /><br />
-            For episode artwork to display in iTunes, image must be
-            <a href="http://answers.yahoo.com/question/index?qid=20080501164348AAjvBvQ">
-            saved to file's <strong>metadata</strong></a> before enclosure uploading!"""))
+    if ThumbnailerImageField:
+        original_image = ThumbnailerImageField(
+            _("original image"), upload_to=get_episode_upload_folder)
+    else:
+        original_image = models.ImageField(
+            _("original image"), upload_to=get_episode_upload_folder)
+    original_image.help_text = _(""" For best results, choose an attractive, original,
+            and square JPEG (.jpg) or PNG (.png) image at a size of 1400x1400 pixels.
+            The image will be scaled down to 50x50 pixels at smallest
+            in iTunes. For reference see the <a
+            href="http://www.apple.com/itunes/podcasts/specs.html#metadata">iTunes
+            Podcast specs</a>.<br /><br /> For episode artwork to
+            display in iTunes, image must be <a
+            href="http://answers.yahoo.com/question/index?qid=20080501164348AAjvBvQ">
+            saved to file's <strong>metadata</strong></a> before
+            enclosure uploading!""")
 
     if ImageSpecField:
         admin_thumb_sm = ImageSpecField(source="original_image",
@@ -297,6 +311,7 @@ class Episode(models.Model):
                                        processors=[ResizeToFill(1400, 1400)],
                                        options={"quality": 100})
 
+    # iTunes specific fields
     hours = models.SmallIntegerField(_("hours"), max_length=2, default=0)
     minutes = models.SmallIntegerField(_("minutes"), max_length=2, default=0, choices=SIXTY_CHOICES)
     seconds = models.SmallIntegerField(_("seconds"), max_length=2, default=0, choices=SIXTY_CHOICES)

@@ -5,7 +5,7 @@ Changelog
 master
 ------
 - Add support for sorl
-- Extend the Admin widget to support sorl, imagekit and css for thumbnailing.
+- Extend the Admin widget to support sorl, imagekit, easy-thumbnails and css for thumbnailing.
 - Add a simple Video model for attaching extrnal video-urls to an
   episode.
 - Add more mime type choices for enclosures.

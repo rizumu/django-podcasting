@@ -5,13 +5,24 @@ from django.template.loader import render_to_string
 
 try:
     import imagekit
+    easy_thumbnails = False
     sorl = False
 except:
+    pass
+
+try:
+    import easy_thumbnails
+    imagekit = False  # noqa
+    sorl = False
+except:
+    pass
+
+try:
+    import sorl
     imagekit = False
-    try:
-        import sorl
-    except:
-        sorl = False
+    easy_thumbnails = False  # noqa
+except:
+    pass
 
 
 class CustomAdminThumbnailWidget(ClearableFileInput):
@@ -31,6 +42,10 @@ class CustomAdminThumbnailWidget(ClearableFileInput):
                 "original_image_url": value.url,
                 "thumb_sm_url": thumb_sm_url,
                 "thumb_lg_url": thumb_lg_url,
+            }))
+        elif value and easy_thumbnails:
+            output.append(render_to_string("podcasting/admin_thumbnail_easy-thumbnails.html", {
+                "original_image": value,
             }))
         elif value and sorl:
             output.append(render_to_string("podcasting/admin_thumbnail_sorl.html", {
