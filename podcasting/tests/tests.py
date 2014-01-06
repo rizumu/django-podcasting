@@ -52,7 +52,7 @@ class PodcastTests(TestCase):
                           "/podcasts/snowprayers/episode-1/")
         for i in range(1, 10):
             self.assertEqual(self.episodes[i].get_absolute_url(),
-                             "/podcasts/snowprayers/episode-1-{0}/".format(i+1))
+                             "/podcasts/snowprayers/episode-1-{0}/".format(i + 1))
 
     def test_shortend_slug(self):
         """Test if slug get's shortened to max_length"""

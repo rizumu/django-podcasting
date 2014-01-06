@@ -119,7 +119,7 @@ class AutoSlugField(SlugField):
             raise ValueError("missing 'populate_from' argument")
         else:
             self._populate_from = populate_from
-        self.separator = kwargs.pop("separator",  u"-")
+        self.separator = kwargs.pop("separator", u"-")
         self.overwrite = kwargs.pop("overwrite", False)
         super(AutoSlugField, self).__init__(*args, **kwargs)
 
@@ -187,8 +187,8 @@ class AutoSlugField(SlugField):
             slug = original_slug
             end = "%s%s" % (self.separator, next)
             end_len = len(end)
-            if slug_len and len(slug)+end_len > slug_len:
-                slug = slug[:slug_len-end_len]
+            if slug_len and len(slug) + end_len > slug_len:
+                slug = slug[:slug_len - end_len]
                 slug = self._slug_strip(slug)
             slug = "%s%s" % (slug, end)
             kwargs[self.attname] = slug

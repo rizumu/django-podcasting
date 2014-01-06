@@ -7,11 +7,6 @@ from django import forms
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 
-try:
-    import imagekit
-except ImportError:
-    imagekit = None  # noqa
-
 from podcasting.utils.twitter import can_tweet
 from podcasting.utils.widgets import CustomAdminThumbnailWidget
 from podcasting.models import Enclosure, Episode, Show
