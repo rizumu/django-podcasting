@@ -20,9 +20,12 @@ from django.contrib.sites.models import Site
 if not hasattr(settings, "AUTH_USER_MODEL"):
     settings.AUTH_USER_MODEL = "auth.User"
 
+# required external dependencies
 from model_utils.managers import PassThroughManager
 
-# Handle optional external dependencies
+from licenses.fields import LicenseField
+
+# optional external dependencies
 try:
     from imagekit.models import ImageSpecField
     from imagekit.processors import ResizeToFill
@@ -30,11 +33,21 @@ except ImportError:
     ResizeToFill = ImageSpecField = None
 
 try:
-    from easy_thumbnails.fields import ThumbnailerImageField
-except:
-    ThumbnailerImageField = None  # noqa
+    from easy_thumbnails.fields import ThumbnailerImageField as ImageField
+    custom_image_field = True
+except ImportError:
+    custom_image_field = False
 
-from licenses.fields import LicenseField
+if not custom_image_field:
+    try:
+        from sorl.thumbnail import ImageField
+        custom_image_field = True
+    except ImportError:
+        custom_image_field = False
+
+if not custom_image_field:
+    # image-kit uses the standard ImageField as well
+    from django.db.models import ImageField
 
 if "taggit" in settings.INSTALLED_APPS:
     from taggit.managers import TaggableManager
@@ -46,6 +59,7 @@ try:
 except ImportError:
     twitter = None  # noqa
 
+# internal imports
 from podcasting.managers import EpisodeManager, ShowManager
 from podcasting.utils.fields import AutoSlugField, UUIDField
 from podcasting.utils.twitter import can_tweet
@@ -136,14 +150,10 @@ class Show(models.Model):
             description, or itunes:keywords tags. This field can be up
             to 4000 characters."""))
 
-    if ThumbnailerImageField:
-        original_image = ThumbnailerImageField(
-            _("original image"), upload_to=get_show_upload_folder)
-    else:
-        original_image = models.ImageField(
-            _("original image"), upload_to=get_show_upload_folder)
-    original_image.help_text = _(""" For best results, choose an attractive, original,
-            and square JPEG (.jpg) or PNG (.png) image at a size of 1400x1400 pixels.
+    original_image = ImageField(
+        _("original image"), upload_to=get_show_upload_folder, help_text=_("""
+            For best results, choose an attractive, original, and square JPEG
+            (.jpg) or PNG (.png) image at a size of 1400x1400 pixels.
             The image will be scaled down to 50x50 pixels at smallest
             in iTunes. For reference see the <a
             href="http://www.apple.com/itunes/podcasts/specs.html#metadata">iTunes
@@ -151,7 +161,7 @@ class Show(models.Model):
             display in iTunes, image must be <a
             href="http://answers.yahoo.com/question/index?qid=20080501164348AAjvBvQ">
             saved to file's <strong>metadata</strong></a> before
-            enclosure uploading!""")
+            enclosure uploading!"""))
 
     if ResizeToFill:
         admin_thumb_sm = ImageSpecField(source="original_image",
@@ -274,14 +284,10 @@ class Episode(models.Model):
 
     tweet_text = models.CharField(_("tweet text"), max_length=140, editable=False)
 
-    if ThumbnailerImageField:
-        original_image = ThumbnailerImageField(
-            _("original image"), upload_to=get_episode_upload_folder)
-    else:
-        original_image = models.ImageField(
-            _("original image"), upload_to=get_episode_upload_folder)
-    original_image.help_text = _(""" For best results, choose an attractive, original,
-            and square JPEG (.jpg) or PNG (.png) image at a size of 1400x1400 pixels.
+    original_image = ImageField(
+        _("original image"), upload_to=get_episode_upload_folder, help_text=_("""
+            For best results, choose an attractive, original, and square JPEG
+            (.jpg) or PNG (.png) image at a size of 1400x1400 pixels.
             The image will be scaled down to 50x50 pixels at smallest
             in iTunes. For reference see the <a
             href="http://www.apple.com/itunes/podcasts/specs.html#metadata">iTunes
@@ -289,7 +295,7 @@ class Episode(models.Model):
             display in iTunes, image must be <a
             href="http://answers.yahoo.com/question/index?qid=20080501164348AAjvBvQ">
             saved to file's <strong>metadata</strong></a> before
-            enclosure uploading!""")
+            enclosure uploading!"""))
 
     if ImageSpecField:
         admin_thumb_sm = ImageSpecField(source="original_image",

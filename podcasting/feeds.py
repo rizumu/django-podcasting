@@ -45,10 +45,11 @@ class ITunesElements(object):
             itunes_sm_url = show.original_image.get_thumbnail(aliases["itunes_sm"]).url
             itunes_lg_url = show.original_image.get_thumbnail(aliases["itunes_lg"]).url
         elif sorl:
-            raise NotImplementedError()
+            itunes_sm_url = sorl.thumbnail.get_thumbnail(show.original_image, "144x144").url
+            itunes_lg_url = sorl.thumbnail.get_thumbnail(show.original_image, "1400x1400").url
         else:
-            itunes_sm_url = ""
-            itunes_lg_url = ""
+            itunes_sm_url = show.original_image.url
+            itunes_lg_url = show.original_image.url
         handler.addQuickElement(u"guid", str(show.uuid), attrs={"isPermaLink": "false"})
         handler.addQuickElement(u"itunes:subtitle", self.feed["subtitle"])
         handler.addQuickElement(u"itunes:author", show.author_text)
@@ -92,10 +93,11 @@ class ITunesElements(object):
             itunes_sm_url = episode.original_image.get_thumbnail(aliases["itunes_sm"]).url
             itunes_lg_url = episode.original_image.get_thumbnail(aliases["itunes_lg"]).url
         elif sorl:
-            raise NotImplementedError()
+            itunes_sm_url = sorl.thumbnail.get_thumbnail(episode.original_image, "144x144").url
+            itunes_lg_url = sorl.thumbnail.get_thumbnail(episode.original_image, "1400x1400").url
         else:
-            itunes_sm_url = ""
-            itunes_lg_url = ""
+            itunes_sm_url = episode.original_image.url
+            itunes_lg_url = episode.original_image.url
         handler.addQuickElement(u"guid", str(episode.uuid), attrs={"isPermaLink": "false"})
         handler.addQuickElement(u"copyright", "{0} {1} {2}".format(episode.show.license.name,
                                                                    episode.show.license.url,

@@ -4,7 +4,7 @@ Changelog
 
 master
 ------
-- Add support for sorl
+- Extend full support to easy-thumbnails and sorl
 - Extend the Admin widget to support sorl, imagekit, easy-thumbnails and css for thumbnailing.
 - Add a simple Video model for attaching extrnal video-urls to an
   episode.
@@ -15,7 +15,7 @@ master
 - Setup Travis CI.
 - Flake8.
 - Support Django 1.5's customizable user model. This change makes
-  django-podacasting usuable only on Django versions 1.4 and greater.
+  django-podacasting usuable only on Django versions 1.4 LTS and greater.
 - Fix autoslug
 - Fix for non ImageKit installs
 - Support Django 1.4's timezone-aware datetimes

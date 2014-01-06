@@ -41,36 +41,29 @@ You may chose between the following three thumbnail libraries or none,
 if imagekit is installed django-podcsating will use that, else it will
 check for easy-thumbnails, followed by sorl.
 
-.. warning:: sorl support is not 100%, but it is close. Pull requests
-             will be happily accepted.
+* django-imagekit_: ``pip install django-imagekit``
 
-* django-imagekit_
+* easy-thumbnails_: ``pip install easy-thumbnails``
 
-    pip install django-imagekit
-
-* easy-thumbnails_
-
-    pip install easy-thumbnails
-
-Here is an example `settings.THUMBNAIL_ALIASES` for
+Here is an example ``settings.THUMBNAIL_ALIASES`` for
 `easy-thumbnails`. iTunes sizes are to spec.::
 
-THUMBNAIL_ALIASES = {
-    "podcasting.Show.original_image": {
-        "sm": {"size": (120, 120)},
-        "lg": {"size": (550, 550)},
-        "itunes_sm": {"size": (144, 144)},
-        "itunes_lg": {"size": (1400, 1400)},
-    },
-    "podcasting.Episode.original_image": {
-        "sm": {"size": (120, 120)},
-        "lg": {"size": (550, 550)},
-        "itunes_sm": {"size": (144, 144)},
-        "itunes_lg": {"size": (1400, 1400)},
-    },
-}
+    THUMBNAIL_ALIASES = {
+        "podcasting.Show.original_image": {
+            "sm": {"size": (120, 120)},
+            "lg": {"size": (550, 550)},
+            "itunes_sm": {"size": (144, 144)},
+            "itunes_lg": {"size": (1400, 1400)},
+        },
+        "podcasting.Episode.original_image": {
+            "sm": {"size": (120, 120)},
+            "lg": {"size": (550, 550)},
+            "itunes_sm": {"size": (144, 144)},
+            "itunes_lg": {"size": (1400, 1400)},
+        },
+    }
 
-* sorl-thumbnail_
+* Sorl-thumbnail_
 
     pip install sorl-thumbnail
 
@@ -79,18 +72,14 @@ Tagging
 
 If django-taggit is installed, tagging will be enabled:
 
-* django-taggit_
-
-    pip install django-taggit
+* django-taggit_: ``pip install django-taggit``
 
 
 If python-twiiter is installed, automatic posts for new tweets is possible:
 
 Tweeting
 --------
-* python-twitter_
-
-    pip install python-twitter
+* python-twitter_: ``pip install python-twitter``
 
 .. _django-licenses: https://bitbucket.org/jezdez/django-licenses/
 .. _django-imagekit: https://github.com/jdriscoll/django-imagekit/
