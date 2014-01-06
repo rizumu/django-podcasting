@@ -5,7 +5,7 @@ Django Podcasting is a reusable application which provides audio
 podcasting functionality for websites running on the Django Web
 framework.
 
-|buildstatus|_
+|buildstatus|_ (only failing on Django 1.7 dev branch)
 
 More documentation about the usage and installation of Django Podcasting
 can be found on `django-podcasting.readthedocs.org`_.
@@ -13,7 +13,7 @@ can be found on `django-podcasting.readthedocs.org`_.
 The source code for Django Podcasting can be found and contributed to on
 `github.com/rizumu/django-podcasting`_. There you can also `file issues`_.
 
-To find out what's new in this version of django-podcasting, please see 
+To find out what's new in this version of django-podcasting, please see
 `the changelog`_
 
 The `in-development version`_ of Django Podcasting can be installed with::
