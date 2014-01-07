@@ -106,16 +106,14 @@ setup(
     author="Thomas Schreiber",
     author_email="tom@nillab.com",
     packages=find_packages(),
-    package_data=find_package_data("podcasting", only_in_packages=False),
-    dependency_links = ["https://github.com/ccollins/milkman/tarball/master#egg=milkman-0.4.6beta"],
     install_requires=[
         "django-licenses>=0.2.5",
         "django-model-utils>=1.5.0",
     ],
     tests_require=[
-        "Django>=1.3",
-        "milkman>=0.4.5",
+        "Django>=1.4",
         "Pillow>=2.2.0",
+        "Milkman>=0.4.6",
     ],
     test_suite="runtests.runtests",
     classifiers=[
@@ -126,6 +124,8 @@ setup(
         "Operating System :: OS Independent",
         'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3.2',
+        'Programming Language :: Python :: 3.3',
         "Topic :: Software Development :: Libraries :: Python Modules",
     ],
     zip_safe=False,
