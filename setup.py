@@ -108,12 +108,12 @@ setup(
     packages=find_packages(),
     install_requires=[
         "django-licenses>=0.2.5",
-        "django-model-utils>=1.5.0",
+        "django-model-utils>=2.0",
     ],
     tests_require=[
         "Django>=1.4",
-        "Pillow>=2.2.0",
-        "Milkman==0.4.5",
+        "Pillow>=2.3.0",
+        "factory_boy>=2.3.0",
     ],
     test_suite="runtests.runtests",
     classifiers=[

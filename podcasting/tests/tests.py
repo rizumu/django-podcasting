@@ -1,33 +1,60 @@
+import factory
+
 from django.test import TestCase
 
-from milkman.dairy import milkman
+from django.contrib.sites.models import Site
+from django.contrib.auth.models import User
+
+from licenses .models import License
 
 from podcasting.models import Show, Episode, Enclosure
 
 
+class UserFactory(factory.django.DjangoModelFactory):
+    FACTORY_FOR = User
+
+
+class SiteFactory(factory.django.DjangoModelFactory):
+    FACTORY_FOR = Site
+
+
+class LicenseFactory(factory.django.DjangoModelFactory):
+    FACTORY_FOR = License
+
+
+class ShowFactory(factory.django.DjangoModelFactory):
+    FACTORY_FOR = Show
+    owner = factory.SubFactory(UserFactory)
+    site = factory.SubFactory(SiteFactory)
+    license = factory.SubFactory(LicenseFactory)
+
+
+class EpisodeFactory(factory.django.DjangoModelFactory):
+    FACTORY_FOR = Episode
+    show = factory.SubFactory(ShowFactory)
+
+
+class EnclosureFactory(factory.django.DjangoModelFactory):
+    FACTORY_FOR = Enclosure
+    episode = factory.SubFactory(EpisodeFactory)
+    size = 303
+
+
 class PodcastTests(TestCase):
     def setUp(self):
-        self.show = milkman.deliver(Show, title="snowprayers")
+        self.show = ShowFactory.create(title="snowprayers")
         self.show.save()
         self.episodes = []
         for i in range(0, 10):
-            episode = milkman.deliver(Episode, show=self.show,
-                                      title="Episode 1")
-            episode.save()
+            episode = EpisodeFactory.create(show=self.show, title="Episode 1")
             self.episodes.append(episode)
-        self.episode = milkman.deliver(Episode, show=self.show, title="Episode")
-        self.episode.save()
+        self.episode = EpisodeFactory.create(show=self.show, title="Episode")
         long_title = "".join(["x" for i in range(51)])
-        self.long_episode1 = milkman.deliver(Episode, show=self.show,
-                                             title=long_title)
-        self.long_episode1.save()
+        self.long_episode1 = EpisodeFactory.create(show=self.show, title=long_title)
 
-        self.long_episode2 = milkman.deliver(Episode, show=self.show,
-                                             title=long_title)
-        self.long_episode2.save()
+        self.long_episode2 = EpisodeFactory.create(show=self.show, title=long_title)
 
-        self.enclosure = milkman.deliver(Enclosure, episode=self.episodes[0])
-        self.enclosure.save()
+        self.enclosure = EnclosureFactory.create(episode=self.episodes[0])
 
     def test_podcast(self):
         self.assertEquals(self.show, self.enclosure.episode.show)
