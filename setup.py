@@ -95,6 +95,7 @@ leading ``./``), and all searching is case-insensitive.
 
 VERSION = __import__("podcasting").__version__
 
+
 setup(
     name="django-podcasting",
     version=VERSION,
@@ -106,6 +107,7 @@ setup(
     author_email="tom@nillab.com",
     packages=find_packages(),
     package_data=find_package_data("podcasting", only_in_packages=False),
+    dependency_links = ["https://github.com/ccollins/milkman/tarball/master#egg=milkman-0.4.6beta"],
     install_requires=[
         "django-licenses>=0.2.5",
         "django-model-utils>=1.5.0",
