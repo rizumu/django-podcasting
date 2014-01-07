@@ -113,7 +113,7 @@ setup(
     tests_require=[
         "Django>=1.4",
         "Pillow>=2.2.0",
-        "Milkman>=0.4.6",
+        "Milkman==0.4.5",
     ],
     test_suite="runtests.runtests",
     classifiers=[
