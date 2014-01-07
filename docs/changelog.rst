@@ -1,9 +1,10 @@
 Changelog
 =========
 
-
 master
 ------
+- Move runtests.py to homedir, drop django-nose and add test support
+  for Django 1.7, add coverage and version badges.
 - Extend full support to easy-thumbnails and sorl
 - Extend the Admin widget to support sorl, imagekit, easy-thumbnails and css for thumbnailing.
 - Add a simple Video model for attaching extrnal video-urls to an

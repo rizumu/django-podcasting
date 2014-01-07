@@ -111,7 +111,6 @@ setup(
         "django-model-utils>=1.5.0",
     ],
     tests_require=[
-        "django-nose>=1.1",
         "Django>=1.3",
         "milkman>=0.4.5",
         "Pillow>=2.2.0",
