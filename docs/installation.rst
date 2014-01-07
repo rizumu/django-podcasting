@@ -12,15 +12,21 @@ Installation
     pip install django-podcasting==dev
 
 
-* Add ``'podcasting'`` and ``'licenses``, and the optional apps of your
-  choice to the ``INSTALLED_APPS`` setting in your ``settings.py``::
+* Add ``"podcasting"``, ``"licenses"``, ``"django.contrib.sites"``,
+  and the optional apps of your choice to the ``INSTALLED_APPS`` setting
+  in your ``settings.py``::
 
     INSTALLED_APPS = (
+        ...
+        "django.contrib.admin",
+        "django.contrib.sites",
+        ...
         "podcasting",
         "licenses",
+        ...
     )
 
-* Add the following to your main ``urls.py``::
+* Include ``podcasting.urls`` and ``podcasting.urls_feeds`` in your urls definition::
 
     url(r"^podcasts/", include("podcasting.urls")),
     url(r"^feeds/podcasts/", include("podcasting.urls_feeds")),

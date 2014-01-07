@@ -1,3 +1,5 @@
+from __future__ import unicode_literals
+
 # See http://djangosnippets.org/snippets/1580/
 from django.forms import ClearableFileInput
 from django.utils.safestring import mark_safe
@@ -56,4 +58,4 @@ class CustomAdminThumbnailWidget(ClearableFileInput):
                 "original_image": value,
             }))
         output.append(super(CustomAdminThumbnailWidget, self).render(name, value, attrs))
-        return mark_safe(u"".join(output))
+        return mark_safe("".join(output))

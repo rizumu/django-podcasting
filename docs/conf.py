@@ -16,6 +16,8 @@
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #sys.path.insert(0, os.path.abspath('.'))
 
+from __future__ import unicode_literals
+
 # -- General configuration -----------------------------------------------------
 
 # If your documentation needs a minimal Sphinx version, state it here.
@@ -38,8 +40,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'django-podcasting'
-copyright = u'2011, Thomas Schreiber'
+project = 'django-podcasting'
+copyright = '2011, Thomas Schreiber'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -176,8 +178,8 @@ htmlhelp_basename = 'django-podcastingdoc'
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-    ('index', 'django-podcasting.tex', u'django\\_podcasting Documentation',
-     u'Thomas Schreiber', 'manual'),
+    ('index', 'django-podcasting.tex', 'django\\_podcasting Documentation',
+     'Thomas Schreiber', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
@@ -209,6 +211,6 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'django-podcasting', u'django-podcasting Documentation',
-     [u'Thomas Schreiber'], 1)
+    ('index', 'django-podcasting', 'django-podcasting Documentation',
+     ['Thomas Schreiber'], 1)
 ]

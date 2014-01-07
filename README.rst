@@ -38,8 +38,8 @@ twitter support.
 
 
 * Add ``"podcasting"``, ``"licenses"``, ``"django.contrib.sites"``,
-    and the optional apps of your choice to the ``INSTALLED_APPS``
-    setting in your ``settings.py``::
+  and the optional apps of your choice to the ``INSTALLED_APPS`` setting
+  in your ``settings.py``::
 
     INSTALLED_APPS = (
         ...

@@ -3,6 +3,7 @@ Changelog
 
 master
 ------
+- Testing on Python3
 - Move runtests.py to homedir, drop django-nose and add test support
   for Django 1.7, add coverage and version badges.
 - Extend full support to easy-thumbnails and sorl

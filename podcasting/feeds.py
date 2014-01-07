@@ -1,3 +1,5 @@
+from __future__ import unicode_literals
+
 import datetime
 
 from django.conf import settings
@@ -50,36 +52,36 @@ class ITunesElements(object):
         else:
             itunes_sm_url = show.original_image.url
             itunes_lg_url = show.original_image.url
-        handler.addQuickElement(u"guid", str(show.uuid), attrs={"isPermaLink": "false"})
-        handler.addQuickElement(u"itunes:subtitle", self.feed["subtitle"])
-        handler.addQuickElement(u"itunes:author", show.author_text)
-        handler.startElement(u"itunes:owner", {})
-        handler.addQuickElement(u"itunes:name", show.owner.get_full_name())
-        handler.addQuickElement(u"itunes:email", show.owner.email)
-        handler.endElement(u"itunes:owner")
-        handler.addQuickElement(u"itunes:image", attrs={"href": itunes_lg_url})
-        handler.startElement(u"image", {})
-        handler.addQuickElement(u"url", itunes_sm_url)
-        handler.addQuickElement(u"title", self.feed["title"])
-        handler.addQuickElement(u"link", self.feed["link"])
-        handler.endElement(u"image")
-        handler.addQuickElement(u"itunes:category", attrs={"text": self.feed["categories"][0]})
-        handler.addQuickElement(u"itunes:summary", show.description)
-        handler.addQuickElement(u"itunes:explicit", show.get_explicit_display())
+        handler.addQuickElement("guid", str(show.uuid), attrs={"isPermaLink": "false"})
+        handler.addQuickElement("itunes:subtitle", self.feed["subtitle"])
+        handler.addQuickElement("itunes:author", show.author_text)
+        handler.startElement("itunes:owner", {})
+        handler.addQuickElement("itunes:name", show.owner.get_full_name())
+        handler.addQuickElement("itunes:email", show.owner.email)
+        handler.endElement("itunes:owner")
+        handler.addQuickElement("itunes:image", attrs={"href": itunes_lg_url})
+        handler.startElement("image", {})
+        handler.addQuickElement("url", itunes_sm_url)
+        handler.addQuickElement("title", self.feed["title"])
+        handler.addQuickElement("link", self.feed["link"])
+        handler.endElement("image")
+        handler.addQuickElement("itunes:category", attrs={"text": self.feed["categories"][0]})
+        handler.addQuickElement("itunes:summary", show.description)
+        handler.addQuickElement("itunes:explicit", show.get_explicit_display())
         if show.redirect:
-            handler.addQuickElement(u"itunes:new-feed-url", show.redirect)
-        handler.addQuickElement(u"keywords", show.keywords)
+            handler.addQuickElement("itunes:new-feed-url", show.redirect)
+        handler.addQuickElement("keywords", show.keywords)
         if show.editor_email:
-            handler.addQuickElement(u"managingEditor", show.editor_email)
+            handler.addQuickElement("managingEditor", show.editor_email)
         if show.webmaster_email:
-            handler.addQuickElement(u"webMaster", show.webmaster_email)
+            handler.addQuickElement("webMaster", show.webmaster_email)
         try:
-            handler.addQuickElement(u"lastBuildDate",
+            handler.addQuickElement("lastBuildDate",
                                     rfc2822_date(show.episode_set.published()[1].published))
         except IndexError:
             pass
-        handler.addQuickElement(u"generator", "Django Web Framework")
-        handler.addQuickElement(u"docs", "http://blogs.law.harvard.edu/tech/rss")
+        handler.addQuickElement("generator", "Django Web Framework")
+        handler.addQuickElement("docs", "http://blogs.law.harvard.edu/tech/rss")
 
     def add_item_elements(self, handler, item):
         """ Add additional elements to the episode object"""
@@ -98,29 +100,29 @@ class ITunesElements(object):
         else:
             itunes_sm_url = episode.original_image.url
             itunes_lg_url = episode.original_image.url
-        handler.addQuickElement(u"guid", str(episode.uuid), attrs={"isPermaLink": "false"})
-        handler.addQuickElement(u"copyright", "{0} {1} {2}".format(episode.show.license.name,
-                                                                   episode.show.license.url,
-                                                                   datetime.date.today().year))
-        handler.addQuickElement(u"itunes:author", episode.author_text)
-        handler.addQuickElement(u"itunes:subtitle", episode.subtitle)
-        handler.addQuickElement(u"itunes:summary", episode.description)
-        handler.addQuickElement(u"itunes:duration", "%02d:%02d:%02d" % (episode.hours,
-                                                                        episode.minutes,
-                                                                        episode.seconds))
-        handler.addQuickElement(u"itunes:keywords", episode.keywords)
-        handler.addQuickElement(u"itunes:explicit", episode.get_explicit_display())
+        handler.addQuickElement("guid", str(episode.uuid), attrs={"isPermaLink": "false"})
+        handler.addQuickElement("copyright", "{0} {1} {2}".format(episode.show.license.name,
+                                                                  episode.show.license.url,
+                                                                  datetime.date.today().year))
+        handler.addQuickElement("itunes:author", episode.author_text)
+        handler.addQuickElement("itunes:subtitle", episode.subtitle)
+        handler.addQuickElement("itunes:summary", episode.description)
+        handler.addQuickElement("itunes:duration", "%02d:%02d:%02d" % (episode.hours,
+                                                                       episode.minutes,
+                                                                       episode.seconds))
+        handler.addQuickElement("itunes:keywords", episode.keywords)
+        handler.addQuickElement("itunes:explicit", episode.get_explicit_display())
         if episode.block:
-            handler.addQuickElement(u"itunes:block", "yes")
-        handler.addQuickElement(u"itunes:image", attrs={"href": itunes_lg_url})
-        handler.startElement(u"image", {})
-        handler.addQuickElement(u"url", itunes_sm_url)
-        handler.addQuickElement(u"title", episode.title)
-        handler.addQuickElement(u"link", episode.get_absolute_url())
-        handler.endElement(u"image")
+            handler.addQuickElement("itunes:block", "yes")
+        handler.addQuickElement("itunes:image", attrs={"href": itunes_lg_url})
+        handler.startElement("image", {})
+        handler.addQuickElement("url", itunes_sm_url)
+        handler.addQuickElement("title", episode.title)
+        handler.addQuickElement("link", episode.get_absolute_url())
+        handler.endElement("image")
 
     def namespace_attributes(self):
-        return {u"xmlns:itunes": u"http://www.itunes.com/dtds/podcast-1.0.dtd"}
+        return {"xmlns:itunes": "http://www.itunes.com/dtds/podcast-1.0.dtd"}
 
 
 class AtomITunesFeedGenerator(ITunesElements, Atom1Feed):
