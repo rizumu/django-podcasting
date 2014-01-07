@@ -103,7 +103,7 @@ setup(
     description="Audio podcasting functionality for django sites.",
     long_description=open("README.rst").read(),
     author="Thomas Schreiber",
-    author_email="tom@insatsu.us",
+    author_email="tom@nillab.com",
     packages=find_packages(),
     package_data=find_package_data("podcasting", only_in_packages=False),
     install_requires=[
@@ -115,7 +115,7 @@ setup(
         "milkman>=0.4.5",
         "Pillow>=2.2.0",
     ],
-    test_suite="podcasting.tests.runtests.runtests",
+    test_suite="runtests.runtests",
     classifiers=[
         "Development Status :: 4 - Beta",
         "Framework :: Django",

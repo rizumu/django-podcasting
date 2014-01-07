@@ -1,19 +1,38 @@
 language: python
 
 python:
+  - 2.6
   - 2.7
+  - 3.2
+  - 3.3
 
 env:
-  - DJANGO_VERSION=master
-  - DJANGO_VERSION=1.6.1
-  - DJANGO_VERSION=1.5.5
-  - DJANGO_VERSION=1.4.10
+  - DJANGO=https://github.com/django/django/tarball/master
+  - DJANGO=Django==1.6.1
+  - DJANGO=Django==1.5.5
+  - DJANGO=Django==1.4.10
 
 install:
-  - pip install -q git+git://github.com/django/django.git@$DJANGO_VERSION#egg=Django --use-mirrors
+  - pip install $DJANGO --use-mirrors
   - pip install flake8 --use-mirrors
+  - pip install coverage coveralls --use-mirrors
   - pip install -e . --use-mirrors
 
 script:
   - flake8 --max-line-length=100 .
-  - python setup.py test
+  - coverage run -a setup.py test
+  - coverage report
+
+matrix:
+  exclude:
+   - python: 2.6
+     env: DJANGO=https://github.com/django/django/tarball/master
+   - python: 3.2
+     env: DJANGO=Django==1.4.10
+   - python: 3.3
+     env: DJANGO=Django==1.4.10
+  include:
+   - python: 2.7
+     env: DJANGO=Django==1.5.5
+
+after_success: coveralls
