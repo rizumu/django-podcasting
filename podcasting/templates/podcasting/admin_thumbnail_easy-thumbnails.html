@@ -1,9 +1,10 @@
-{% load thumbnail i18n %}
+{% load i18n thumbnail %}
 
-{% thumbnail original_image.url "30x30" as im %}
+
+{% if original_image %}
     <a href="{{ original_image.url }}" target="_blank">
-        <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"/>
+        <img src="{% thumbnail original_image "240x240" %}"/>
     </a>
-{% empty %}
+{% else %}
     <p>{% trans "No image" %}</p>
-{% endthumbnail %}
+{% endif %}
