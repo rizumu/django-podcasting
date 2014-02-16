@@ -3,6 +3,9 @@ Changelog
 
 master
 ------
+- Rename the newly added Video class to EmbedMedia, and build in
+  support for django-embed-video for easy embedding of SoundCloud, Vimeo
+  and YouTube files on Episode detail pages.
 - Add a show.on_itunes boolean and relax required fields to allow
   simpler user forms when not publishing to iTunes.
 - Testing on Python3

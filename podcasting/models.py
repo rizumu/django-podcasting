@@ -59,6 +59,11 @@ try:
 except ImportError:
     twitter = None  # noqa
 
+try:
+    from embed_video.fields import EmbedVideoField
+except ImportError:
+    EmbedVideoField = None
+
 # internal imports
 from podcasting.managers import EpisodeManager, ShowManager
 from podcasting.utils.fields import AutoSlugField, UUIDField
@@ -451,21 +456,28 @@ class Enclosure(models.Model):
 
 
 @python_2_unicode_compatible
-class Video(models.Model):
+class EmbedMedia(models.Model):
     """
-    Associate a video to an Episode.
+    Associate a media URL to an Episode.
 
     This is *not* a replacement for a video podcast, but simply a way
-    to embed video content via url in an episode description.
+    to embed content via url in an episode description.
+
+    Ideally this will be used with django-embed-video which supports
+    easy embeding for YouTube and Vimeo videos and music from SoundCloud.
     """
     episode = models.ForeignKey(Episode)
-    url = models.URLField(_("url"), help_text=_("URL of the video file"))
+
+    if EmbedVideoField:
+        url = EmbedVideoField(_("url"), help_text=_("URL of the media file"))
+    else:
+        url = models.URLField(_("url"), help_text=_("URL of the media file"))
 
     class Meta:
         ordering = ("episode", "url")
         unique_together = ("episode", "url")
-        verbose_name = _("Video")
-        verbose_name_plural = _("Videos")
+        verbose_name = _("Embed Media URL")
+        verbose_name_plural = _("Embed Media URLs")
 
     def __str__(self):
         return "{} - {}".format(self.episode, self.url)

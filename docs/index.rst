@@ -154,6 +154,13 @@ report it on github.
   Django Pocasting can optionally provide the ability to announce new
   episodes on twitter. Install python-twitter_ to get started.
 
+**Embeddable Media**
+  Want to display Youtube, Vimeo or Soundcloud content on Episode
+  detail pages? Django Pocasting provides the ability to link to
+  external embeddable media via the `podcasting.models.EmbedMedia`
+  class. Optionally install django-embed-video_ for easy embedding of
+  YouTube and Vimeo videos and music from SoundCloud.
+
 
 Usage
 =====
@@ -196,3 +203,4 @@ Contents
 .. _FeedBurner: http://www.feedburner.com/
 .. _iTunes: http://www.apple.com/itunes/podcasts/specs.html
 .. _python-twitter: http://code.google.com/p/python-twitter/
+.. _django-embed-video: https://github.com/yetty/django-embed-video/

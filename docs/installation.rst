@@ -76,7 +76,8 @@ Here is an example ``settings.THUMBNAIL_ALIASES`` for
 Tagging
 -------
 
-If django-taggit is installed, tagging will be enabled:
+If django-taggit is installed, tagging will be enabled for Episodes
+and Shows:
 
 * django-taggit_: ``pip install django-taggit``
 
@@ -85,7 +86,19 @@ If python-twiiter is installed, automatic posts for new tweets is possible:
 
 Tweeting
 --------
+
+Want to send a tweet every time a new Episode is created?
+
 * python-twitter_: ``pip install python-twitter``
+
+
+Media Embedding
+---------------
+
+Want to display Youtube, Vimeo or Soundcloud content on Episode detail
+pages?
+
+* django-embed-video_: ``pip install django-embed-video``
 
 .. _django-licenses: https://bitbucket.org/jezdez/django-licenses/
 .. _django-imagekit: https://github.com/jdriscoll/django-imagekit/
@@ -93,3 +106,4 @@ Tweeting
 .. _sorl-thumbnail: https://github.com/sorl/sorl-thumbnail/
 .. _django-taggit: https://github.com/alex/django-taggit/
 .. _python-twitter: http://code.google.com/p/python-twitter/
+.. _django-embed-video: https://github.com/yetty/django-embed-video/
