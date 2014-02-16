@@ -161,7 +161,7 @@ class Show(models.Model):
             to 4000 characters."""))
 
     original_image = ImageField(
-        _("original image"), upload_to=get_show_upload_folder, help_text=_("""
+        _("image"), upload_to=get_show_upload_folder, help_text=_("""
             For best results, choose an attractive, original, and square JPEG
             (.jpg) or PNG (.png) image at a size of 1400x1400 pixels.
             The image will be scaled down to 50x50 pixels at smallest
@@ -295,7 +295,7 @@ class Episode(models.Model):
     tweet_text = models.CharField(_("tweet text"), max_length=140, editable=False)
 
     original_image = ImageField(
-        _("original image"), upload_to=get_episode_upload_folder, blank=True, help_text=_("""
+        _("image"), upload_to=get_episode_upload_folder, blank=True, help_text=_("""
             For best results, choose an attractive, original, and square JPEG
             (.jpg) or PNG (.png) image at a size of 1400x1400 pixels.
             The image will be scaled down to 50x50 pixels at smallest
