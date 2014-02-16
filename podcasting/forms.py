@@ -36,6 +36,7 @@ class BaseShowForm(forms.ModelForm):
             "feedburner", "itunes",
             "keywords", "organization", "license",
             "explicit", "link",
+            "on_itunes",
             "publish",
         ]
         if "taggit" in settings.INSTALLED_APPS:
@@ -88,14 +89,27 @@ class BaseEpisodeForm(forms.ModelForm):
             "original_image",
             "author_text",
             "title", "subtitle",
-            "description", "keywords",
+            "description",
             "tracklist",
             "hours", "minutes", "seconds",
-            "explicit", "block",
             "publish",
         ]
         if "taggit" in settings.INSTALLED_APPS:
             fields.append("tags")
+        extra_fields_itunes = [
+            "keywords",
+            "explicit",
+            "block",
+        ]
+        required_fields_itunes = [
+            "author_text",
+            "subtitle",
+            "description",
+            "original_image",
+            "tags",
+            "keywords",
+            "explicit",
+        ]
 
     def save(self):
         instance = super(BaseEpisodeForm, self).save()
@@ -132,11 +146,31 @@ class EpisodeChangeForm(BaseEpisodeForm):
             self.validate_published()
 
 
+class EpisodeITunesChangeForm(EpisodeChangeForm):
+    def __init__(self, *args, **kwargs):
+        super(EpisodeITunesChangeForm, self).__init__(*args, **kwargs)
+        for key in self.Meta.required_fields_itunes:
+            self.fields[key].required = True
+
+    class Meta(EpisodeChangeForm.Meta):
+        fields = EpisodeChangeForm.Meta.fields + EpisodeChangeForm.Meta.extra_fields_itunes
+
+
 class EpisodeAddForm(BaseEpisodeForm):
 
     def clean_publish(self):
         if self.cleaned_data["publish"]:
             self.validate_published()
+
+
+class EpisodeITunesAddForm(EpisodeAddForm):
+    def __init__(self, *args, **kwargs):
+        super(EpisodeITunesAddForm, self).__init__(*args, **kwargs)
+        for key in self.Meta.required_fields_itunes:
+            self.fields[key].required = True
+
+    class Meta(EpisodeAddForm.Meta):
+        fields = EpisodeAddForm.Meta.fields + EpisodeAddForm.Meta.extra_fields_itunes
 
 
 class EnclosureForm(forms.ModelForm):

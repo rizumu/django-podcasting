@@ -3,6 +3,8 @@ Changelog
 
 master
 ------
+- Add a show.on_itunes boolean and relax required fields to allow
+  simpler user forms when not publishing to iTunes.
 - Testing on Python3
 - Move runtests.py to homedir, drop django-nose and add test support
   for Django 1.7, add coverage and version badges.

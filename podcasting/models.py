@@ -137,6 +137,11 @@ class Show(models.Model):
         _("subtitle"), max_length=255,
         help_text=_("Looks best if only a few words, like a tagline."))
 
+    # If the show is not on iTunes, many fields may be ignored in your user forms
+    on_itunes = models.BooleanField(
+        _("iTunes"), default=True,
+        help_text=_("Checked if the podcast is submitted to iTunes"))
+
     description = models.TextField(
         _("description"), max_length=4000, help_text=_("""
             This is your chance to tell potential subscribers all about your
@@ -200,7 +205,7 @@ class Show(models.Model):
             the URL of the current show feed. Must continue old feed for at least
             two weeks and write a 301 redirect for old feed."""))
     keywords = models.CharField(
-        _("keywords"), max_length=255,
+        _("keywords"), max_length=255, blank=True,
         help_text=_("""A comma-demlimitedlist of up to 12 words for iTunes
             searches. Perhaps include misspellings of the title."""))
     itunes = models.URLField(
@@ -216,7 +221,7 @@ class Show(models.Model):
         blank=True)
 
     objects = PassThroughManager.for_queryset_class(ShowManager)()
-    tags = TaggableManager()
+    tags = TaggableManager(blank=True)
 
     class Meta:
         verbose_name = _("Show")
@@ -256,7 +261,7 @@ class Episode(models.Model):
 
     enable_comments = models.BooleanField(default=True)
 
-    author_text = models.CharField("author text", max_length=255, help_text=_("""
+    author_text = models.CharField("author text", max_length=255, blank=True, help_text=_("""
         The person or musician name(s) featured on this specific episode.
         The suggested format is: 'email@example.com (Full Name)' but 'Full Name' only,
         is acceptable. Multiple authors should be comma separated."""))
@@ -265,11 +270,11 @@ class Episode(models.Model):
     slug = AutoSlugField(_("slug"), populate_from="title")
 
     subtitle = models.CharField(
-        _("subtitle"), max_length=255,
+        _("subtitle"), max_length=255, blank=True,
         help_text=_("Looks best if only a few words like a tagline."))
 
     description = models.TextField(
-        _("description"), max_length=4000, help_text=_("""
+        _("description"), max_length=4000, blank=True, help_text=_("""
             This is your chance to tell potential subscribers all about your podcast.
             Describe your subject matter, media format, episode schedule, and other
             relevant info so that they know what they'll be getting when they
@@ -279,13 +284,13 @@ class Episode(models.Model):
             irrelevant words in the itunes:summary, description, or
             itunes:keywords tags. This field can be up to 4000 characters."""))
     tracklist = models.TextField(
-        _("tracklist"), null=True, blank=True,
+        _("tracklist"), blank=True,
         help_text=_("""One track per line, machine will automatically add the numbers."""))
 
     tweet_text = models.CharField(_("tweet text"), max_length=140, editable=False)
 
     original_image = ImageField(
-        _("original image"), upload_to=get_episode_upload_folder, help_text=_("""
+        _("original image"), upload_to=get_episode_upload_folder, blank=True, help_text=_("""
             For best results, choose an attractive, original, and square JPEG
             (.jpg) or PNG (.png) image at a size of 1400x1400 pixels.
             The image will be scaled down to 50x50 pixels at smallest
@@ -322,7 +327,7 @@ class Episode(models.Model):
     minutes = models.SmallIntegerField(_("minutes"), max_length=2, default=0, choices=SIXTY_CHOICES)
     seconds = models.SmallIntegerField(_("seconds"), max_length=2, default=0, choices=SIXTY_CHOICES)
     keywords = models.CharField(
-        _("keywords"), max_length=255,
+        _("keywords"), max_length=255, blank=True,
         help_text=_("A comma-delimited list of words for searches, up to 12; "
                     "perhaps include misspellings."))
     explicit = models.PositiveSmallIntegerField(
@@ -334,7 +339,7 @@ class Episode(models.Model):
                     "content might cause the entire show to be <br />removed from iTunes."""))
 
     objects = PassThroughManager.for_queryset_class(EpisodeManager)()
-    tags = TaggableManager()
+    tags = TaggableManager(blank=True)
 
     class Meta:
         verbose_name = _("Episode")
