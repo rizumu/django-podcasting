@@ -414,6 +414,7 @@ class Enclosure(models.Model):
         ("mp4", "audio/mp4"),
         ("ogg", "audio/ogg"),
         ("flac", "audio/flac"),
+        ("wav", "audio/wav"),
     )
 
     episode = models.ForeignKey(Episode)
@@ -434,7 +435,8 @@ class Enclosure(models.Model):
                                "(on a Mac, ``Get Info`` and refer to the size row)"))
     mime = models.CharField(
         _("mime format"), max_length=4, choices=MIME_CHOICES,
-        default="mp3", help_text=_("Please contact support for a non mp3 filetype!"))
+        help_text=_("Supports mime types of: {0}".format(
+             ", ".join([mime[0] for mime in MIME_CHOICES]))))
     bitrate = models.CharField(
         _("bit rate"), max_length=5, default="192",
         help_text=_("Measured in kilobits per second (kbps), often 128 or 192."))
@@ -444,6 +446,9 @@ class Enclosure(models.Model):
     channel = models.CharField(
         _("channel"), max_length=1, default=2,
         help_text=_("Number of channels; 2 for stereo, 1 for mono."))
+    duration = models.IntegerField(
+        _("duration"), max_length=1,
+        help_text=_("Duration of the audio file, in seconds (always as integer)."))
 
     class Meta:
         ordering = ("episode", "mime")
