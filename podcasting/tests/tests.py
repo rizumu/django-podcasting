@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 try:
     from licenses .models import License
 except ImportError:
-    licenses_installed = False
+    License = False
 
 from podcasting.models import Show, Episode, Enclosure
 
@@ -21,7 +21,7 @@ class SiteFactory(factory.django.DjangoModelFactory):
     FACTORY_FOR = Site
 
 
-if licenses_installed:
+if License:
     class LicenseFactory(factory.django.DjangoModelFactory):
         FACTORY_FOR = License
 
@@ -30,7 +30,7 @@ class ShowFactory(factory.django.DjangoModelFactory):
     FACTORY_FOR = Show
     owner = factory.SubFactory(UserFactory)
     site = factory.SubFactory(SiteFactory)
-    if licenses_installed:
+    if License:
         license = factory.SubFactory(LicenseFactory)
 
 
@@ -43,6 +43,7 @@ class EnclosureFactory(factory.django.DjangoModelFactory):
     FACTORY_FOR = Enclosure
     episode = factory.SubFactory(EpisodeFactory)
     size = 303
+    duration = 909
 
 
 class PodcastTests(TestCase):

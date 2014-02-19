@@ -5,13 +5,17 @@ import sys
 import django
 from django.conf import settings
 
+try:
+    import licenses
+except ImportError:
+    licenses = False
+
 
 DEFAULT_SETTINGS = dict(
     INSTALLED_APPS=(
         "django.contrib.auth",
         "django.contrib.contenttypes",
         "django.contrib.sites",
-        "licenses",
         "podcasting",
         "podcasting.tests",
     ),
@@ -26,6 +30,8 @@ DEFAULT_SETTINGS = dict(
     SECRET_KEY="notasecret",
 )
 
+if licenses:
+    DEFAULT_SETTINGS["INSTALLED_APPS"] += ("licenses",)
 
 def runtests(*test_args):
     if not settings.configured:
