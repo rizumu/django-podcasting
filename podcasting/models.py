@@ -52,7 +52,7 @@ if not custom_image_field:
 if "taggit" in settings.INSTALLED_APPS:
     from taggit.managers import TaggableManager
 else:
-    def TaggableManager():  # noqa
+    def TaggableManager(blank=True):  # noqa
         return None
 try:
     import twitter
