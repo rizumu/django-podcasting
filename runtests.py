@@ -33,6 +33,7 @@ DEFAULT_SETTINGS = dict(
 if licenses:
     DEFAULT_SETTINGS["INSTALLED_APPS"] += ("licenses",)
 
+
 def runtests(*test_args):
     if not settings.configured:
         settings.configure(**DEFAULT_SETTINGS)
