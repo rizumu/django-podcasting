@@ -21,6 +21,7 @@ if not hasattr(settings, "AUTH_USER_MODEL"):
     settings.AUTH_USER_MODEL = "auth.User"
 
 # required external dependencies
+from autoslug import AutoSlugField
 from model_utils.managers import PassThroughManager
 
 # optional external dependencies
@@ -69,7 +70,7 @@ except ImportError:
 
 # internal imports
 from podcasting.managers import EpisodeManager, ShowManager
-from podcasting.utils.fields import AutoSlugField, UUIDField
+from podcasting.utils.fields import UUIDField
 from podcasting.utils.twitter import can_tweet
 
 
@@ -144,7 +145,7 @@ class Show(models.Model):
             should be comma separated."""))
 
     title = models.CharField(_("title"), max_length=255)
-    slug = AutoSlugField(_("slug"), populate_from="title")
+    slug = AutoSlugField(_("slug"), populate_from="title", unique_with="site")
 
     subtitle = models.CharField(
         _("subtitle"), max_length=255,
@@ -280,7 +281,7 @@ class Episode(models.Model):
         is acceptable. Multiple authors should be comma separated."""))
 
     title = models.CharField(_("title"), max_length=255)
-    slug = AutoSlugField(_("slug"), populate_from="title")
+    slug = AutoSlugField(_("slug"), populate_from="title", unique_with="show__site")
 
     subtitle = models.CharField(
         _("subtitle"), max_length=255, blank=True,

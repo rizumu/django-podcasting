@@ -111,6 +111,7 @@ setup(
     ],
     tests_require=[
         "Django>=1.4",
+        "django-autoslug>=1.7.2",
         "Pillow>=2.3.0",
         "factory_boy>=2.3.0",
     ],

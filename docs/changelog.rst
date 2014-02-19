@@ -4,6 +4,7 @@ Changelog
 master
 ------
 - Make django-licenses optional
+- Drop bundled AutoSlug and use django-autoslug
 - Rename the newly added Video class to EmbedMedia, and build in
   support for django-embed-video for easy embedding of SoundCloud, Vimeo
   and YouTube files on Episode detail pages.
