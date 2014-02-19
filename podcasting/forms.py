@@ -106,7 +106,6 @@ class BaseEpisodeForm(forms.ModelForm):
             "subtitle",
             "description",
             "original_image",
-            "tags",
             "keywords",
             "explicit",
         ]
@@ -205,6 +204,22 @@ class AdminShowForm(forms.ModelForm):
 
     class Meta:
         model = Show
+        fields = [
+            "original_image",
+            "author_text",
+            "owner",
+            "editor_email",
+            "webmaster_email",
+            "title", "subtitle", "description",
+            "twitter_tweet_prefix",
+            "feedburner", "itunes",
+            "keywords", "organization", "license",
+            "explicit", "link",
+            "on_itunes",
+            "publish",
+        ]
+        if "taggit" in settings.INSTALLED_APPS:
+            fields.append("tags")
 
     def __init__(self, *args, **kwargs):
         super(AdminShowForm, self).__init__(*args, **kwargs)
@@ -234,6 +249,20 @@ class AdminEpisodeForm(forms.ModelForm):
 
     class Meta:
         model = Episode
+        fields = [
+            "original_image",
+            "author_text",
+            "title", "subtitle",
+            "description",
+            "tracklist",
+            "hours", "minutes", "seconds",
+            "publish",
+            "keywords",
+            "explicit",
+            "block",
+        ]
+        if "taggit" in settings.INSTALLED_APPS:
+            fields.append("tags")
 
     def __init__(self, *args, **kwargs):
         super(AdminEpisodeForm, self).__init__(*args, **kwargs)
