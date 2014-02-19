@@ -37,7 +37,7 @@ twitter support.
     pip install django-podcasting==dev
 
 
-* Add ``"podcasting"``, ``"licenses"``, ``"django.contrib.sites"``,
+* Add ``"podcasting"``, ``"django.contrib.sites"``,
   and the optional apps of your choice to the ``INSTALLED_APPS`` setting
   in your ``settings.py``::
 
@@ -47,7 +47,6 @@ twitter support.
         "django.contrib.sites",
         ...
         "podcasting",
-        "licenses",
         ...
     )
 

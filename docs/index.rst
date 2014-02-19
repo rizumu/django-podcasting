@@ -59,7 +59,7 @@ An ``episode`` has one or many ``enclosures`` formats for example
 Requirements
 ============
 
-``django-podcasting`` requires ``django-licenses`` which is included
+``django-podcasting`` requires ``django-model-utils`` which is included
 in the setup.py and Django 1.3 or greater due to its choice in
 class-based views.
 
@@ -83,7 +83,7 @@ Features
 **Licensing**
 
   To publish a podcast to iTunes it is required to set a
-  license. Podcasting requires django-licenses_ which provides a light
+  license. It is suggested to install django-licenses_ which provides a light
   weight mechanism for adding licenses to the shows.
 
 **Serve your media from anywhere**

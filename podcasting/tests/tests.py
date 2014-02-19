@@ -5,7 +5,10 @@ from django.test import TestCase
 from django.contrib.sites.models import Site
 from django.contrib.auth.models import User
 
-from licenses .models import License
+try:
+    from licenses .models import License
+except ImportError:
+    licenses_installed = False
 
 from podcasting.models import Show, Episode, Enclosure
 
@@ -18,15 +21,17 @@ class SiteFactory(factory.django.DjangoModelFactory):
     FACTORY_FOR = Site
 
 
-class LicenseFactory(factory.django.DjangoModelFactory):
-    FACTORY_FOR = License
+if licenses_installed:
+    class LicenseFactory(factory.django.DjangoModelFactory):
+        FACTORY_FOR = License
 
 
 class ShowFactory(factory.django.DjangoModelFactory):
     FACTORY_FOR = Show
     owner = factory.SubFactory(UserFactory)
     site = factory.SubFactory(SiteFactory)
-    license = factory.SubFactory(LicenseFactory)
+    if licenses_installed:
+        license = factory.SubFactory(LicenseFactory)
 
 
 class EpisodeFactory(factory.django.DjangoModelFactory):

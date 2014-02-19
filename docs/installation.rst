@@ -12,7 +12,7 @@ Installation
     pip install django-podcasting==dev
 
 
-* Add ``"podcasting"``, ``"licenses"``, ``"django.contrib.sites"``,
+* Add ``"podcasting"``, ``"django.contrib.sites"``,
   and the optional apps of your choice to the ``INSTALLED_APPS`` setting
   in your ``settings.py``::
 
@@ -22,7 +22,6 @@ Installation
         "django.contrib.sites",
         ...
         "podcasting",
-        "licenses",
         ...
     )
 
@@ -80,6 +79,17 @@ If django-taggit is installed, tagging will be enabled for Episodes
 and Shows:
 
 * django-taggit_: ``pip install django-taggit``
+
+
+If python-twiiter is installed, automatic posts for new tweets is possible:
+
+Tagging
+-------
+
+If django-licenses is installed, the show will contain the license
+field which which is helpful for publishing podcasts on iTunes:
+
+* django-licenses_: ``pip install django-licenses``
 
 
 If python-twiiter is installed, automatic posts for new tweets is possible:

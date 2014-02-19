@@ -107,7 +107,6 @@ setup(
     author_email="tom@nillab.com",
     packages=find_packages(),
     install_requires=[
-        "django-licenses>=0.2.5",
         "django-model-utils>=2.0",
     ],
     tests_require=[

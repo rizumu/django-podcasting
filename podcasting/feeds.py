@@ -30,6 +30,11 @@ try:
 except:
     pass
 
+try:
+    import licenses
+except:
+    licenses = False
+
 from podcasting.models import Enclosure, Show
 
 
@@ -101,8 +106,12 @@ class ITunesElements(object):
             itunes_sm_url = episode.original_image.url
             itunes_lg_url = episode.original_image.url
         handler.addQuickElement("guid", str(episode.uuid), attrs={"isPermaLink": "false"})
-        handler.addQuickElement("copyright", "{0} {1} {2}".format(episode.show.license.name,
-                                                                  episode.show.license.url,
+        if licenses:
+            handler.addQuickElement("copyright", "{0} {1} {2}".format(episode.show.license.name,
+                                                                      episode.show.license.url,
+                                                                      datetime.date.today().year))
+        else:
+            handler.addQuickElement("copyright", "{0} {1}".format(episode.show.license.name,
                                                                   datetime.date.today().year))
         handler.addQuickElement("itunes:author", episode.author_text)
         handler.addQuickElement("itunes:subtitle", episode.subtitle)
@@ -153,7 +162,11 @@ class ShowFeed(Feed):
         return ("Music",)
 
     def feed_copyright(self, show):
-        return "{0} {1} {2}".format(show.license.name, show.license.url, datetime.date.today().year)
+        if licenses:
+            return "{0} {1} {2}".format(
+                show.license.name, show.license.url, datetime.date.today().year)
+        else:
+            return "{0} {1}".format(show.license, datetime.date.today().year)
 
     def ttl(self, show):
         return show.ttl

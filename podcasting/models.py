@@ -23,9 +23,12 @@ if not hasattr(settings, "AUTH_USER_MODEL"):
 # required external dependencies
 from model_utils.managers import PassThroughManager
 
-from licenses.fields import LicenseField
-
 # optional external dependencies
+try:
+    from licenses.models import License
+except:
+    License = None
+
 try:
     from imagekit.models import ImageSpecField
     from imagekit.processors import ResizeToFill
@@ -116,7 +119,12 @@ class Show(models.Model):
         _("webmaster email"), blank=True,
         help_text="Email address of the person responsible for channel publishing.")
 
-    license = LicenseField()
+    if License:
+        license = models.ForeignKey(License)
+    else:
+        license = models.CharField(
+            _("license"), max_length=255,
+            help_text=_("To publish a podcast to iTunes it is required to set a license type."))
 
     organization = models.CharField(
         _("organization"), max_length=255,
@@ -436,7 +444,7 @@ class Enclosure(models.Model):
     mime = models.CharField(
         _("mime format"), max_length=4, choices=MIME_CHOICES,
         help_text=_("Supports mime types of: {0}".format(
-             ", ".join([mime[0] for mime in MIME_CHOICES]))))
+            ", ".join([mime[0] for mime in MIME_CHOICES]))))
     bitrate = models.CharField(
         _("bit rate"), max_length=5, default="192",
         help_text=_("Measured in kilobits per second (kbps), often 128 or 192."))
