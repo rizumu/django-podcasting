@@ -171,10 +171,13 @@ class Show(models.Model):
 
     original_image = ImageField(
         _("image"), upload_to=get_show_upload_folder, help_text=_("""
-            For best results, choose an attractive, original, and square JPEG
-            (.jpg) or PNG (.png) image at a size of 1400x1400 pixels.
-            The image will be scaled down to 50x50 pixels at smallest
-            in iTunes. For reference see the <a
+            A podcast must have 1400 x 1400 pixel cover art in JPG or PNG
+            format using RGB color space. See our technical spec for
+            details. To be eligible for featuring on iTunes Stores,
+            choose an attractive, original, and square JPEG (.jpg) or
+            PNG (.png) image at a size of 1400x1400 pixels. The image
+            will be scaled down to 50x50 pixels at smallest in iTunes.
+            For reference see the <a
             href="http://www.apple.com/itunes/podcasts/specs.html#metadata">iTunes
             Podcast specs</a>.<br /><br /> For episode artwork to
             display in iTunes, image must be <a
@@ -305,10 +308,13 @@ class Episode(models.Model):
 
     original_image = ImageField(
         _("image"), upload_to=get_episode_upload_folder, blank=True, help_text=_("""
-            For best results, choose an attractive, original, and square JPEG
-            (.jpg) or PNG (.png) image at a size of 1400x1400 pixels.
-            The image will be scaled down to 50x50 pixels at smallest
-            in iTunes. For reference see the <a
+            A podcast must have 1400 x 1400 pixel cover art in JPG or PNG
+            format using RGB color space. See our technical spec for
+            details. To be eligible for featuring on iTunes Stores,
+            choose an attractive, original, and square JPEG (.jpg) or
+            PNG (.png) image at a size of 1400x1400 pixels. The image
+            will be scaled down to 50x50 pixels at smallest in iTunes.
+            For reference see the <a
             href="http://www.apple.com/itunes/podcasts/specs.html#metadata">iTunes
             Podcast specs</a>.<br /><br /> For episode artwork to
             display in iTunes, image must be <a
