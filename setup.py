@@ -106,6 +106,7 @@ setup(
     author="Thomas Schreiber",
     author_email="tom@nillab.com",
     packages=find_packages(),
+    package_data=find_package_data("podcasting", only_in_packages=False),
     install_requires=[
         "django-model-utils>=2.0",
     ],
