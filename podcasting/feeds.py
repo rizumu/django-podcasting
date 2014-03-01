@@ -7,6 +7,7 @@ from django.core.urlresolvers import reverse
 from django.utils.feedgenerator import rfc2822_date, Rss201rev2Feed, Atom1Feed
 from django.shortcuts import get_object_or_404
 
+from django.contrib.sites.models import get_current_site
 from django.contrib.syndication.views import Feed
 
 try:
@@ -176,7 +177,8 @@ class ShowFeed(Feed):
 
     def get_object(self, request, *args, **kwargs):
         self.mime = [mc[0] for mc in Enclosure.MIME_CHOICES if mc[0] == kwargs["mime_type"]][0]
-        self.show = get_object_or_404(Show, slug=kwargs["show_slug"])
+        site = get_current_site(request)
+        self.show = get_object_or_404(Show, slug=kwargs["show_slug"], site=site)
         return self.show
 
     def item_title(self, episode):
