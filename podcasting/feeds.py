@@ -44,20 +44,30 @@ class ITunesElements(object):
     def add_root_elements(self, handler):
         """ Add additional elements to the show object"""
         super(ITunesElements, self).add_root_elements(handler)
+
         show = self.feed["show"]
-        if imagekit:
-            itunes_sm_url = show.img_itunes_sm.url
-            itunes_lg_url = show.img_itunes_lg.url
-        elif easy_thumbnails:
-            aliases = settings.THUMBNAIL_ALIASES["podcasting.Show.original_image"]
-            itunes_sm_url = show.original_image.get_thumbnail(aliases["itunes_sm"]).url
-            itunes_lg_url = show.original_image.get_thumbnail(aliases["itunes_lg"]).url
-        elif sorl:
-            itunes_sm_url = sorl.thumbnail.get_thumbnail(show.original_image, "144x144").url
-            itunes_lg_url = sorl.thumbnail.get_thumbnail(show.original_image, "1400x1400").url
-        else:
-            itunes_sm_url = show.original_image.url
-            itunes_lg_url = show.original_image.url
+
+        if show.original_image:
+            if imagekit:
+                itunes_sm_url = show.img_itunes_sm.url
+                itunes_lg_url = show.img_itunes_lg.url
+            elif easy_thumbnails:
+                aliases = settings.THUMBNAIL_ALIASES["podcasting.Show.original_image"]
+                itunes_sm_url = show.original_image.get_thumbnail(aliases["itunes_sm"]).url
+                itunes_lg_url = show.original_image.get_thumbnail(aliases["itunes_lg"]).url
+            elif sorl:
+                itunes_sm_url = sorl.thumbnail.get_thumbnail(show.original_image, "144x144").url
+                itunes_lg_url = sorl.thumbnail.get_thumbnail(show.original_image, "1400x1400").url
+            else:
+                itunes_sm_url = show.original_image.url
+                itunes_lg_url = show.original_image.url
+            handler.addQuickElement("itunes:image", attrs={"href": itunes_lg_url})
+            handler.startElement("image", {})
+            handler.addQuickElement("url", itunes_sm_url)
+            handler.addQuickElement("title", self.feed["title"])
+            handler.addQuickElement("link", self.feed["link"])
+            handler.endElement("image")
+
         handler.addQuickElement("guid", str(show.uuid), attrs={"isPermaLink": "false"})
         handler.addQuickElement("itunes:subtitle", self.feed["subtitle"])
         handler.addQuickElement("itunes:author", show.author_text)
@@ -65,12 +75,6 @@ class ITunesElements(object):
         handler.addQuickElement("itunes:name", show.owner.get_full_name())
         handler.addQuickElement("itunes:email", show.owner.email)
         handler.endElement("itunes:owner")
-        handler.addQuickElement("itunes:image", attrs={"href": itunes_lg_url})
-        handler.startElement("image", {})
-        handler.addQuickElement("url", itunes_sm_url)
-        handler.addQuickElement("title", self.feed["title"])
-        handler.addQuickElement("link", self.feed["link"])
-        handler.endElement("image")
         handler.addQuickElement("itunes:category", attrs={"text": self.feed["categories"][0]})
         handler.addQuickElement("itunes:summary", show.description)
         handler.addQuickElement("itunes:explicit", show.get_explicit_display())
@@ -92,20 +96,29 @@ class ITunesElements(object):
     def add_item_elements(self, handler, item):
         """ Add additional elements to the episode object"""
         super(ITunesElements, self).add_item_elements(handler, item)
+
         episode = item["episode"]
-        if imagekit:
-            itunes_sm_url = episode.img_itunes_sm.url
-            itunes_lg_url = episode.img_itunes_lg.url
-        elif easy_thumbnails:
-            aliases = settings.THUMBNAIL_ALIASES["podcasting.Episode.original_image"]
-            itunes_sm_url = episode.original_image.get_thumbnail(aliases["itunes_sm"]).url
-            itunes_lg_url = episode.original_image.get_thumbnail(aliases["itunes_lg"]).url
-        elif sorl:
-            itunes_sm_url = sorl.thumbnail.get_thumbnail(episode.original_image, "144x144").url
-            itunes_lg_url = sorl.thumbnail.get_thumbnail(episode.original_image, "1400x1400").url
-        else:
-            itunes_sm_url = episode.original_image.url
-            itunes_lg_url = episode.original_image.url
+        if episode.original_image:
+            if imagekit:
+                itunes_sm_url = episode.img_itunes_sm.url
+                itunes_lg_url = episode.img_itunes_lg.url
+            elif easy_thumbnails:
+                aliases = settings.THUMBNAIL_ALIASES["podcasting.Episode.original_image"]
+                itunes_sm_url = episode.original_image.get_thumbnail(aliases["itunes_sm"]).url
+                itunes_lg_url = episode.original_image.get_thumbnail(aliases["itunes_lg"]).url
+            elif sorl:
+                itunes_sm_url = sorl.thumbnail.get_thumbnail(episode.original_image, "144x144").url
+                itunes_lg_url = sorl.thumbnail.get_thumbnail(episode.original_image, "1400x1400").url
+            else:
+                itunes_sm_url = episode.original_image.url
+                itunes_lg_url = episode.original_image.url
+            handler.addQuickElement("itunes:image", attrs={"href": itunes_lg_url})
+            handler.startElement("image", {})
+            handler.addQuickElement("url", itunes_sm_url)
+            handler.addQuickElement("title", episode.title)
+            handler.addQuickElement("link", episode.get_absolute_url())
+            handler.endElement("image")
+
         handler.addQuickElement("guid", str(episode.uuid), attrs={"isPermaLink": "false"})
         if licenses:
             handler.addQuickElement("copyright", "{0} {1} {2}".format(episode.show.license.name,
@@ -124,12 +137,6 @@ class ITunesElements(object):
         handler.addQuickElement("itunes:explicit", episode.get_explicit_display())
         if episode.block:
             handler.addQuickElement("itunes:block", "yes")
-        handler.addQuickElement("itunes:image", attrs={"href": itunes_lg_url})
-        handler.startElement("image", {})
-        handler.addQuickElement("url", itunes_sm_url)
-        handler.addQuickElement("title", episode.title)
-        handler.addQuickElement("link", episode.get_absolute_url())
-        handler.endElement("image")
 
     def namespace_attributes(self):
         return {"xmlns:itunes": "http://www.itunes.com/dtds/podcast-1.0.dtd"}
