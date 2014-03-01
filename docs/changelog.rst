@@ -3,6 +3,7 @@ Changelog
 
 master
 ------
+- Make feed_urs more generic by removing /itunes/. Redirect old style.
 - Make django-licenses optional
 - Drop bundled AutoSlug and use django-autoslug
 - Rename the newly added Video class to EmbedMedia, and build in
