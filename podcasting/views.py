@@ -4,11 +4,13 @@ from podcasting.models import Episode, Show
 
 
 class ShowListView(ListView):
-    queryset = Show.objects.onsite()
+    def get_queryset(self):
+        return Show.objects.onsite()
 
 
 class ShowDetailView(DetailView):
-    queryset = Show.objects.onsite()
+    def get_queryset(self):
+        return Show.objects.onsite()
 
 
 class EpisodeListView(ListView):
