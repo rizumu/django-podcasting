@@ -170,7 +170,7 @@ class Show(models.Model):
             to 4000 characters."""))
 
     original_image = ImageField(
-        _("image"), upload_to=get_show_upload_folder, help_text=_("""
+        _("image"), upload_to=get_show_upload_folder, blank=True, help_text=_("""
             A podcast must have 1400 x 1400 pixel cover art in JPG or PNG
             format using RGB color space. See our technical spec for
             details. To be eligible for featuring on iTunes Stores,
