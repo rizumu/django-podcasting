@@ -205,6 +205,7 @@ class AdminShowForm(forms.ModelForm):
     class Meta:
         model = Show
         fields = [
+            "site",
             "original_image",
             "author_text",
             "owner",
@@ -250,6 +251,7 @@ class AdminEpisodeForm(forms.ModelForm):
     class Meta:
         model = Episode
         fields = [
+            "show",
             "original_image",
             "author_text",
             "title", "subtitle",

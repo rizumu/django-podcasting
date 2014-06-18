@@ -9,6 +9,7 @@ from django.shortcuts import get_object_or_404
 
 from django.contrib.sites.models import get_current_site
 from django.contrib.syndication.views import Feed
+from django.views.generic.base import RedirectView
 
 try:
     import imagekit
@@ -273,3 +274,22 @@ class RssShowFeed(ShowFeed):
 
     def description(self, show):
         return show.description
+
+
+class AtomRedirectView(RedirectView):
+    permanent = False
+
+    def get_redirect_url(self, show_slug, mime_type):
+        return reverse('podcasts_show_feed_atom', kwargs={
+                                                'show_slug':show_slug,
+                                                'mime_type':mime_type})
+
+
+
+class RssRedirectView(RedirectView):
+    permanent = False
+
+    def get_redirect_url(self, show_slug, mime_type):
+        return reverse('podcasts_show_feed_rss', kwargs={
+                                                'show_slug':show_slug,
+                                                'mime_type':mime_type})
