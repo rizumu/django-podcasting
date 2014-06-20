@@ -102,7 +102,7 @@ class Show(models.Model):
     updated = models.DateTimeField(_("updated"), auto_now=True, editable=False)
     published = models.DateTimeField(null=True, blank=True, editable=False)
 
-    site = models.ForeignKey(Site)
+    site = models.ForeignKey(Site, verbose_name=_('Site'))
 
     ttl = models.PositiveIntegerField(
         _("ttl"), default=1440,
@@ -110,18 +110,19 @@ class Show(models.Model):
         cached before refreshing."""))
 
     owner = models.ForeignKey(
-        settings.AUTH_USER_MODEL, related_name="podcast_shows",
+        settings.AUTH_USER_MODEL, related_name="podcast_shows", 
+        verbose_name=_("owner"),
         help_text=_("""Make certain the user account has a name and e-mail address."""))
 
     editor_email = models.EmailField(
         _("editor email"), blank=True,
-        help_text="Email address of the person responsible for the feed's content.")
+        help_text=_("Email address of the person responsible for the feed's content."))
     webmaster_email = models.EmailField(
         _("webmaster email"), blank=True,
-        help_text="Email address of the person responsible for channel publishing.")
+        help_text=_("Email address of the person responsible for channel publishing."))
 
     if License:
-        license = models.ForeignKey(License)
+        license = models.ForeignKey(License, verbose_name=_("license"))
     else:
         license = models.CharField(
             _("license"), max_length=255,
@@ -136,7 +137,7 @@ class Show(models.Model):
     enable_comments = models.BooleanField(default=True)
 
     author_text = models.CharField(
-        "author text", max_length=255, help_text=_("""
+        _("author text"), max_length=255, help_text=_("""
             This tag contains the name of the person or company that is most
             widely attributed to publishing the Podcast and will be
             displayed immediately underneath the title of the Podcast.
@@ -274,11 +275,11 @@ class Episode(models.Model):
     updated = models.DateTimeField(_("updated"), auto_now=True, editable=False)
     published = models.DateTimeField(null=True, blank=True, editable=False)
 
-    show = models.ForeignKey(Show)
+    show = models.ForeignKey(Show, verbose_name=_("Podcast"))
 
     enable_comments = models.BooleanField(default=True)
 
-    author_text = models.CharField("author text", max_length=255, blank=True, help_text=_("""
+    author_text = models.CharField(_("author text"), max_length=255, blank=True, help_text=_("""
         The person or musician name(s) featured on this specific episode.
         The suggested format is: 'email@example.com (Full Name)' but 'Full Name' only,
         is acceptable. Multiple authors should be comma separated."""))
@@ -432,7 +433,7 @@ class Enclosure(models.Model):
         ("wav", "audio/wav"),
     )
 
-    episode = models.ForeignKey(Episode)
+    episode = models.ForeignKey(Episode, verbose_name=_("episode"))
 
     url = models.URLField(
         _("url"),
@@ -486,7 +487,7 @@ class EmbedMedia(models.Model):
     Ideally this will be used with django-embed-video which supports
     easy embeding for YouTube and Vimeo videos and music from SoundCloud.
     """
-    episode = models.ForeignKey(Episode)
+    episode = models.ForeignKey(Episode, verbose_name=_("episode"))
 
     if EmbedVideoField:
         url = EmbedVideoField(_("url"), help_text=_("URL of the media file"))
