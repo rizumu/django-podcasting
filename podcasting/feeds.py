@@ -38,6 +38,7 @@ except ImportError:
     licenses = False
 
 from podcasting.models import Enclosure, Show
+from podcasting.conf import settings as settings2
 
 
 class ITunesElements(object):
@@ -183,7 +184,7 @@ class ShowFeed(Feed):
         return show.ttl
 
     def items(self, show):
-        return show.episode_set.published()
+        return show.episode_set.published()[:settings2.PODCASTING_FEED_ENTRIES]
 
     def get_object(self, request, *args, **kwargs):
         self.mime = [mc[0] for mc in Enclosure.MIME_CHOICES if mc[0] == kwargs["mime_type"]][0]

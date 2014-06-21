@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: podcasting\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-06-20 11:35-0500\n"
-"PO-Revision-Date: 2014-06-20 12:06-0600\n"
+"PO-Revision-Date: 2014-06-20 15:51-0600\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: ES <LL@li.org>\n"
 "Language: es\n"
@@ -596,7 +596,7 @@ msgstr "URLs del Media incrustado"
 #: templates/podcasting/_episode_detail.html:14
 #: templates/podcasting/_episode_list.html:16
 msgid "to download right click and select 'save link as'"
-msgstr "Para descargar, click derecho y seleccione \"Guardar enlace como '"
+msgstr "Para descargar, click derecho y seleccione 'Guardar enlace como '"
 
 #: templates/podcasting/_current_episode.html:19
 #: templates/podcasting/_episode_detail.html:15
