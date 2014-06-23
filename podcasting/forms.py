@@ -271,7 +271,7 @@ class AdminEpisodeForm(forms.ModelForm):
         self.fields["publish"].initial = bool(self.instance.published)
 
     def validate_published(self):
-        if not self.instance.enclosure_set.count() or not self.instance.embedmedia_set.count():
+        if not self.instance.enclosure_set.count() and not self.instance.embedmedia_set.count():
             raise forms.ValidationError(
                 _("An episode must have at least one enclosure or media file before publishing.\n "
                   "Uncheck, save this episode, and add an encoslure before publishing."))
