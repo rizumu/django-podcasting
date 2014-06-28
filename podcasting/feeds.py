@@ -122,7 +122,7 @@ class ITunesElements(object):
                     itunes_lg_url = thumbnailer.get_thumbnail(aliases["itunes_lg"]).url
             elif sorl:
                 itunes_sm_url = sorl.thumbnail.get_thumbnail(episode.original_image, "144x144").url
-                itunes_lg_url = sorl.thumbnail.get_thumbnail(episode.original_image, "1400x1400").url
+                itunes_lg_url = sorl.thumbnail.get_thumbnail(episode.original_image, "1400x1400").url  # noqa
             else:
                 itunes_sm_url = episode.original_image.url
                 itunes_lg_url = episode.original_image.url
@@ -291,16 +291,15 @@ class AtomRedirectView(RedirectView):
     permanent = False
 
     def get_redirect_url(self, show_slug, mime_type):
-        return reverse('podcasts_show_feed_atom', kwargs={
-                                                'show_slug':show_slug,
-                                                'mime_type':mime_type})
-
+        return reverse(
+            "podcasts_show_feed_atom",
+            kwargs={"show_slug": show_slug, "mime_type": mime_type})
 
 
 class RssRedirectView(RedirectView):
     permanent = False
 
     def get_redirect_url(self, show_slug, mime_type):
-        return reverse('podcasts_show_feed_rss', kwargs={
-                                                'show_slug':show_slug,
-                                                'mime_type':mime_type})
+        return reverse(
+            "podcasts_show_feed_rss",
+            kwargs={"show_slug": show_slug, "mime_type": mime_type})

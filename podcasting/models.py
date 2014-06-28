@@ -100,7 +100,7 @@ class Show(models.Model):
 
     created = models.DateTimeField(_("created"), auto_now_add=True, editable=False)
     updated = models.DateTimeField(_("updated"), auto_now=True, editable=False)
-    published = models.DateTimeField(null=True, blank=True, editable=False)
+    published = models.DateTimeField(_("published"), null=True, blank=True, editable=False)
 
     site = models.ForeignKey(Site, verbose_name=_('Site'))
 
@@ -110,7 +110,7 @@ class Show(models.Model):
         cached before refreshing."""))
 
     owner = models.ForeignKey(
-        settings.AUTH_USER_MODEL, related_name="podcast_shows", 
+        settings.AUTH_USER_MODEL, related_name="podcast_shows",
         verbose_name=_("owner"),
         help_text=_("""Make certain the user account has a name and e-mail address."""))
 
@@ -273,7 +273,7 @@ class Episode(models.Model):
 
     created = models.DateTimeField(_("created"), auto_now_add=True, editable=False)
     updated = models.DateTimeField(_("updated"), auto_now=True, editable=False)
-    published = models.DateTimeField(null=True, blank=True, editable=False)
+    published = models.DateTimeField(_("published"), null=True, blank=True, editable=False)
 
     show = models.ForeignKey(Show, verbose_name=_("Podcast"))
 

@@ -197,7 +197,8 @@ class EnclosureForm(forms.ModelForm):
 
 class AdminShowForm(forms.ModelForm):
 
-    publish = forms.BooleanField(label=_("publish"),
+    publish = forms.BooleanField(
+        label=_("publish"),
         required=False,
         help_text=_("Checking this will publish this show on the site, no turning back."),
     )
@@ -239,7 +240,8 @@ class AdminShowForm(forms.ModelForm):
 
 class AdminEpisodeForm(forms.ModelForm):
 
-    publish = forms.BooleanField(label=_("publish"),
+    publish = forms.BooleanField(
+        label=_("publish"),
         required=False,
         help_text=_("Checking this will publish this episode on the site, no turning back."))
 

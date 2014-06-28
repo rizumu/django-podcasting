@@ -1,13 +1,11 @@
 from django.conf.urls import patterns, url
-from podcasting.feeds import (RssShowFeed, AtomShowFeed,
-    AtomRedirectView, RssRedirectView)
 
-from podcasting.feeds import RssShowFeed, AtomShowFeed
+from podcasting.feeds import (
+    RssShowFeed, AtomShowFeed, AtomRedirectView, RssRedirectView)
 from podcasting.models import Enclosure
 
 
 MIMES = "|".join([enclosure[0] for enclosure in Enclosure.MIME_CHOICES])
-
 
 
 urlpatterns = patterns(
