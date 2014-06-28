@@ -109,6 +109,7 @@ setup(
     package_data=find_package_data("podcasting", only_in_packages=False),
     install_requires=[
         "django-model-utils>=2.0",
+        "django-appconf>=0.6",
     ],
     tests_require=[
         "Django>=1.4",

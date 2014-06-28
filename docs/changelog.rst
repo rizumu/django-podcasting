@@ -3,6 +3,10 @@ Changelog
 
 master
 ------
+
+0.9.6
+------
+- Add django-appconf to required packages
 - RedirectView fixes - kike721
 - Spanish translations - kike721
 - Use AppConf for pagination settings - kike721
