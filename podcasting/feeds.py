@@ -60,7 +60,7 @@ class ITunesElements(object):
                     itunes_sm_url = thumbnailer.get_thumbnail(aliases["itunes_sm"]).url
                     itunes_lg_url = thumbnailer.get_thumbnail(aliases["itunes_lg"]).url
                 except easy_thumbnails.exceptions.InvalidImageFormatError:
-                    easy_thumbnails.signal_handlers.generate_aliases_global(episode.original_image)
+                    easy_thumbnails.signal_handlers.generate_aliases_global(show.original_image)
                     itunes_sm_url = thumbnailer.get_thumbnail(aliases["itunes_sm"]).url
                     itunes_lg_url = thumbnailer.get_thumbnail(aliases["itunes_lg"]).url
             elif sorl:
