@@ -3,6 +3,10 @@ Changelog
 
 master
 ------
+- RedirectView fixes - kike721
+- Spanish translations - kike721
+- Use AppConf for pagination settings - kike721
+- Enforce that feed urls can only request supported mime types.
 - Make feed_urs more generic by removing /itunes/. Redirect old style.
 - Make django-licenses optional
 - Drop bundled AutoSlug and use django-autoslug
