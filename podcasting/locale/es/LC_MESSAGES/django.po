@@ -1,0 +1,663 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: podcasting\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-06-20 11:35-0500\n"
+"PO-Revision-Date: 2014-06-20 15:51-0600\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: ES <LL@li.org>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.6.5\n"
+
+#: admin.py:29 admin.py:51
+msgid "Published"
+msgstr "Publicado"
+
+#: forms.py:23 forms.py:202
+msgid "Checking this will publish this show on the site, no turning back."
+msgstr ""
+"Al marcar este se publicará este podcast en el sitio, no hay vuelta atrás."
+
+#: forms.py:78 forms.py:244
+msgid "Checking this will publish this episode on the site, no turning back."
+msgstr ""
+"Al marcar este se publicará este episodio en el sitio, no hay vuelta atrás."
+
+#: forms.py:84 forms.py:249
+msgid "Checking this will send out a tweet announcing the episode."
+msgstr "Al checar este se enviará un tweet anunciando el episodio."
+
+#: forms.py:124 forms.py:276
+msgid ""
+"An episode must have at least one enclosure or media file before "
+"publishing.\n"
+" Uncheck, save this episode, and add an encoslure before publishing."
+msgstr ""
+"Un episodio debe tener al menos un adjunto o un archivo media antes de "
+"publicar.\n"
+"Desmarque, guarde el episodio, y agregue un adjunto antes de publicar."
+
+#: forms.py:127 forms.py:279
+msgid "The show for this episode is not yet published"
+msgstr "El podcast para este episodio aún no se publica"
+
+#: models.py:95
+msgid "yes"
+msgstr "si"
+
+#: models.py:96
+msgid "no"
+msgstr "no"
+
+#: models.py:97
+msgid "clean"
+msgstr "limpiar"
+
+#: models.py:99
+msgid "id"
+msgstr "id"
+
+#: models.py:101 models.py:274
+msgid "created"
+msgstr "creado"
+
+#: models.py:102 models.py:275
+msgid "updated"
+msgstr "actualizado"
+
+#: models.py:103 models.py:276
+msgid "publish"
+msgstr "Publicar"
+
+#: models.py:105
+msgid "Site"
+msgstr "Sitio"
+
+#: models.py:108
+msgid "ttl"
+msgstr "ttl"
+
+#: models.py:109
+msgid ""
+"``Time to Live,`` the number of minutes a channel can be\n"
+"        cached before refreshing."
+msgstr ""
+"`` Time to Live, `` el número de minutos que un canal puede estar\n"
+"        en caché antes de actualizar."
+
+#: models.py:114
+msgid "owner"
+msgstr "Propietario"
+
+#: models.py:115
+msgid "Make certain the user account has a name and e-mail address."
+msgstr ""
+"Asegúrese de que la cuenta de usuario tiene un nombre y una dirección de e-"
+"mail"
+
+#: models.py:118
+msgid "editor email"
+msgstr "Correo Electrónico del editor"
+
+#: models.py:119
+msgid "Email address of the person responsible for the feed's content."
+msgstr ""
+"Dirección de correo electrónico de la persona responsable del contenido de "
+"sindicación."
+
+#: models.py:121
+msgid "webmaster email"
+msgstr "Correo Electrónico del webmaster"
+
+#: models.py:122
+msgid "Email address of the person responsible for channel publishing."
+msgstr ""
+"Dirección de correo electrónico de la persona responsable de la edición de "
+"canales."
+
+#: models.py:125 models.py:128
+msgid "license"
+msgstr "licencia"
+
+#: models.py:129
+msgid "To publish a podcast to iTunes it is required to set a license type."
+msgstr ""
+"Para publicar un podcast a iTunes se requiere establecer un tipo de licencia."
+
+#: models.py:132
+msgid "organization"
+msgstr "organización"
+
+#: models.py:133
+msgid "Name of the organization, company or Web site producing the podcast."
+msgstr ""
+"Nombre de la organización, compañia o sitio Web produciendo el podcast."
+
+#: models.py:134
+msgid "link"
+msgstr "enlace"
+
+#: models.py:134
+msgid ""
+"URL of either the main website or the\n"
+"        podcast section of the main website."
+msgstr ""
+"URL de el sitio web principal o la\n"
+"         sección de podcast del sitio web principal."
+
+#: models.py:140 models.py:282
+msgid "author text"
+msgstr "Autor del texto"
+
+#: models.py:140
+msgid ""
+"\n"
+"            This tag contains the name of the person or company that is "
+"most\n"
+"            widely attributed to publishing the Podcast and will be\n"
+"            displayed immediately underneath the title of the Podcast.\n"
+"            The suggested format is: 'email@example.com (Full Name)'\n"
+"            but 'Full Name' only, is acceptable. Multiple authors\n"
+"            should be comma separated."
+msgstr ""
+"\n"
+"            Esta etiqueta contiene el nombre de la persona o empresa que se "
+"atribuye más\n"
+"            ampliamente a publicar el podcast y se\n"
+"            mostrará inmediatamente debajo del título del podcast.\n"
+"            El formato sugerido es: 'email@example.com (nombre completo)'\n"
+"            pero se acepta solo 'Nombre completo'. Multiples autores\n"
+"            deben ser separados por comas."
+
+#: models.py:148 models.py:287
+msgid "title"
+msgstr "título"
+
+#: models.py:149 models.py:288
+msgid "slug"
+msgstr "slug"
+
+#: models.py:152 models.py:291
+msgid "subtitle"
+msgstr "subtítulo"
+
+#: models.py:153
+msgid "Looks best if only a few words, like a tagline."
+msgstr "De preferencia pocas palabras, como un eslogan."
+
+#: models.py:157 templates/podcasting/_feeds.html:10
+msgid "iTunes"
+msgstr "iTunes"
+
+#: models.py:158
+msgid "Checked if the podcast is submitted to iTunes"
+msgstr "Marcar si el podcast es enviado a iTunes."
+
+#: models.py:161 models.py:295
+msgid "description"
+msgstr "descripción"
+
+#: models.py:161
+msgid ""
+"\n"
+"            This is your chance to tell potential subscribers all about "
+"your\n"
+"            podcast. Describe your subject matter, media format,\n"
+"            episode schedule, and other relevant info so that they\n"
+"            know what they'll be getting when they subscribe. In\n"
+"            addition, make a list of the most relevant search terms\n"
+"            that you want yourp podcast to match, then build them into\n"
+"            your description. Note that iTunes removes podcasts that\n"
+"            include lists of irrelevant words in the itunes:summary,\n"
+"            description, or itunes:keywords tags. This field can be up\n"
+"            to 4000 characters."
+msgstr ""
+"\n"
+"            Esta es tu oportunidad de decirle a tus subscriptores "
+"potenciales todo acerca de tu\n"
+"            podcast. Describa su temática, formato media,\n"
+"            el cronograma del episodio, y otra información relevante para "
+"que\n"
+"            conoscan lo que van a recibir cuando se suscriban. Además,\n"
+"            haz una lista con los términos de búsqueda más relevantes\n"
+"            que desee que coincidan con su podcast, luego incorporarlos\n"
+"            en su descripción. Tenga en cuenta que iTunes elimina podcasts "
+"que\n"
+"            que incluyan listas de palabras irrelevantes en itunes:resumen,\n"
+"            descripción o itunes:palabras clave etiquetas. Este campo puede "
+"ser de\n"
+"            hasta 4000 caracteres."
+
+#: models.py:174 models.py:311
+msgid "image"
+msgstr "imagen"
+
+#: models.py:174 models.py:311
+msgid ""
+"\n"
+"            A podcast must have 1400 x 1400 pixel cover art in JPG or PNG\n"
+"            format using RGB color space. See our technical spec for\n"
+"            details. To be eligible for featuring on iTunes Stores,\n"
+"            choose an attractive, original, and square JPEG (.jpg) or\n"
+"            PNG (.png) image at a size of 1400x1400 pixels. The image\n"
+"            will be scaled down to 50x50 pixels at smallest in iTunes.\n"
+"            For reference see the <a\n"
+"            href=\"http://www.apple.com/itunes/podcasts/specs.html#metadata"
+"\">iTunes\n"
+"            Podcast specs</a>.<br /><br /> For episode artwork to\n"
+"            display in iTunes, image must be <a\n"
+"            href=\"http://answers.yahoo.com/question/index?"
+"qid=20080501164348AAjvBvQ\">\n"
+"            saved to file's <strong>metadata</strong></a> before\n"
+"            enclosure uploading!"
+msgstr ""
+"\n"
+"            Un podcast debe tener 1400 x 1400 píxeles de portada en formato\n"
+"            JPG o PNG usando el espacio de color RGB. Vea nuestra "
+"especificación técnica\n"
+"            para más detalles. Para tener derecho a presentarse en la iTunes "
+"Store,\n"
+"            elegir una atractiva, original y cuadrada imagen JPEG (.jpg) o\n"
+"            PNG (.png) con un tamaño de 1400x1400 píxeles. La imagen\n"
+"            se reducirá a 50x50 píxeles como la mas pequeña en iTunes.\n"
+"            Para referencia vea las <a\n"
+"            href=\"http://www.apple.com/itunes/podcasts/specs.html#metadata"
+"\">especificaciónes\n"
+"            iTunes Podcast</a>.<br /><br /> ¡Para mostrar las ilustraciones\n"
+"            en iTunes, la imagen debe <a\n"
+"            href=\"http://answers.yahoo.com/question/index?"
+"qid=20080501164348AAjvBvQ\">\n"
+"            guardarse en un archivo <strong>metadata</strong></a> antes\n"
+"            de subir un adjunto!"
+
+#: models.py:210
+msgid "feedburner url"
+msgstr "url feedburner"
+
+#: models.py:211
+msgid ""
+"Fill this out after saving this show and at least one\n"
+"            episode. URL should look like \"http://feeds.feedburner.com/"
+"TitleOfShow\".\n"
+"            See <a href=\"http://code.google.com/p/django-podcast/"
+"\">documentation</a>\n"
+"            for more. <a href=\"http://www.feedburner.com/fb/a/ping"
+"\">Manually ping</a>"
+msgstr ""
+"Llene esto después de guardar un podcast y al menos un\n"
+"            episodio. La URL debe verse así \"http://feeds.feedburner.com/"
+"TítulodelShow\".\n"
+"            Ver la <a href=\"http://code.google.com/p/django-podcast/"
+"\">documentación</a>\n"
+"            para más información. <a href=\"http://www.feedburner.com/fb/a/"
+"ping\">Manual de ping</a>"
+
+#: models.py:218 models.py:355
+msgid "explicit"
+msgstr "explícito"
+
+#: models.py:219 models.py:356
+msgid "``Clean`` will put the clean iTunes graphic by it."
+msgstr "``limpiar`` pondra limpio el gráfico iTunes."
+
+#: models.py:221
+msgid "redirect"
+msgstr "redirigir"
+
+#: models.py:222
+msgid ""
+"The show's new URL feed if changing\n"
+"            the URL of the current show feed. Must continue old feed for at "
+"least\n"
+"            two weeks and write a 301 redirect for old feed."
+msgstr ""
+"Si esta cambiando a una nueva\n"
+"            URL de sindicación del podcast. Debe continuar funcionando la "
+"anterior URL\n"
+"            durante al menos dos semanas y que esta responda con una "
+"redirección 301."
+
+#: models.py:226 models.py:351
+msgid "keywords"
+msgstr "Palabras clave"
+
+#: models.py:227
+msgid ""
+"A comma-demlimitedlist of up to 12 words for iTunes\n"
+"            searches. Perhaps include misspellings of the title."
+msgstr ""
+"Una lista delimitada por comas de hasta 12 palabras para búsquedas\n"
+"            en iTunes. Quizás incluyen faltas de ortografía del título."
+
+#: models.py:230
+msgid "itunes store url"
+msgstr "url de itunes store"
+
+#: models.py:231
+msgid ""
+"Fill this out after saving this show and at least one\n"
+"            episode. URL should look like:\n"
+"            \"http://phobos.apple.com/WebObjects/MZStore.woa/wa/viewPodcast?"
+"id=000000000\".\n"
+"            See <a href=\"http://code.google.com/p/django-podcast/"
+"\">documentation</a> for more."
+msgstr ""
+"Llene esto después de guardar este podcast y al menos un\n"
+"            episodio. La URL debe verse así:\n"
+"            \"http://phobos.apple.com/WebObjects/MZStore.woa/wa/viewPodcast?"
+"id=000000000\".\n"
+"            Consulte la <a href=\"http://code.google.com/p/django-podcast/"
+"\">documentación</a> para más información."
+
+#: models.py:237
+msgid "Twitter tweet prefix"
+msgstr "Twitter prefijo tweet"
+
+#: models.py:238
+msgid "Enter a short ``tweet_text`` prefix for new episodes on this show."
+msgstr ""
+"Introduzca un pequeño ``texto de tweet`` como prefijo para nuevos episodios "
+"en este podcast."
+
+#: models.py:245
+msgid "Show"
+msgstr "Podcast"
+
+#: models.py:246
+msgid "Shows"
+msgstr "Podcasts"
+
+#: models.py:278
+msgid "Podcast"
+msgstr "Podcast"
+
+#: models.py:282
+msgid ""
+"\n"
+"        The person or musician name(s) featured on this specific episode.\n"
+"        The suggested format is: 'email@example.com (Full Name)' but 'Full "
+"Name' only,\n"
+"        is acceptable. Multiple authors should be comma separated."
+msgstr ""
+"\n"
+"        El nombre(s) de la persona o músico que se presenta en este "
+"específico episodio.\n"
+"        Se sugiere el siguiente formato: 'email@example.com (Nombre "
+"completo)' pero se acepta solo el 'Nombre completo'.\n"
+"        Multiples autores deben ir separados por comas."
+
+#: models.py:292
+msgid "Looks best if only a few words like a tagline."
+msgstr "De preferencia pocas palabras como un eslogan."
+
+#: models.py:295
+msgid ""
+"\n"
+"            This is your chance to tell potential subscribers all about your "
+"podcast.\n"
+"            Describe your subject matter, media format, episode schedule, "
+"and other\n"
+"            relevant info so that they know what they'll be getting when "
+"they\n"
+"            subscribe. In addition, make a list of the most relevant search "
+"terms\n"
+"            that you want your podcast to match, then build them into your\n"
+"            description. Note that iTunes removes podcasts that include "
+"lists of\n"
+"            irrelevant words in the itunes:summary, description, or\n"
+"            itunes:keywords tags. This field can be up to 4000 characters."
+msgstr ""
+"\n"
+"            Esta es tu oportunidad de decirle a tus subscriptores "
+"potenciales todo acerca de tu\n"
+"            podcast. Describa su temática, formato media,\n"
+"            el cronograma del episodio, y otra información relevante para "
+"que\n"
+"            conoscan lo que van a recibir cuando se suscriban. Además,\n"
+"            haz una lista con los términos de búsqueda más relevantes\n"
+"            que desee que coincidan con su podcast, luego incorporarlos\n"
+"            en su descripción. Tenga en cuenta que iTunes elimina podcasts "
+"que\n"
+"            que incluyan listas de palabras irrelevantes en itunes:resumen,\n"
+"            descripción o itunes:palabras clave etiquetas. Este campo puede "
+"ser de\n"
+"            hasta 4000 caracteres."
+
+#: models.py:305
+msgid "tracklist"
+msgstr "Lista de pistas"
+
+#: models.py:306
+msgid "One track per line, machine will automatically add the numbers."
+msgstr "Una pista por línea, se añadirán automáticamente los números."
+
+#: models.py:308
+msgid "tweet text"
+msgstr "texto de tweet"
+
+#: models.py:347
+msgid "hours"
+msgstr "horas"
+
+#: models.py:348
+msgid "minutes"
+msgstr "minutos"
+
+#: models.py:349
+msgid "seconds"
+msgstr "segundos"
+
+#: models.py:352
+msgid ""
+"A comma-delimited list of words for searches, up to 12; perhaps include "
+"misspellings."
+msgstr ""
+"Una lista delimitada por comas de hasta 12 palabras para búsquedas\n"
+"            en iTunes. Quizás incluyen faltas de ortografía del título."
+
+#: models.py:358
+msgid "block"
+msgstr "bloque"
+
+#: models.py:359
+msgid ""
+"Check to block this episode from iTunes because <br />its content might "
+"cause the entire show to be <br />removed from iTunes."
+msgstr ""
+"Marque para bloquear este episodio de iTunes porque <br /> su contenido "
+"podría causar que todo el podcast sea <br /> removido de iTunes."
+
+#: models.py:366
+msgid "Episode"
+msgstr "Episodio"
+
+#: models.py:367
+msgid "Episodes"
+msgstr "Episodios"
+
+#: models.py:436 models.py:490
+msgid "episode"
+msgstr "Episodio"
+
+#: models.py:439 models.py:493 models.py:495
+msgid "url"
+msgstr "url"
+
+#: models.py:440
+msgid ""
+"URL of the media file. <br /> It is <strong>very</strong>\n"
+"            important to remember that for episode artwork to display in "
+"iTunes, image must be\n"
+"            <a href=\"http://answers.yahoo.com/question/index?"
+"qid=20080501164348AAjvBvQ\">\n"
+"            saved to file's <strong>metadata</strong></a> before enclosure "
+"uploading!<br /><br />\n"
+"            For best results, choose an attractive, original, and square "
+"JPEG (.jpg) or PNG (.png)\n"
+"            image at a size of 1400x1400 pixels. The image will be\n"
+"            scaled down to 50x50 pixels at smallest in iTunes."
+msgstr ""
+"La URL de el archivo media. <br /> ¡Es <strong>muy</strong>\n"
+"            importante recordar que para mostrar la ilustración del episodio "
+"en iTunes, la imagen debe de\n"
+"            <a href=\"http://answers.yahoo.com/question/index?"
+"qid=20080501164348AAjvBvQ\">\n"
+"            guardarse en un archivo <strong>metadata</strong></a> antes de "
+"subir un adjunto!<br /><br />\n"
+"            Para mejores resultados, elegir una atractiva, original y "
+"cuadradaimagen JPEG (.jpg) o PNG (.png)\n"
+"            con un tamaño de 1400x1400 píxeles. La imagen se \n"
+"            reducira a 50x50 píxeles como la más pequeña en iTunes."
+
+#: models.py:449
+msgid "size"
+msgstr "tamaño"
+
+#: models.py:449
+msgid ""
+"The length attribute is the file size in bytes. Find this information in the "
+"files properties (on a Mac, ``Get Info`` and refer to the size row)"
+msgstr ""
+"El atributo de longitud es el tamaño del archivo en bytes. Encontraras esta "
+"información en las propiedades del archivo (en una Mac,  ``Obtener "
+"información`` y ver en la fila de tamaño)"
+
+#: models.py:453
+msgid "mime format"
+msgstr "formato mime"
+
+#: models.py:454
+#, python-brace-format
+msgid "Supports mime types of: {0}"
+msgstr "Soporta tipos mime de: {0}"
+
+#: models.py:457
+msgid "bit rate"
+msgstr "tasa de transferencia"
+
+#: models.py:458
+msgid "Measured in kilobits per second (kbps), often 128 or 192."
+msgstr "Se mide en kilobits por segundo (kbps), a menudo 128 o 192."
+
+#: models.py:460
+msgid "sample rate"
+msgstr "muestreo digital"
+
+#: models.py:461
+msgid "Measured in kilohertz (kHz), often 44.1."
+msgstr "Se mide en kilohertz (kHz), a menudo 44.1."
+
+#: models.py:463
+msgid "channel"
+msgstr "canal"
+
+#: models.py:464
+msgid "Number of channels; 2 for stereo, 1 for mono."
+msgstr "Número de canales; 2 para estero, 1 para mono"
+
+#: models.py:466
+msgid "duration"
+msgstr "duración"
+
+#: models.py:467
+msgid "Duration of the audio file, in seconds (always as integer)."
+msgstr "Duración del archivo de audio, en segundos (siempre un entero)"
+
+#: models.py:472
+msgid "Enclosure"
+msgstr "Adjunto"
+
+#: models.py:473
+msgid "Enclosures"
+msgstr "Adjuntos"
+
+#: models.py:493 models.py:495
+msgid "URL of the media file"
+msgstr "Url del archivo media"
+
+#: models.py:500
+msgid "Embed Media URL"
+msgstr "URL del Media incrustado"
+
+#: models.py:501
+msgid "Embed Media URLs"
+msgstr "URLs del Media incrustado"
+
+#: templates/podcasting/_current_episode.html:18
+#: templates/podcasting/_episode_detail.html:14
+#: templates/podcasting/_episode_list.html:16
+msgid "to download right click and select 'save link as'"
+msgstr "Para descargar, click derecho y seleccione 'Guardar enlace como '"
+
+#: templates/podcasting/_current_episode.html:19
+#: templates/podcasting/_episode_detail.html:15
+#: templates/podcasting/_episode_list.html:17
+msgid "Download / Stream"
+msgstr "Descargar / Reproducir"
+
+#: templates/podcasting/_current_episode.html:26
+#: templates/podcasting/_current_episode.html:29
+#: templates/podcasting/_episode_detail.html:37
+#: templates/podcasting/_episode_list.html:24
+#: templates/podcasting/_episode_list.html:27
+msgid "Tracklist"
+msgstr "Lista de pistas"
+
+#: templates/podcasting/_current_episode.html:46
+#: templates/podcasting/_episode_list.html:44
+msgid "read more"
+msgstr "leer más"
+
+#: templates/podcasting/_current_episode.html:54
+#: templates/podcasting/_episode_detail.html:44
+#: templates/podcasting/_episode_list.html:54
+msgid "Coming soon..."
+msgstr "Próximamente..."
+
+#: templates/podcasting/_feeds.html:7
+msgid "Feedburner"
+msgstr "Feedburner"
+
+#: templates/podcasting/_feeds.html:12
+msgid "Atom"
+msgstr "Atom"
+
+#: templates/podcasting/_feeds.html:13
+msgid "RSS"
+msgstr "RSS"
+
+#: templates/podcasting/_show_detail.html:17
+msgid "There is no such show."
+msgstr "No existe tal Podcast."
+
+#: templates/podcasting/_show_list.html:4
+#: templates/podcasting/show_list.html:5
+msgid "Podcast Shows"
+msgstr "Podcast"
+
+#: templates/podcasting/_show_list.html:17
+msgid "There are no shows."
+msgstr "No existen Podcasts."
+
+#: templates/podcasting/admin_thumbnail_css.html:8
+#: templates/podcasting/admin_thumbnail_easy-thumbnails.html:9
+#: templates/podcasting/admin_thumbnail_sorl.html:8
+msgid "No image"
+msgstr "No imagen"
+
+#: templates/podcasting/current_episode.html:5
+msgid "Current Edition"
+msgstr "Edición actual"
+
+#: templates/podcasting/episode_list.html:5
+msgid "Archive"
+msgstr "Archivo"

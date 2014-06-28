@@ -197,7 +197,7 @@ class EnclosureForm(forms.ModelForm):
 
 class AdminShowForm(forms.ModelForm):
 
-    publish = forms.BooleanField(
+    publish = forms.BooleanField(label=_("publish"),
         required=False,
         help_text=_("Checking this will publish this show on the site, no turning back."),
     )
@@ -205,6 +205,7 @@ class AdminShowForm(forms.ModelForm):
     class Meta:
         model = Show
         fields = [
+            "site",
             "original_image",
             "author_text",
             "owner",
@@ -238,7 +239,7 @@ class AdminShowForm(forms.ModelForm):
 
 class AdminEpisodeForm(forms.ModelForm):
 
-    publish = forms.BooleanField(
+    publish = forms.BooleanField(label=_("publish"),
         required=False,
         help_text=_("Checking this will publish this episode on the site, no turning back."))
 
@@ -250,6 +251,7 @@ class AdminEpisodeForm(forms.ModelForm):
     class Meta:
         model = Episode
         fields = [
+            "show",
             "original_image",
             "author_text",
             "title", "subtitle",
@@ -269,7 +271,7 @@ class AdminEpisodeForm(forms.ModelForm):
         self.fields["publish"].initial = bool(self.instance.published)
 
     def validate_published(self):
-        if not self.instance.enclosure_set.count() or not self.instance.embedmedia_set.count():
+        if not self.instance.enclosure_set.count() and not self.instance.embedmedia_set.count():
             raise forms.ValidationError(
                 _("An episode must have at least one enclosure or media file before publishing.\n "
                   "Uncheck, save this episode, and add an encoslure before publishing."))

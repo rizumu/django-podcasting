@@ -1,11 +1,13 @@
 from django.conf.urls import patterns, url
-from django.views.generic.base import RedirectView
+from podcasting.feeds import (RssShowFeed, AtomShowFeed,
+    AtomRedirectView, RssRedirectView)
 
 from podcasting.feeds import RssShowFeed, AtomShowFeed
 from podcasting.models import Enclosure
 
 
 MIMES = "|".join([enclosure[0] for enclosure in Enclosure.MIME_CHOICES])
+
 
 
 urlpatterns = patterns(
@@ -25,7 +27,7 @@ urlpatterns = patterns(
     # Previously we had /itunes/ in the feed url.
     # This is now deprecated and redirects to a more general feed url.
     url(r"^(?P<show_slug>[-\w]+)/itunes/(?P<mime_type>[-\w]+)/rss/$",
-        RedirectView.as_view(pattern_name="podcasts_show_feed_rss")),
+        RssRedirectView.as_view()),
     url(r"^(?P<show_slug>[-\w]+)/itunes/(?P<mime_type>[-\w]+)/atom/$",
-        RedirectView.as_view(pattern_name="podcasts_show_feed_atom")),
+        AtomRedirectView.as_view()),
 )
