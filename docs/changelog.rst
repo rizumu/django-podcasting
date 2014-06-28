@@ -4,7 +4,7 @@ Changelog
 master
 ------
 
-0.9.6
+0.9.9
 ------
 - Add django-appconf to required packages
 - RedirectView fixes - kike721
