@@ -56,8 +56,13 @@ class ITunesElements(object):
             elif easy_thumbnails:
                 aliases = settings.THUMBNAIL_ALIASES["podcasting.Show.original_image"]
                 thumbnailer = easy_thumbnails.files.get_thumbnailer(show.original_image)
-                itunes_sm_url = thumbnailer.get_thumbnail(aliases["itunes_sm"]).url
-                itunes_lg_url = thumbnailer.get_thumbnail(aliases["itunes_lg"]).url
+                try:
+                    itunes_sm_url = thumbnailer.get_thumbnail(aliases["itunes_sm"]).url
+                    itunes_lg_url = thumbnailer.get_thumbnail(aliases["itunes_lg"]).url
+                except easy_thumbnails.exceptions.InvalidImageFormatError:
+                    easy_thumbnails.signal_handlers.generate_aliases_global(episode.original_image)
+                    itunes_sm_url = thumbnailer.get_thumbnail(aliases["itunes_sm"]).url
+                    itunes_lg_url = thumbnailer.get_thumbnail(aliases["itunes_lg"]).url
             elif sorl:
                 itunes_sm_url = sorl.thumbnail.get_thumbnail(show.original_image, "144x144").url
                 itunes_lg_url = sorl.thumbnail.get_thumbnail(show.original_image, "1400x1400").url
@@ -108,8 +113,13 @@ class ITunesElements(object):
             elif easy_thumbnails:
                 aliases = settings.THUMBNAIL_ALIASES["podcasting.Episode.original_image"]
                 thumbnailer = easy_thumbnails.files.get_thumbnailer(episode.original_image)
-                itunes_sm_url = thumbnailer.get_thumbnail(aliases["itunes_sm"]).url
-                itunes_lg_url = thumbnailer.get_thumbnail(aliases["itunes_lg"]).url
+                try:
+                    itunes_sm_url = thumbnailer.get_thumbnail(aliases["itunes_sm"]).url
+                    itunes_lg_url = thumbnailer.get_thumbnail(aliases["itunes_lg"]).url
+                except easy_thumbnails.exceptions.InvalidImageFormatError:
+                    easy_thumbnails.signal_handlers.generate_aliases_global(episode.original_image)
+                    itunes_sm_url = thumbnailer.get_thumbnail(aliases["itunes_sm"]).url
+                    itunes_lg_url = thumbnailer.get_thumbnail(aliases["itunes_lg"]).url
             elif sorl:
                 itunes_sm_url = sorl.thumbnail.get_thumbnail(episode.original_image, "144x144").url
                 itunes_lg_url = sorl.thumbnail.get_thumbnail(episode.original_image, "1400x1400").url
