@@ -4,6 +4,11 @@ Changelog
 master
 ------
 
+0.9.10
+------
+- setting FEED_ENTRIES hides older episodes, use None (aka all) as default.
+- more forgiving error handling on images in feeds.
+
 0.9.9
 ------
 - Add django-appconf to required packages
