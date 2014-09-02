@@ -68,6 +68,5 @@ twitter support.
 .. _coverage: https://coveralls.io/r/rizumu/django-podcasting
 .. |version| image:: https://pypip.in/v/django-podcasting/badge.png
 .. _version: https://crate.io/packages/django-podcasting
-.. image:: https://requires.io/github/rizumu/django-podcasting/requirements.png?branch=master
-     :target: https://requires.io/github/rizumu/django-podcasting/requirements/?branch=master
-     :alt: Requirements Status
+.. |requires| image:: https://requires.io/github/rizumu/django-podcasting/requirements.png?branch=master
+.. _requires: https://requires.io/github/rizumu/django-podcasting/requirements/?branch=master
