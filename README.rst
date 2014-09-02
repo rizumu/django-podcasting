@@ -5,6 +5,7 @@ Django Podcasting is a reusable application which provides audio
 podcasting functionality for websites running on the Django Web
 framework.
 
+|docs|_
 |build|_
 |coverage|_
 |version|_
@@ -70,3 +71,5 @@ twitter support.
 .. _version: https://crate.io/packages/django-podcasting
 .. |requires| image:: https://requires.io/github/rizumu/django-podcasting/requirements.png?branch=master
 .. _requires: https://requires.io/github/rizumu/django-podcasting/requirements/?branch=master
+.. |docs| image:: https://readthedocs.org/projects/django-podcasting/badge/?version=latest
+.. _docs: https://readthedocs.org/projects/django-podcasting/?badge=latest
