@@ -8,6 +8,7 @@ framework.
 |build|_
 |coverage|_
 |version|_
+|requires|_
 
 More documentation about the usage and installation of Django Podcasting
 can be found on `django-podcasting.readthedocs.org`_.
@@ -67,3 +68,6 @@ twitter support.
 .. _coverage: https://coveralls.io/r/rizumu/django-podcasting
 .. |version| image:: https://pypip.in/v/django-podcasting/badge.png
 .. _version: https://crate.io/packages/django-podcasting
+.. image:: https://requires.io/github/rizumu/django-podcasting/requirements.png?branch=master
+     :target: https://requires.io/github/rizumu/django-podcasting/requirements/?branch=master
+     :alt: Requirements Status
