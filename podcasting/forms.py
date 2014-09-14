@@ -6,6 +6,7 @@ except ImportError:
 from django import forms
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
+from django.core.exceptions import ObjectDoesNotExist
 
 from podcasting.utils.twitter import can_tweet
 from podcasting.utils.widgets import CustomAdminThumbnailWidget
@@ -123,7 +124,7 @@ class BaseEpisodeForm(forms.ModelForm):
             raise forms.ValidationError(
                 _("An episode must have at least one enclosure or media file before publishing.\n "
                   "Uncheck, save this episode, and add an encoslure before publishing."))
-        elif not self.instance.show.published:
+        elif not self.instance.is_show_published:
             raise forms.ValidationError(_("The show for this episode is not yet published"))
         self.instance.published = now()
 
@@ -177,6 +178,7 @@ class EnclosureForm(forms.ModelForm):
     class Meta:
         model = Enclosure
         fields = [
+            "episodes",
             "url",
             "mime",
             "size",
@@ -185,9 +187,20 @@ class EnclosureForm(forms.ModelForm):
             "channel",
         ]
 
+    def clean(self):
+	cleaned_data = super(EnclosureForm, self).clean()
+        for episode in cleaned_data.get('episodes'):
+            try:
+                existing = episode.enclosure_set.get(mime=cleaned_data.get('mime'))
+                raise forms.ValidationError(
+                    _("An episode can only have one enclosure of a specific mimetype. \n "
+                      "Episode '%(item)s' already has an enclosure of mimetype %(mimetype)s"),
+                      params={'item': episode, 'mimetype': cleaned_data.get('mime')})
+            except ObjectDoesNotExist:
+                pass
+
     def validate_unique(self):
         exclude = self._get_validation_exclusions()
-        exclude.remove("episode")  # allow checking against the missing attribute
 
         try:
             self.instance.validate_unique(exclude=exclude)
@@ -206,7 +219,7 @@ class AdminShowForm(forms.ModelForm):
     class Meta:
         model = Show
         fields = [
-            "site",
+            "sites",
             "original_image",
             "author_text",
             "owner",
@@ -253,7 +266,7 @@ class AdminEpisodeForm(forms.ModelForm):
     class Meta:
         model = Episode
         fields = [
-            "show",
+            "shows",
             "original_image",
             "author_text",
             "title", "subtitle",
@@ -277,7 +290,7 @@ class AdminEpisodeForm(forms.ModelForm):
             raise forms.ValidationError(
                 _("An episode must have at least one enclosure or media file before publishing.\n "
                   "Uncheck, save this episode, and add an encoslure before publishing."))
-        elif not self.instance.show.published:
+        elif not self.instance.is_show_published:
             raise forms.ValidationError(_("The show for this episode is not yet published"))
         self.instance.published = now()
 
@@ -300,3 +313,8 @@ class AdminEpisodeForm(forms.ModelForm):
             episode.tweet()
 
         return episode
+
+class AdminEnclosureForm(EnclosureForm):
+
+    class Meta:
+        model = Enclosure

@@ -109,6 +109,7 @@ class ITunesElements(object):
         """ Add additional elements to the episode object"""
         super(ITunesElements, self).add_item_elements(handler, item)
 
+        show = item["show"]
         episode = item["episode"]
         if episode.original_image:
             if imagekit:
@@ -143,11 +144,11 @@ class ITunesElements(object):
 
         handler.addQuickElement("guid", str(episode.uuid), attrs={"isPermaLink": "false"})
         if licenses:
-            handler.addQuickElement("copyright", "{0} {1} {2}".format(episode.show.license.name,
-                                                                      episode.show.license.url,
+            handler.addQuickElement("copyright", "{0} {1} {2}".format(show.license.name,
+                                                                      show.license.url,
                                                                       datetime.date.today().year))
         else:
-            handler.addQuickElement("copyright", "{0} {1}".format(episode.show.license.name,
+            handler.addQuickElement("copyright", "{0} {1}".format(show.license.name,
                                                                   datetime.date.today().year))
         handler.addQuickElement("itunes:author", episode.author_text)
         handler.addQuickElement("itunes:subtitle", episode.subtitle)
@@ -207,7 +208,7 @@ class ShowFeed(Feed):
     def get_object(self, request, *args, **kwargs):
         self.mime = [mc[0] for mc in Enclosure.MIME_CHOICES if mc[0] == kwargs["mime_type"]][0]
         site = get_current_site(request)
-        self.show = get_object_or_404(Show, slug=kwargs["show_slug"], site=site)
+        self.show = get_object_or_404(Show, slug=kwargs["show_slug"], sites=site)
         return self.show
 
     def item_title(self, episode):
@@ -219,7 +220,7 @@ class ShowFeed(Feed):
 
     def item_link(self, episode):
         return reverse("podcasting_episode_detail",
-                       kwargs={"show_slug": episode.show.slug, "slug": episode.slug})
+                       kwargs={"show_slug": self.show.slug, "slug": episode.slug})
 
     # def item_author_link(self, episode):
     #     return "todo" #this one doesn't add anything in atom or rss
@@ -231,7 +232,7 @@ class ShowFeed(Feed):
         return episode.published
 
     def item_categories(self, episode):
-        return self.categories(episode.show)
+        return self.categories(self.show)
 
     def item_enclosure_url(self, episode):
         try:
@@ -264,6 +265,7 @@ class ShowFeed(Feed):
 
     def item_extra_kwargs(self, item):
         extra = {}
+        extra["show"] = self.show
         extra["episode"] = item
         return extra
 

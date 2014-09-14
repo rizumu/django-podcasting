@@ -22,9 +22,9 @@ class EpisodeListView(ListView):
     paginate_by = settings.PODCASTING_PAGINATE_BY
 
     def get_queryset(self):
-        return Episode.objects.published().filter(show__slug=self.kwargs["show_slug"])
+        return Episode.objects.published().filter(shows__slug=self.kwargs["show_slug"])
 
 
 class EpisodeDetailView(DetailView):
     def get_queryset(self):
-        return Episode.objects.published().filter(show__slug=self.kwargs["show_slug"])
+        return Episode.objects.published().filter(shows__slug=self.kwargs["show_slug"])

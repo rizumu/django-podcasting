@@ -83,7 +83,10 @@ def get_show_upload_folder(instance, pathname):
 def get_episode_upload_folder(instance, pathname):
     "A standardized pathname for uploaded files and images."
     root, ext = os.path.splitext(pathname)
-    return "img/podcasts/{0}/episodes/{1}{2}".format(instance.show.slug, slugify(root), ext)
+    if instance.shows.count() == 1:   
+ 	return "img/podcasts/{0}/episodes/{1}{2}".format(instance.shows.all()[0].slug, slugify(root), ext)
+    else: 
+    	return "img/podcasts/episodes/{0}/{1}{2}".format(instance.slug, slugify(root), ext)
 
 
 @python_2_unicode_compatible
@@ -102,7 +105,7 @@ class Show(models.Model):
     updated = models.DateTimeField(_("updated"), auto_now=True, editable=False)
     published = models.DateTimeField(_("published"), null=True, blank=True, editable=False)
 
-    site = models.ForeignKey(Site, verbose_name=_('Site'))
+    sites = models.ManyToManyField(Site, verbose_name=_('Sites'))
 
     ttl = models.PositiveIntegerField(
         _("ttl"), default=1440,
@@ -146,7 +149,7 @@ class Show(models.Model):
             should be comma separated."""))
 
     title = models.CharField(_("title"), max_length=255)
-    slug = AutoSlugField(_("slug"), populate_from="title", unique_with="site")
+    slug = AutoSlugField(_("slug"), populate_from="title", unique="True")
 
     subtitle = models.CharField(
         _("subtitle"), max_length=255,
@@ -275,7 +278,7 @@ class Episode(models.Model):
     updated = models.DateTimeField(_("updated"), auto_now=True, editable=False)
     published = models.DateTimeField(_("published"), null=True, blank=True, editable=False)
 
-    show = models.ForeignKey(Show, verbose_name=_("Podcast"))
+    shows = models.ManyToManyField(Show, verbose_name=_("Podcasts"))
 
     enable_comments = models.BooleanField(default=True)
 
@@ -285,7 +288,7 @@ class Episode(models.Model):
         is acceptable. Multiple authors should be comma separated."""))
 
     title = models.CharField(_("title"), max_length=255)
-    slug = AutoSlugField(_("slug"), populate_from="title", unique_with="show__site")
+    slug = AutoSlugField(_("slug"), populate_from="title", unique="True")
 
     subtitle = models.CharField(
         _("subtitle"), max_length=255, blank=True,
@@ -372,7 +375,7 @@ class Episode(models.Model):
 
     def get_absolute_url(self):
         return reverse("podcasting_episode_detail",
-                       kwargs={"show_slug": self.show.slug, "slug": self.slug})
+                       kwargs={"show_slug": self.shows.all()[0].slug, "slug": self.slug})
 
     def as_tweet(self):
         if not self.tweet_text:
@@ -385,7 +388,7 @@ class Episode(models.Model):
             ))
             result = json.loads(u.read())
             self.tweet_text = "{0} {1} - {2}".format(
-                self.show.episode_twitter_tweet_prefix,
+                self.shows.all()[0].episode_twitter_tweet_prefix,
                 self.title,
                 result["url"],
             )
@@ -417,24 +420,32 @@ class Episode(models.Model):
     def get_share_description(self):
         return "{0}...".format(self.description[:512])
 
+    def is_show_published(self):
+        for show in self.shows.all():
+           if show.published:
+               return True
+        return False
 
 @python_2_unicode_compatible
 class Enclosure(models.Model):
     """
     An enclosure is one, of possibly many, files/filetypes of an episode.
     """
-    MIME_CHOICES = (
-        ("aiff", "audio/aiff"),
-        ("flac", "audio/flac"),
-        ("mp3", "audio/mpeg"),
-        ("mp4", "audio/mp4"),
-        ("ogg", "audio/ogg"),
-        ("flac", "audio/flac"),
-        ("wav", "audio/wav"),
-    )
-
-    episode = models.ForeignKey(Episode, verbose_name=_("episode"))
-
+    try:
+        MIME_CHOICES = settings.PODCASTING_MIME_CHOICES
+    except AttributeError: 
+        MIME_CHOICES = (
+            ("aiff", "audio/aiff"),
+            ("flac", "audio/flac"),
+            ("mp3", "audio/mpeg"),
+            ("mp4", "audio/mp4"),
+            ("ogg", "audio/ogg"),
+            ("flac", "audio/flac"),
+            ("wav", "audio/wav"),
+        )
+ 
+    episodes = models.ManyToManyField(Episode, verbose_name=_("Episodes"))
+    
     url = models.URLField(
         _("url"),
         help_text=_("""URL of the media file. <br /> It is <strong>very</strong>
@@ -467,13 +478,12 @@ class Enclosure(models.Model):
         help_text=_("Duration of the audio file, in seconds (always as integer)."))
 
     class Meta:
-        ordering = ("episode", "mime")
-        unique_together = ("episode", "mime")
+        ordering = ("url", "mime",)
         verbose_name = _("Enclosure")
         verbose_name_plural = _("Enclosures")
 
     def __str__(self):
-        return "{} - {}".format(self.episode, self.mime)
+        return "{} - {}".format(self.url, self.mime)
 
 
 @python_2_unicode_compatible
