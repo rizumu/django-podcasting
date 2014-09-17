@@ -25,6 +25,10 @@ DEFAULT_SETTINGS = dict(
             "NAME": ":memory:",
         }
     },
+    MIDDLEWARE_CLASSES = (
+        "django.middleware.common.CommonMiddleware",
+        "django.middleware.csrf.CsrfViewMiddleware"
+    ),
     SITE_ID = 1,
     ROOT_URLCONF="podcasting.tests.urls",
     SECRET_KEY="notasecret",
