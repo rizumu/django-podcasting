@@ -28,11 +28,14 @@ Please visit `django-podcasting.readthedocs.org`_ for the full
 installation guide including optional thumbnailing, tagging and
 twitter support.
 
+
 * Requires Django 1.4 or greater
+
 
 * Install Django Podcasting with your favorite Python package manager::
 
     pip install django-podcasting
+
 
 * To install the `in-development version`_ of Django Podcasting::
 
@@ -52,10 +55,17 @@ twitter support.
         ...
     )
 
+
 * Include ``podcasting.urls`` and ``podcasting.urls_feeds`` in your urls definition::
 
     url(r"^podcasts/", include("podcasting.urls")),
     url(r"^feeds/podcasts/", include("podcasting.urls_feeds")),
+
+
+* To run the test suite::
+
+    ./runtests.sh
+
 
 .. _github.com/rizumu/django-podcasting: https://github.com/rizumu/django-podcasting/
 .. _django-podcasting.readthedocs.org: http://django-podcasting.readthedocs.org/
