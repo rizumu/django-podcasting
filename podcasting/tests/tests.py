@@ -61,6 +61,7 @@ class EpisodeFactory(factory.django.DjangoModelFactory):
             for show in extracted:
                 self.shows.add(show)
 
+
 class EnclosureFactory(factory.django.DjangoModelFactory):
     FACTORY_FOR = Enclosure
 #    episodes = factory.SubFactory(EpisodeFactory)
@@ -77,6 +78,7 @@ class EnclosureFactory(factory.django.DjangoModelFactory):
             # A list of groups were passed in, use them
             for episode in extracted:
                 self.episodes.add(episode)
+
 
 class PodcastTests(TestCase):
     def setUp(self):
