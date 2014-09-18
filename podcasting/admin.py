@@ -31,7 +31,6 @@ class ShowAdmin(admin.ModelAdmin):
 
     def show_sites(self, obj):
         return ', '.join([site.name for site in obj.sites.all()])
-        #return obj.site.name
     show_sites.short_description = "Sites"
 
 
@@ -75,7 +74,7 @@ class EnclosureAdmin(admin.ModelAdmin):
     form = AdminEnclosureForm
 
     list_display = ("mime", "url")
-    list_filter = ("mime","episodes")
+    list_filter = ("mime", "episodes")
 
 
 class EmbedMediaAdmin(admin.ModelAdmin):

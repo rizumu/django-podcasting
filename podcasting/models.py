@@ -83,10 +83,12 @@ def get_show_upload_folder(instance, pathname):
 def get_episode_upload_folder(instance, pathname):
     "A standardized pathname for uploaded files and images."
     root, ext = os.path.splitext(pathname)
-    if instance.shows.count() == 1:   
- 	return "img/podcasts/{0}/episodes/{1}{2}".format(instance.shows.all()[0].slug, slugify(root), ext)
-    else: 
-    	return "img/podcasts/episodes/{0}/{1}{2}".format(instance.slug, slugify(root), ext)
+    if instance.shows.count() == 1:
+        return "img/podcasts/{0}/episodes/{1}{2}".format(
+            instance.shows.all()[0].slug, slugify(root), ext
+        )
+    else:
+        return "img/podcasts/episodes/{0}/{1}{2}".format(instance.slug, slugify(root), ext)
 
 
 @python_2_unicode_compatible
@@ -422,9 +424,10 @@ class Episode(models.Model):
 
     def is_show_published(self):
         for show in self.shows.all():
-           if show.published:
-               return True
+            if show.published:
+                return True
         return False
+
 
 @python_2_unicode_compatible
 class Enclosure(models.Model):
@@ -433,7 +436,7 @@ class Enclosure(models.Model):
     """
     try:
         MIME_CHOICES = settings.PODCASTING_MIME_CHOICES
-    except AttributeError: 
+    except AttributeError:
         MIME_CHOICES = (
             ("aiff", "audio/aiff"),
             ("flac", "audio/flac"),
@@ -443,9 +446,9 @@ class Enclosure(models.Model):
             ("flac", "audio/flac"),
             ("wav", "audio/wav"),
         )
- 
+
     episodes = models.ManyToManyField(Episode, verbose_name=_("Episodes"))
-    
+
     url = models.URLField(
         _("url"),
         help_text=_("""URL of the media file. <br /> It is <strong>very</strong>

@@ -188,14 +188,14 @@ class EnclosureForm(forms.ModelForm):
         ]
 
     def clean(self):
-	cleaned_data = super(EnclosureForm, self).clean()
+        cleaned_data = super(EnclosureForm, self).clean()
         for episode in cleaned_data.get('episodes'):
             try:
-                existing = episode.enclosure_set.get(mime=cleaned_data.get('mime'))
+                episode.enclosure_set.get(mime=cleaned_data.get('mime'))
                 raise forms.ValidationError(
                     _("An episode can only have one enclosure of a specific mimetype. \n "
                       "Episode '%(item)s' already has an enclosure of mimetype %(mimetype)s"),
-                      params={'item': episode, 'mimetype': cleaned_data.get('mime')})
+                    params={'item': episode, 'mimetype': cleaned_data.get('mime')})
             except ObjectDoesNotExist:
                 pass
 
@@ -313,6 +313,7 @@ class AdminEpisodeForm(forms.ModelForm):
             episode.tweet()
 
         return episode
+
 
 class AdminEnclosureForm(EnclosureForm):
 
