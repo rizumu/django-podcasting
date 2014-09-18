@@ -185,6 +185,7 @@ class EnclosureForm(forms.ModelForm):
             "bitrate",
             "sample",
             "channel",
+            "duration",
         ]
 
     def clean(self):
@@ -313,9 +314,3 @@ class AdminEpisodeForm(forms.ModelForm):
             episode.tweet()
 
         return episode
-
-
-class AdminEnclosureForm(EnclosureForm):
-
-    class Meta:
-        model = Enclosure

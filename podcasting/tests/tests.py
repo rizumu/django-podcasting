@@ -4,10 +4,14 @@ from django.test import TestCase
 
 from django.contrib.sites.models import Site
 from django.contrib.auth.models import User
+from django.conf import settings
 
-try:
-    from licenses .models import License
-except ImportError:
+if 'licenses' in settings.INSTALLED_APPS:
+    try:
+        from licenses .models import License
+    except ImportError:
+        License = False
+else:
     License = False
 
 from podcasting.models import Show, Episode, Enclosure
@@ -29,22 +33,50 @@ if License:
 class ShowFactory(factory.django.DjangoModelFactory):
     FACTORY_FOR = Show
     owner = factory.SubFactory(UserFactory)
-    site = factory.SubFactory(SiteFactory)
     if License:
         license = factory.SubFactory(LicenseFactory)
+
+    @factory.post_generation
+    def sites(self, create, extracted, **kwargs):
+        if not create:
+            # Simple build, do nothing.
+            return
+        else:
+            site = SiteFactory.create()
+            self.sites.add(site)
 
 
 class EpisodeFactory(factory.django.DjangoModelFactory):
     FACTORY_FOR = Episode
-    show = factory.SubFactory(ShowFactory)
+#    show = factory.SubFactory(ShowFactory)
 
+    @factory.post_generation
+    def shows(self, create, extracted, **kwargs):
+        if not create:
+            # Simple build, do nothing.
+            return
+
+        if extracted:
+            # A list of groups were passed in, use them
+            for show in extracted:
+                self.shows.add(show)
 
 class EnclosureFactory(factory.django.DjangoModelFactory):
     FACTORY_FOR = Enclosure
-    episode = factory.SubFactory(EpisodeFactory)
+#    episodes = factory.SubFactory(EpisodeFactory)
     size = 303
     duration = 909
 
+    @factory.post_generation
+    def episodes(self, create, extracted, **kwargs):
+        if not create:
+            # Simple build, do nothing.
+            return
+
+        if extracted:
+            # A list of groups were passed in, use them
+            for episode in extracted:
+                self.episodes.add(episode)
 
 class PodcastTests(TestCase):
     def setUp(self):
@@ -52,18 +84,18 @@ class PodcastTests(TestCase):
         self.show.save()
         self.episodes = []
         for i in range(0, 10):
-            episode = EpisodeFactory.create(show=self.show, title="Episode 1")
+            episode = EpisodeFactory.create(shows=(self.show,), title="Episode 1")
             self.episodes.append(episode)
-        self.episode = EpisodeFactory.create(show=self.show, title="Episode")
+        self.episode = EpisodeFactory.create(shows=(self.show,), title="Episode")
         long_title = "".join(["x" for i in range(51)])
-        self.long_episode1 = EpisodeFactory.create(show=self.show, title=long_title)
+        self.long_episode1 = EpisodeFactory.create(shows=(self.show,), title=long_title)
 
-        self.long_episode2 = EpisodeFactory.create(show=self.show, title=long_title)
+        self.long_episode2 = EpisodeFactory.create(shows=(self.show,), title=long_title)
 
-        self.enclosure = EnclosureFactory.create(episode=self.episodes[0])
+        self.enclosure = EnclosureFactory.create(episodes=(self.episodes[0],),)
 
     def test_podcast(self):
-        self.assertEquals(self.show, self.enclosure.episode.show)
+        self.assertEquals(self.show, self.enclosure.episodes.all()[0].shows.all()[0])
 
     def test_autoslug(self):
         """Test normal slug generation. Slug has to be lower case."""

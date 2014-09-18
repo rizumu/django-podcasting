@@ -7,7 +7,7 @@ try:
 except ImportError:
     AdminThumbnail = None
 
-from podcasting.forms import AdminShowForm, AdminEpisodeForm, AdminEnclosureForm
+from podcasting.forms import AdminShowForm, AdminEpisodeForm, EnclosureForm as AdminEnclosureForm
 from podcasting.models import Show, Episode, Enclosure, EmbedMedia
 from podcasting.utils.twitter import can_tweet
 
