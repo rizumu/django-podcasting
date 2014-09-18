@@ -126,7 +126,7 @@ class Show(models.Model):
         _("webmaster email"), blank=True,
         help_text=_("Email address of the person responsible for channel publishing."))
 
-    if License:
+    if 'licenses' in settings.INSTALLED_APPS:
         license = models.ForeignKey(License, verbose_name=_("license"))
     else:
         license = models.CharField(
