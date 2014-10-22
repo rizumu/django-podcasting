@@ -7,12 +7,24 @@ import podcasting.models
 from django.conf import settings
 import podcasting.utils.fields
 
-def alter_license_field(apps, schema_editor):
+def create_license_field(apps, schema_editor):
     if 'licenses' in settings.INSTALLED_APPS:
-        return migrations.AlterField(
+        return migrations.AddField(
             model_name='show',
             name='license',
-            field=models.ForeignKey(verbose_name='license', to='licenses.License'),
+            field=models.ForeignKey(help_text='To publish a podcast to iTunes it is required to set a license type.',
+                verbose_name='license', 
+                to='licenses.License',
+            ),
+        )
+    else: 
+        return migrations.AddField(
+            model_name='show',
+            name='license',
+            field=models.CharField(help_text='To publish a podcast to iTunes it is required to set a license type.', 
+                max_length=255, 
+                verbose_name='license',
+            ),
         )
     return 1   
 
@@ -98,7 +110,6 @@ class Migration(migrations.Migration):
                 ('ttl', models.PositiveIntegerField(default=1440, help_text='``Time to Live,`` the number of minutes a channel can be\n        cached before refreshing.', verbose_name='ttl')),
                 ('editor_email', models.EmailField(help_text="Email address of the person responsible for the feed's content.", max_length=75, verbose_name='editor email', blank=True)),
                 ('webmaster_email', models.EmailField(help_text='Email address of the person responsible for channel publishing.', max_length=75, verbose_name='webmaster email', blank=True)),
-                ('license', models.CharField(help_text='To publish a podcast to iTunes it is required to set a license type.', max_length=255, verbose_name='license')),
                 ('organization', models.CharField(help_text='Name of the organization, company or Web site producing the podcast.', max_length=255, verbose_name='organization')),
                 ('link', models.URLField(help_text='URL of either the main website or the\n        podcast section of the main website.', verbose_name='link')),
                 ('enable_comments', models.BooleanField(default=True)),
@@ -151,5 +162,5 @@ class Migration(migrations.Migration):
             name='embedmedia',
             unique_together=set([('episode', 'url')]),
         ),
-        migrations.RunPython(alter_license_field),
+        migrations.RunPython(create_license_field),
     ]
