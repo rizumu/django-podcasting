@@ -38,7 +38,7 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AlterModelOptions(
             name='enclosure',
-            options={'ordering': ('mime',), 'verbose_name': 'Enclosure', 'verbose_name_plural': 'Enclosures'},
+            options={'ordering': ('url', 'mime'), 'verbose_name': 'Enclosure', 'verbose_name_plural': 'Enclosures'},
         ),
         migrations.AddField(
             model_name='enclosure',

@@ -7,26 +7,15 @@ import podcasting.models
 from django.conf import settings
 import podcasting.utils.fields
 
-def create_license_field(apps, schema_editor):
+def get_license_field():
     if 'licenses' in settings.INSTALLED_APPS:
-        return migrations.AddField(
-            model_name='show',
-            name='license',
-            field=models.ForeignKey(help_text='To publish a podcast to iTunes it is required to set a license type.',
-                verbose_name='license', 
-                to='licenses.License',
-            ),
+        license = ('license', models.ForeignKey(to='licenses.License', verbose_name="license"))
+    else:
+        license = ('license', models.CharField(
+           max_length=255,
+           help_text=_("To publish a podcast to iTunes it is required to set a license type."))
         )
-    else: 
-        return migrations.AddField(
-            model_name='show',
-            name='license',
-            field=models.CharField(help_text='To publish a podcast to iTunes it is required to set a license type.', 
-                max_length=255, 
-                verbose_name='license',
-            ),
-        )
-    return 1   
+    return license
 
 class Migration(migrations.Migration):
 
@@ -128,6 +117,7 @@ class Migration(migrations.Migration):
                 ('twitter_tweet_prefix', models.CharField(help_text='Enter a short ``tweet_text`` prefix for new episodes on this show.', max_length=80, verbose_name='Twitter tweet prefix', blank=True)),
                 ('owner', models.ForeignKey(related_name=b'podcast_shows', verbose_name='owner', to=settings.AUTH_USER_MODEL, help_text='Make certain the user account has a name and e-mail address.')),
                 ('site', models.ForeignKey(verbose_name='Site', to='sites.Site')),
+                get_license_field(),
             ],
             options={
                 'ordering': ('organization', 'slug'),
@@ -162,5 +152,4 @@ class Migration(migrations.Migration):
             name='embedmedia',
             unique_together=set([('episode', 'url')]),
         ),
-        migrations.RunPython(create_license_field),
     ]
