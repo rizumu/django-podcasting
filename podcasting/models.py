@@ -473,7 +473,7 @@ class Enclosure(models.Model):
         verbose_name_plural = _("Enclosures")
 
     def __str__(self):
-        return "{} - {}".format(self.episode, self.mime)
+        return u"{} - {}".format(self.episode, self.mime)
 
 
 @python_2_unicode_compatible
@@ -501,4 +501,4 @@ class EmbedMedia(models.Model):
         verbose_name_plural = _("Embed Media URLs")
 
     def __str__(self):
-        return "{} - {}".format(self.episode, self.url)
+        return u"{} - {}".format(self.episode, self.url)
