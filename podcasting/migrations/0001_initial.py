@@ -6,10 +6,12 @@ import autoslug.fields
 import podcasting.models
 from django.conf import settings
 import podcasting.utils.fields
+from django.utils.translation import ugettext_lazy as _
+
 
 def get_license_field():
     if 'licenses' in settings.INSTALLED_APPS:
-        license = ('license', models.ForeignKey(to='licenses.License', verbose_name="license"))
+        license = ('license', models.ForeignKey(to='licenses.License', verbose_name=_("license")))
     else:
         license = ('license', models.CharField(
            max_length=255,
