@@ -14,7 +14,7 @@ class EpisodeManager(QuerySet):
         return self.exclude(published=None)
 
     def onsite(self):
-        return self.filter(show__site=Site.objects.get_current())
+        return self.filter(shows__sites=Site.objects.get_current())
 
     def current(self):
         try:
@@ -30,4 +30,4 @@ class ShowManager(QuerySet):
         return self.exclude(published=None)
 
     def onsite(self):
-        return self.filter(site=Site.objects.get_current())
+        return self.filter(sites=Site.objects.get_current())
