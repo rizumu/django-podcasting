@@ -4,6 +4,14 @@ Changelog
 master
 ------
 
+0.10.0
+------
+- fix unicode literals in models.py. Thanks @hakanw
+- Convert relationships for Enclosure, Episode, Sites into M2M to
+  allow mix and match show creation. Thanks to Jeff Lindsey
+  @djangolackey
+
+
 0.9.10
 ------
 - setting FEED_ENTRIES hides older episodes, use None (aka all) as default.
