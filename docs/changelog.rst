@@ -4,6 +4,10 @@ Changelog
 master
 ------
 
+0.10.2
+------
+- Fix for runserver warning, 'max_length' is ignored when used with IntegerField.
+
 0.10.1
 ------
 - Add missing `django-autoslug` requirement to setup.py. Thanks @Rolando.
@@ -14,7 +18,6 @@ master
 - Convert relationships for Enclosure, Episode, Sites into M2M to
   allow mix and match show creation. Thanks to Jeff Lindsey
   @djangolackey
-
 
 0.9.10
 ------
