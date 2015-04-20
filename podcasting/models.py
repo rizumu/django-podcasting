@@ -351,9 +351,9 @@ class Episode(models.Model):
                                        options={"quality": 100})
 
     # iTunes specific fields
-    hours = models.SmallIntegerField(_("hours"), max_length=2, default=0)
-    minutes = models.SmallIntegerField(_("minutes"), max_length=2, default=0, choices=SIXTY_CHOICES)
-    seconds = models.SmallIntegerField(_("seconds"), max_length=2, default=0, choices=SIXTY_CHOICES)
+    hours = models.SmallIntegerField(_("hours"), default=0)
+    minutes = models.SmallIntegerField(_("minutes"), default=0, choices=SIXTY_CHOICES)
+    seconds = models.SmallIntegerField(_("seconds"), default=0, choices=SIXTY_CHOICES)
     keywords = models.CharField(
         _("keywords"), max_length=255, blank=True,
         help_text=_("A comma-delimited list of words for searches, up to 12; "
@@ -479,7 +479,7 @@ class Enclosure(models.Model):
         _("channel"), max_length=1, default=2,
         help_text=_("Number of channels; 2 for stereo, 1 for mono."))
     duration = models.IntegerField(
-        _("duration"), max_length=1,
+        _("duration"),
         help_text=_("Duration of the audio file, in seconds (always as integer)."))
 
     class Meta:
