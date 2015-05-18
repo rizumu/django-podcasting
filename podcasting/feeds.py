@@ -148,7 +148,7 @@ class ITunesElements(object):
                                                                       show.license.url,
                                                                       datetime.date.today().year))
         else:
-            handler.addQuickElement("copyright", "{0} {1}".format(show.license.name,
+            handler.addQuickElement("copyright", "{0} {1}".format(show.license,
                                                                   datetime.date.today().year))
         handler.addQuickElement("itunes:author", episode.author_text)
         handler.addQuickElement("itunes:subtitle", episode.subtitle)
