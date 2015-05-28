@@ -79,18 +79,22 @@ from podcasting.utils.twitter import can_tweet
 def get_show_upload_folder(instance, pathname):
     "A standardized pathname for uploaded files and images."
     root, ext = os.path.splitext(pathname)
-    return "img/podcasts/{0}/{1}{2}".format(instance.slug, slugify(root), ext)
+    return "{0}/podcasts/{1}/{2}{3}".format(
+        settings.PODCASTING_IMG_PATH, instance.slug, slugify(root), ext
+    )
 
 
 def get_episode_upload_folder(instance, pathname):
     "A standardized pathname for uploaded files and images."
     root, ext = os.path.splitext(pathname)
     if instance.shows.count() == 1:
-        return "img/podcasts/{0}/episodes/{1}{2}".format(
-            instance.shows.all()[0].slug, slugify(root), ext
+        return "{0}/podcasts/{1}/episodes/{2}{3}".format(
+            settings.PODCASTING_IMG_PATH, instance.shows.all()[0].slug, slugify(root), ext
         )
     else:
-        return "img/podcasts/episodes/{0}/{1}{2}".format(instance.slug, slugify(root), ext)
+        return "{0}/podcasts/episodes/{1}/{2}{3}".format(
+            settings.PODCASTING_IMG_PATH, instance.slug, slugify(root), ext
+        )
 
 
 @python_2_unicode_compatible
