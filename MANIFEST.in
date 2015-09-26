@@ -2,4 +2,3 @@ include AUTHORS
 include README.rst
 include LICENSE
 recursive-include podcasting/templates/podcasting *.html
-

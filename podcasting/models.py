@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 
 import json
 import os
+
 try:
     from urllib2 import urlopen
 except ImportError:
@@ -17,14 +18,12 @@ from django.utils.translation import ugettext_lazy as _
 
 from django.contrib.sites.models import Site
 
-# until the 1.4 shim is released
-# https://groups.google.com/d/msg/django-developers/EI-ihJ4CLqw/ZE8kw-JhQtAJ
-if not hasattr(settings, "AUTH_USER_MODEL"):
-    settings.AUTH_USER_MODEL = "auth.User"
-
-# required external dependencies
 from autoslug import AutoSlugField
 from model_utils.managers import PassThroughManager
+
+from podcasting.managers import EpisodeManager, ShowManager
+from podcasting.utils.fields import UUIDField
+from podcasting.utils.twitter import can_tweet
 
 # optional external dependencies
 try:
@@ -69,11 +68,6 @@ try:
     from embed_video.fields import EmbedVideoField
 except ImportError:
     EmbedVideoField = None
-
-# internal imports
-from podcasting.managers import EpisodeManager, ShowManager
-from podcasting.utils.fields import UUIDField
-from podcasting.utils.twitter import can_tweet
 
 
 def get_show_upload_folder(instance, pathname):

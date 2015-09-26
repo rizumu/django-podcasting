@@ -6,6 +6,8 @@ from django.contrib.sites.models import Site
 from django.contrib.auth.models import User
 from django.conf import settings
 
+from podcasting.models import Show, Episode, Enclosure
+
 if 'licenses' in settings.INSTALLED_APPS:
     try:
         from licenses .models import License
@@ -14,27 +16,30 @@ if 'licenses' in settings.INSTALLED_APPS:
 else:
     License = False
 
-from podcasting.models import Show, Episode, Enclosure
-
 
 class UserFactory(factory.django.DjangoModelFactory):
-    FACTORY_FOR = User
+    class Meta:
+        model = User
 
 
 class SiteFactory(factory.django.DjangoModelFactory):
-    FACTORY_FOR = Site
+    class Meta:
+        model = Site
 
 
 if License:
     class LicenseFactory(factory.django.DjangoModelFactory):
-        FACTORY_FOR = License
+        class Meta:
+            model = License
 
 
 class ShowFactory(factory.django.DjangoModelFactory):
-    FACTORY_FOR = Show
     owner = factory.SubFactory(UserFactory)
     if License:
         license = factory.SubFactory(LicenseFactory)
+
+    class Meta:
+        model = Show
 
     @factory.post_generation
     def sites(self, create, extracted, **kwargs):
@@ -47,8 +52,9 @@ class ShowFactory(factory.django.DjangoModelFactory):
 
 
 class EpisodeFactory(factory.django.DjangoModelFactory):
-    FACTORY_FOR = Episode
-#    show = factory.SubFactory(ShowFactory)
+
+    class Meta:
+        model = Episode
 
     @factory.post_generation
     def shows(self, create, extracted, **kwargs):
@@ -63,10 +69,11 @@ class EpisodeFactory(factory.django.DjangoModelFactory):
 
 
 class EnclosureFactory(factory.django.DjangoModelFactory):
-    FACTORY_FOR = Enclosure
-#    episodes = factory.SubFactory(EpisodeFactory)
     size = 303
     duration = 909
+
+    class Meta:
+        model = Enclosure
 
     @factory.post_generation
     def episodes(self, create, extracted, **kwargs):

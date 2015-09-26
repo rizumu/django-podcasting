@@ -19,16 +19,17 @@ DEFAULT_SETTINGS = dict(
         "podcasting",
         "podcasting.tests",
     ),
+    MIDDLEWARE_CLASSES=[
+        "django.contrib.sessions.middleware.SessionMiddleware",
+        "django.contrib.auth.middleware.AuthenticationMiddleware",
+        "django.contrib.messages.middleware.MessageMiddleware",
+    ],
     DATABASES={
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
             "NAME": ":memory:",
         }
     },
-    MIDDLEWARE_CLASSES = (
-        "django.middleware.common.CommonMiddleware",
-        "django.middleware.csrf.CsrfViewMiddleware"
-    ),
     SITE_ID = 1,
     ROOT_URLCONF="podcasting.tests.urls",
     SECRET_KEY="notasecret",
@@ -46,23 +47,19 @@ def runtests(*test_args):
     if hasattr(django, "setup"):
         django.setup()
 
-    if not test_args:
-        test_args = ["tests"]
-
     parent = os.path.dirname(os.path.abspath(__file__))
     sys.path.insert(0, parent)
 
     try:
         from django.test.runner import DiscoverRunner
         runner_class = DiscoverRunner
-        test_args = ['model_utils.tests']
+        test_args = ["podcasting.tests"]
     except ImportError:
         from django.test.simple import DjangoTestSuiteRunner
         runner_class = DjangoTestSuiteRunner
-        test_args = ['tests']
+        test_args = ["tests"]
 
-    failures = runner_class(
-        verbosity=1, interactive=True, failfast=False).run_tests(test_args)
+    failures = runner_class(verbosity=1, interactive=True, failfast=False).run_tests(test_args)
     sys.exit(failures)
 
 
