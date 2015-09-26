@@ -4,6 +4,13 @@ Changelog
 master
 ------
 
+1.0.0
+------
+- When no django-licensing is installed, show the Show's CharField
+  license. @nachopro
+- Setting to choose the path where podcast's images will be saved.
+  Thanks @nachopro
+
 0.10.2
 ------
 - Fix for runserver warning, 'max_length' is ignored when used with IntegerField.
