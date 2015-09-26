@@ -29,17 +29,12 @@ installation guide including optional thumbnailing, tagging and
 twitter support.
 
 
-* Requires Django 1.4 or greater
+* Tested against Django 1.7 and greater (most likely works with older versions).
 
 
 * Install Django Podcasting with your favorite Python package manager::
 
     pip install django-podcasting
-
-
-* To install the `in-development version`_ of Django Podcasting::
-
-    pip install django-podcasting==dev
 
 
 * Add ``"podcasting"``, ``"django.contrib.sites"``,

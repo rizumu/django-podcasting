@@ -1,16 +1,11 @@
 Installation
 ============
 
-* Requires Django 1.4 or greater
+* Tested against Django 1.7 and greater (most likely works with older versions).
 
 * Install Django Podcasting with your favorite Python package manager::
 
     pip install django-podcasting
-
-* To install the in-development version of Django Podcasting::
-
-    pip install django-podcasting==dev
-
 
 * Add ``"podcasting"``, ``"django.contrib.sites"``,
   and the optional apps of your choice to the ``INSTALLED_APPS`` setting
