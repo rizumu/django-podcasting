@@ -1,6 +1,7 @@
 from django.db.models import Q
 from django.db.models.query import QuerySet
 
+from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.sites.models import Site
 
 
@@ -13,8 +14,10 @@ class EpisodeManager(QuerySet):
     def published(self):
         return self.exclude(published=None)
 
-    def onsite(self):
-        return self.filter(shows__sites=Site.objects.get_current())
+    def onsite(self, site=None):
+        if not site:
+            site = Site.objects.get_current()
+        return self.filter(shows__sites=site.name)
 
     def current(self):
         try:
@@ -29,5 +32,7 @@ class ShowManager(QuerySet):
     def published(self):
         return self.exclude(published=None)
 
-    def onsite(self):
-        return self.filter(sites=Site.objects.get_current())
+    def onsite(self, site=None):
+        if not site:
+            site = Site.objects.get_current()
+        return self.filter(sites__name=site.name)

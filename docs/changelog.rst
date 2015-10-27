@@ -4,6 +4,10 @@ Changelog
 master
 ------
 
+1.0.1
+------
+- Improve onsite manager by supporting mutliple environments, and getting site from request
+
 1.0.0
 ------
 - When no django-licensing is installed, show the Show's CharField
