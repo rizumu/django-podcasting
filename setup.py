@@ -22,7 +22,6 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     install_requires=[
-        "django-model-utils>=2.3.1",
         "django-appconf>=1.0.1",
         "django-autoslug>=1.8.0",
     ],

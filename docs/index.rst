@@ -59,9 +59,8 @@ An ``episode`` has one or many ``enclosures`` formats for example
 Requirements
 ============
 
-``django-podcasting`` requires ``django-model-utils`` and
-``django-autoslug`` which is included in the setup.py and Django 1.3
-or greater due to its choice in class-based views.
+``django-podcasting`` requires ``django-autoslug`` which is included
+in the setup.py.
 
 
 Features

@@ -19,9 +19,8 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib.sites.models import Site
 
 from autoslug import AutoSlugField
-from model_utils.managers import PassThroughManager
 
-from podcasting.managers import EpisodeManager, ShowManager
+from podcasting.managers import EpisodeQuerySet, ShowQuerySet
 from podcasting.utils.fields import UUIDField
 from podcasting.utils.twitter import can_tweet
 
@@ -243,7 +242,7 @@ class Show(models.Model):
         help_text=_("Enter a short ``tweet_text`` prefix for new episodes on this show."),
         blank=True)
 
-    objects = PassThroughManager.for_queryset_class(ShowManager)()
+    objects = ShowQuerySet.as_manager()
     tags = TaggableManager(blank=True)
 
     class Meta:
@@ -364,7 +363,7 @@ class Episode(models.Model):
         help_text=_("Check to block this episode from iTunes because <br />its "
                     "content might cause the entire show to be <br />removed from iTunes."""))
 
-    objects = PassThroughManager.for_queryset_class(EpisodeManager)()
+    objects = EpisodeQuerySet.as_manager()
     tags = TaggableManager(blank=True)
 
     class Meta:

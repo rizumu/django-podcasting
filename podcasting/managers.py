@@ -5,7 +5,7 @@ from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.sites.models import Site
 
 
-class EpisodeManager(QuerySet):
+class EpisodeQuerySet(QuerySet):
     """Returns public episodes that are currently activated."""
 
     def itunespublished(self):
@@ -26,7 +26,7 @@ class EpisodeManager(QuerySet):
             return None
 
 
-class ShowManager(QuerySet):
+class ShowQuerySet(QuerySet):
     """Returns shows that are on the current site."""
 
     def published(self):
