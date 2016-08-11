@@ -17,7 +17,7 @@ class EpisodeQuerySet(QuerySet):
     def onsite(self, site=None):
         if not site:
             site = Site.objects.get_current()
-        return self.filter(shows__sites=site.name)
+        return self.filter(shows__sites__name=site.name).distinct()
 
     def current(self):
         try:
@@ -35,4 +35,4 @@ class ShowQuerySet(QuerySet):
     def onsite(self, site=None):
         if not site:
             site = Site.objects.get_current()
-        return self.filter(sites__name=site.name)
+        return self.filter(sites__name=site.name).distinct()
