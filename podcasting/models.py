@@ -295,6 +295,14 @@ class Episode(models.Model):
         _("subtitle"), max_length=255, blank=True,
         help_text=_("Looks best if only a few words like a tagline."))
 
+    description_pretty = models.TextField(
+        _("pretty description"), blank=True,
+        help_text="May be longer than 4000 characters and contain HTML tags and styling.")
+
+    description_pretty = models.TextField(
+        _("pretty description"), blank=True,
+        help_text="May be longer than 4000 characters and contain HTML tags and styling.")
+
     description = models.TextField(
         _("description"), max_length=4000, blank=True, help_text=_("""
             This is your chance to tell potential subscribers all about your podcast.
@@ -304,7 +312,9 @@ class Episode(models.Model):
             that you want your podcast to match, then build them into your
             description. Note that iTunes removes podcasts that include lists of
             irrelevant words in the itunes:summary, description, or
-            itunes:keywords tags. This field can be up to 4000 characters."""))
+            itunes:keywords tags. This field can be up to 4000 plain text characters.
+            No HTML tags or styling allowed."""))
+
     tracklist = models.TextField(
         _("tracklist"), blank=True,
         help_text=_("""One track per line, machine will automatically add the numbers."""))
