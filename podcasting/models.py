@@ -161,6 +161,10 @@ class Show(models.Model):
         _("iTunes"), default=True,
         help_text=_("Checked if the podcast is submitted to iTunes"))
 
+    description_pretty = models.TextField(
+        _("pretty description"), blank=True,
+        help_text="May be longer than 4000 characters and contain HTML tags and styling.")
+
     description = models.TextField(
         _("description"), max_length=4000, help_text=_("""
             This is your chance to tell potential subscribers all about your
@@ -294,10 +298,6 @@ class Episode(models.Model):
     subtitle = models.CharField(
         _("subtitle"), max_length=255, blank=True,
         help_text=_("Looks best if only a few words like a tagline."))
-
-    description_pretty = models.TextField(
-        _("pretty description"), blank=True,
-        help_text="May be longer than 4000 characters and contain HTML tags and styling.")
 
     description_pretty = models.TextField(
         _("pretty description"), blank=True,
