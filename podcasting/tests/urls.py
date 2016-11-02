@@ -1,8 +1,6 @@
-from django.conf.urls import include, patterns, url
+from django.conf.urls import include, url
 
 
-urlpatterns = patterns(
-    "",
-
+urlpatterns = [
     url(r"^podcasts/", include("podcasting.urls")),
-)
+]
