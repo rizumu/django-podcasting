@@ -28,7 +28,7 @@ installation guide including optional thumbnailing, tagging and
 twitter support.
 
 
-* Tested against Django 1.7 and greater (most likely works with older versions).
+* Tested against Django 1.8 and greater.
 
 
 * Install Django Podcasting with your favorite Python package manager::
