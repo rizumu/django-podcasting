@@ -4,6 +4,11 @@ Changelog
 master
 ------
 -
+1.1.0
+------
+- Multiple bugfixes
+- Improvments to queryset managers
+- Add a pretty description field for WYSIWYG editors
 
 1.0.1
 ------
