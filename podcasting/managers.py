@@ -1,7 +1,6 @@
 from django.db.models import Q
 from django.db.models.query import QuerySet
 
-from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.sites.models import Site
 
 
