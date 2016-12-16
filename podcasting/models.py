@@ -388,6 +388,20 @@ class Episode(models.Model):
         return reverse("podcasting_episode_detail",
                        kwargs={"show_slug": self.shows.all()[0].slug, "slug": self.slug})
 
+    def get_next(self):
+        next = self.__class__.objects.filter(published__gt=self.published)
+        try:
+            return next[0]
+        except IndexError:
+            return False
+
+    def get_prev(self):
+        prev = self.__class__.objects.filter(published__lt=self.published).order_by("-published")
+        try:
+            return prev[0]
+        except IndexError:
+            return False
+
     def as_tweet(self):
         if not self.tweet_text:
             current_site = Site.objects.get_current()
