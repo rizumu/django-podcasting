@@ -1,0 +1,503 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: POEditor.com\n"
+"Project-Id-Version: Django-podcasting\n"
+"Language: eu\n"
+
+#: admin.py:29 admin.py:51
+msgid "Published"
+msgstr "Argitaratua"
+
+#: forms.py:23 forms.py:202
+msgid "Checking this will publish this show on the site, no turning back."
+msgstr "Hau markatzean podcast-a argitaratuko da, ez dago atzera bueltarik."
+
+#: forms.py:78 forms.py:244
+msgid "Checking this will publish this episode on the site, no turning back."
+msgstr "Hau markatzean saioa argitaratuko da, ez dago atzera bueltarik."
+
+#: forms.py:84 forms.py:249
+msgid "Checking this will send out a tweet announcing the episode."
+msgstr "Hau markatzean tweet bat bidaliko da saioa argitaratzean."
+
+#: forms.py:124 forms.py:276
+msgid "An episode must have at least one enclosure or media file before publishing.\n"
+" Uncheck, save this episode, and add an encoslure before publishing."
+msgstr "Saio batek gutxienez artxibo edo media fitxategi bat izan behar du gutxienez argitaratu aurretik.\n"
+"Desmarkatu, gorde atala, eta gehitu eranskina argitaratu aurretik."
+
+#: forms.py:127 forms.py:279
+msgid "The show for this episode is not yet published"
+msgstr "Atal honen podcast-a oraindik ez da argitaratu"
+
+#: models.py:95
+msgid "yes"
+msgstr "bai"
+
+#: models.py:96
+msgid "no"
+msgstr "ez"
+
+#: models.py:97
+msgid "clean"
+msgstr "garbitu"
+
+#: models.py:99
+msgid "id"
+msgstr "id"
+
+#: models.py:101 models.py:274
+msgid "created"
+msgstr "sortuta"
+
+#: models.py:102 models.py:275
+msgid "updated"
+msgstr "eguneratuta"
+
+#: models.py:103 models.py:276
+msgid "publish"
+msgstr "argitaratu"
+
+#: models.py:105
+msgid "Site"
+msgstr "Gunea"
+
+#: models.py:108
+msgid "ttl"
+msgstr "ttl"
+
+#: models.py:109
+msgid "``Time to Live,`` the number of minutes a channel can be\n"
+"        cached before refreshing."
+msgstr "`` Time to Live, `` kate bat cache-an egon daitekeen\n"
+"        minutuak eguneratu aurretik."
+
+#: models.py:114
+msgid "owner"
+msgstr "jabea"
+
+#: models.py:115
+msgid "Make certain the user account has a name and e-mail address."
+msgstr "Ziurtatu erabiltzaile-kontuak izen bat eta posta elektroniko bat dutela."
+
+#: models.py:118
+msgid "editor email"
+msgstr "editorearen posta elektronikoa"
+
+#: models.py:119
+msgid "Email address of the person responsible for the feed's content."
+msgstr "Edukiaren arduradunaren posta elektronikoa."
+
+#: models.py:121
+msgid "webmaster email"
+msgstr "webmasterraren posta elektronikoa"
+
+#: models.py:122
+msgid "Email address of the person responsible for channel publishing."
+msgstr "Kateen argitaratzearen arduradunaren posta elektronikoa."
+
+#: models.py:125 models.py:128
+msgid "license"
+msgstr "baimena"
+
+#: models.py:129
+msgid "To publish a podcast to iTunes it is required to set a license type."
+msgstr "iTunes-en podcast bat argitaratzeko, baimen-mota zehaztu behar da."
+
+#: models.py:132
+msgid "organization"
+msgstr "erakundea"
+
+#: models.py:133
+msgid "Name of the organization, company or Web site producing the podcast."
+msgstr "Podcast-a ekoizten duen enpresaren, erakundearen, edo webgunearen izena."
+
+#: models.py:134
+msgid "link"
+msgstr "esteka"
+
+#: models.py:134
+msgid "URL of either the main website or the\n"
+"        podcast section of the main website."
+msgstr "Webgune nagusiaren URLa edo\n"
+"         webgune nagusiaren podcast gunea."
+
+#: models.py:140 models.py:282
+msgid "author text"
+msgstr "testuaren egilea"
+
+#: models.py:140
+msgid "\n"
+"            This tag contains the name of the person or company that is most\n"
+"            widely attributed to publishing the Podcast and will be\n"
+"            displayed immediately underneath the title of the Podcast.\n"
+"            The suggested format is: 'email@example.com (Full Name)'\n"
+"            but 'Full Name' only, is acceptable. Multiple authors\n"
+"            should be comma separated."
+msgstr "\n"
+"            Etiketa honek poscast-a argitaratuko duen pertsonaren edo erakundearen\n"
+"            izena darama eta Podcast-aren izenburuaren\n"
+"            azpian erakutsiko da.\n"
+"            Gomendatutako formatua: posta@adibidea.com (Izen Osoa)'\n"
+"            baina 'Izen Osoa’ bakarrik onartzen da. Hainbat egile direnean\n"
+"            banandu komen bidez."
+
+#: models.py:148 models.py:287
+msgid "title"
+msgstr "izenburua"
+
+#: models.py:149 models.py:288
+msgid "slug"
+msgstr "bala"
+
+#: models.py:152 models.py:291
+msgid "subtitle"
+msgstr "azpititulua"
+
+#: models.py:153
+msgid "Looks best if only a few words, like a tagline."
+msgstr "Hobe hitz gutxirekin, eslogan bat bezala."
+
+#: models.py:157 templates/podcasting/_feeds.html:10
+msgid "iTunes"
+msgstr "iTunes"
+
+#: models.py:158
+msgid "Checked if the podcast is submitted to iTunes"
+msgstr "Markatu podcast-a iTunes-era bidali bada"
+
+#: models.py:161 models.py:295
+msgid "description"
+msgstr "deskribapena"
+
+#: models.py:161
+msgid "\n"
+"            This is your chance to tell potential subscribers all about your\n"
+"            podcast. Describe your subject matter, media format,\n"
+"            episode schedule, and other relevant info so that they\n"
+"            know what they'll be getting when they subscribe. In\n"
+"            addition, make a list of the most relevant search terms\n"
+"            that you want yourp podcast to match, then build them into\n"
+"            your description. Note that iTunes removes podcasts that\n"
+"            include lists of irrelevant words in the itunes:summary,\n"
+"            description, or itunes:keywords tags. This field can be up\n"
+"            to 4000 characters."
+msgstr "Hona hemen aukera zure harpidedun potentzialei kontatzeko zeri buruz den podcast-a. Deskribatu gaia, media formatua, atalen egutegia, eta beste hainbat informazio garrantzitsu, jakin dezaten zer jasoko duten harpidetuz gero. Horrez gain, egin bilaketarako hitz-gakoen zerrenda bat,  zure podcast-arekin bat egiten dutenak, eta gehitu zure deskribapenera. Kontuan izan iTunes-ek  deskribapenean, itunes:summary eta itunes:keywords zerrendetan garrantzirik gabeko hitzak dituzten podcast-ak ezabatzen dituela. Eremu honek 4000 izan ditzake gehienez."
+
+#: models.py:174 models.py:311
+msgid "image"
+msgstr "irudia"
+
+#: models.py:174 models.py:311
+msgid "\n"
+"            A podcast must have 1400 x 1400 pixel cover art in JPG or PNG\n"
+"            format using RGB color space. See our technical spec for\n"
+"            details. To be eligible for featuring on iTunes Stores,\n"
+"            choose an attractive, original, and square JPEG (.jpg) or\n"
+"            PNG (.png) image at a size of 1400x1400 pixels. The image\n"
+"            will be scaled down to 50x50 pixels at smallest in iTunes.\n"
+"            For reference see the <a\n"
+"            href=\"http://www.apple.com/itunes/podcasts/specs.html#metadata\">iTunes\n"
+"            Podcast specs</a>.<br /><br /> For episode artwork to\n"
+"            display in iTunes, image must be <a\n"
+"            href=\"http://answers.yahoo.com/question/index?qid=20080501164348AAjvBvQ\">\n"
+"            saved to file's <strong>metadata</strong></a> before\n"
+"            enclosure uploading!"
+msgstr "Podcast batek 1400 x 1400 pixeletako azaleko irudi bat eduki behar du, JPG edo PNG formatuan, RGB koloreekin. Ikusi gure espezifikazio teknikoak informazio gehiagorako. iTunes Stores dendan nabarmentzeko, aukeratu 1400x1400 pixeletako JPEG (.jpg) edo PNG (.png) irudi original bat. Irudia 50x50 pixeletara eskalatuko da iTunes-en. Erreferentziarako ikus <a            href=\"http://www.apple.com/itunes/podcasts/specs.html#metadata\">iTunes            Podcast zehaztapenak</a>.<br /><br /> iTunes-eko atalen irudietarako, irudia <a href=\"http://answers.yahoo.com/question/index?qid=20080501164348AAjvBvQ\">\n"
+"<strong>metadatuen</strong> fitxategi batean gorde</a> igo aurretik! "
+
+#: models.py:210
+msgid "feedburner url"
+msgstr "feedburner urla"
+
+#: models.py:211
+msgid "Fill this out after saving this show and at least one\n"
+"            episode. URL should look like \"http://feeds.feedburner.com/TitleOfShow\".\n"
+"            See <a href=\"http://code.google.com/p/django-podcast/\">documentation</a>\n"
+"            for more. <a href=\"http://www.feedburner.com/fb/a/ping\">Manually ping</a>"
+msgstr "Bete hau saioa eta gutxienez atal bat gorde ondoren. URL-ak itxura hau eduki beharko luke: \"http://feeds.feedburner.com/TitleOfShow\". Ikus <a href=\"http://code.google.com/p/django-podcast/\">dokumentazioa</a> gehiago jakiteko. <a href=\"http://www.feedburner.com/fb/a/ping\">Eskuzko 'ping'</a> "
+
+#: models.py:218 models.py:355
+msgid "explicit"
+msgstr "esplizitua"
+
+#: models.py:219 models.py:356
+msgid "``Clean`` will put the clean iTunes graphic by it."
+msgstr "``Garbitu`` bidez, iTunes grafiko garbia bertan jarriko da. "
+
+#: models.py:221
+msgid "redirect"
+msgstr "berbideratu"
+
+#: models.py:222
+msgid "The show's new URL feed if changing\n"
+"            the URL of the current show feed. Must continue old feed for at least\n"
+"            two weeks and write a 301 redirect for old feed."
+msgstr "Saioaren URL jario berria oraingo saioaren URL jarioa aldatzen bada. Jarriatu bi aste gutxienez jario zaharrarekin eta idatzi 301 berbideratzea jario zaharrerako."
+
+#: models.py:226 models.py:351
+msgid "keywords"
+msgstr "hitz gakoak"
+
+#: models.py:227
+msgid "A comma-demlimitedlist of up to 12 words for iTunes\n"
+"            searches. Perhaps include misspellings of the title."
+msgstr "Komaz banatutako 12 hitzen zerrenda, iTunes bilaketetarako. Agian izenburua akats ortografikoekin dauka."
+
+#: models.py:230
+msgid "itunes store url"
+msgstr "itunes storeko urla"
+
+#: models.py:231
+msgid "Fill this out after saving this show and at least one\n"
+"            episode. URL should look like:\n"
+"            \"http://phobos.apple.com/WebObjects/MZStore.woa/wa/viewPodcast?id=000000000\".\n"
+"            See <a href=\"http://code.google.com/p/django-podcast/\">documentation</a> for more."
+msgstr "Bete hau saioa eta gutxienez atal bat gorde ondoren. URLak ondorengo itxura eduki behar du: \"http://phobos.apple.com/WebObjects/MZStore.woa/wa/viewPodcast?id=000000000\". See <a href=\"http://code.google.com/p/django-podcast/\">dokumentazioa</a> gehiago jakiteko. "
+
+#: models.py:237
+msgid "Twitter tweet prefix"
+msgstr "Twitterreko txioen aurrizkia"
+
+#: models.py:238
+msgid "Enter a short ``tweet_text`` prefix for new episodes on this show."
+msgstr "Sartu ``txio_testu`` aurrizkia saioaren atal berrietarako."
+
+#: models.py:245
+msgid "Show"
+msgstr "Podcasta"
+
+#: models.py:246
+msgid "Shows"
+msgstr "Podcastak"
+
+#: models.py:278
+msgid "Podcast"
+msgstr "Podcasta"
+
+#: models.py:282
+msgid "\n"
+"        The person or musician name(s) featured on this specific episode.\n"
+"        The suggested format is: 'email@example.com (Full Name)' but 'Full Name' only,\n"
+"        is acceptable. Multiple authors should be comma separated."
+msgstr "Atal zehatz honetan nabarmendutako pertsona edo musikarien izenak. Hau da gomendatutako formatua: 'post@adibidea.com (Izen osoa)' baina 'Izen Osoa' bakarrik onartzen da. Banatu egileak komen bidez. "
+
+#: models.py:292
+msgid "Looks best if only a few words like a tagline."
+msgstr "Hobe hitz gutxikin, esloganak bezala."
+
+#: models.py:295
+msgid "\n"
+"            This is your chance to tell potential subscribers all about your podcast.\n"
+"            Describe your subject matter, media format, episode schedule, and other\n"
+"            relevant info so that they know what they'll be getting when they\n"
+"            subscribe. In addition, make a list of the most relevant search terms\n"
+"            that you want your podcast to match, then build them into your\n"
+"            description. Note that iTunes removes podcasts that include lists of\n"
+"            irrelevant words in the itunes:summary, description, or\n"
+"            itunes:keywords tags. This field can be up to 4000 characters."
+msgstr "Hona hemen aukera zure harpidedun potentzialei kontatzeko zeri buruz den podcast-a. Deskribatu gaia, media formatua, atalen egutegia, eta beste hainbat informazio garrantzitsu, jakin dezaten zer jasoko duten harpidetuz gero. Horrez gain, egin bilaketarako hitz-gakoen zerrenda bat,  zure podcast-arekin bat egiten dutenak, eta gehitu zure deskribapenera. Kontuan izan iTunes-ek  deskribapenean, itunes:summary eta itunes:keywords zerrendetan garrantzirik gabeko hitzak dituzten podcast-ak ezabatzen dituela. Eremu honek 4000 izan ditzake gehienez."
+
+#: models.py:305
+msgid "tracklist"
+msgstr "Audio zerrenda"
+
+#: models.py:306
+msgid "One track per line, machine will automatically add the numbers."
+msgstr "Abesti bat lerro bakoitzeko, sistemak automatikoki gehituko ditu zenbakiak."
+
+#: models.py:308
+msgid "tweet text"
+msgstr "txioko testua"
+
+#: models.py:347
+msgid "hours"
+msgstr "orduak"
+
+#: models.py:348
+msgid "minutes"
+msgstr "minutuak"
+
+#: models.py:349
+msgid "seconds"
+msgstr "segunduak"
+
+#: models.py:352
+msgid "A comma-delimited list of words for searches, up to 12; perhaps include misspellings."
+msgstr "Komaz separatutako hitz-zerrenda, bilaketarako, gehienez 12; baliteke gaizki idatzitakoren bat egotea."
+
+#: models.py:358
+msgid "block"
+msgstr "blokea"
+
+#: models.py:359
+msgid "Check to block this episode from iTunes because <br />its content might cause the entire show to be <br />removed from iTunes."
+msgstr "Aukeratu atal hau iTunes-etik ezabatzea <br />honen edukiak saio guztia iTunes-etik ezabatzea eragingo lukeelako <br />."
+
+#: models.py:366
+msgid "Episode"
+msgstr "Atala"
+
+#: models.py:367
+msgid "Episodes"
+msgstr "Atalak"
+
+#: models.py:436 models.py:490
+msgid "episode"
+msgstr "atala"
+
+#: models.py:439 models.py:493 models.py:495
+msgid "url"
+msgstr "url"
+
+#: models.py:440
+msgid "URL of the media file. <br /> It is <strong>very</strong>\n"
+"            important to remember that for episode artwork to display in iTunes, image must be\n"
+"            <a href=\"http://answers.yahoo.com/question/index?qid=20080501164348AAjvBvQ\">\n"
+"            saved to file's <strong>metadata</strong></a> before enclosure uploading!<br /><br />\n"
+"            For best results, choose an attractive, original, and square JPEG (.jpg) or PNG (.png)\n"
+"            image at a size of 1400x1400 pixels. The image will be\n"
+"            scaled down to 50x50 pixels at smallest in iTunes."
+msgstr "Fitxategiaren URLa. <br /> <strong>Oso</strong> garrantzitsua da atalaren irudia iTunes-en ikusteko, irudia <a href=\"http://answers.yahoo.com/question/index?qid=20080501164348AAjvBvQ\"> <strong>metadatuen</strong> fitxategian gordetzea</a> igo aurretik! <br /><br />Emaitza onenetarako, aukeratu JPEG (.jpg) edo PNG (.png) irudi original eta erakargarri bat, karratua, eta 1400x1400 pixelen tamainakoa. Irudia 50x50 pixeletara eskalatuko da iTunes-en."
+
+#: models.py:449
+msgid "size"
+msgstr "tamaina"
+
+#: models.py:449
+msgid "The length attribute is the file size in bytes. Find this information in the files properties (on a Mac, ``Get Info`` and refer to the size row)"
+msgstr "Fitxategi-tamainaren atributua byte-etan. Bilatu informazio hau fitxategien propietateetan (Mac batean, ``Lortu informazioa`` eta erreferentziatu tamainaren lerroa)."
+
+#: models.py:453
+msgid "mime format"
+msgstr "mime formatua"
+
+#: models.py:454
+msgid "Supports mime types of: {0}"
+msgstr "Mime mota hauek onartzen ditu: {0}"
+
+#: models.py:457
+msgid "bit rate"
+msgstr "bit ratioa"
+
+#: models.py:458
+msgid "Measured in kilobits per second (kbps), often 128 or 192."
+msgstr "Lortutako kilobitak segunduko (kbps), normalean 128 edo 192."
+
+#: models.py:460
+msgid "sample rate"
+msgstr "laginaren abiadura"
+
+#: models.py:461
+msgid "Measured in kilohertz (kHz), often 44.1."
+msgstr "Lortutako kilohertzioak (kHz), normalean 44.1."
+
+#: models.py:463
+msgid "channel"
+msgstr "kanala"
+
+#: models.py:464
+msgid "Number of channels; 2 for stereo, 1 for mono."
+msgstr "Kanal kopurua; 2 estereorako, 1 monorako."
+
+#: models.py:466
+msgid "duration"
+msgstr "iraupena"
+
+#: models.py:467
+msgid "Duration of the audio file, in seconds (always as integer)."
+msgstr "Audio fitxategiaren iraupena segundutan (beti integer moduan)."
+
+#: models.py:472
+msgid "Enclosure"
+msgstr "Eranskina"
+
+#: models.py:473
+msgid "Enclosures"
+msgstr "Eranskinak"
+
+#: models.py:493 models.py:495
+msgid "URL of the media file"
+msgstr "Media fitxategiaren URLa"
+
+#: models.py:500
+msgid "Embed Media URL"
+msgstr "Media kapsulatuaren URLa"
+
+#: models.py:501
+msgid "Embed Media URLs"
+msgstr "Media kapsulatuaren URLak"
+
+#: templates/podcasting/_current_episode.html:18
+#: templates/podcasting/_episode_detail.html:14
+#: templates/podcasting/_episode_list.html:16
+msgid "to download right click and select 'save link as'"
+msgstr "Jaisteko egin klik eskuineko botoiarekin eta aukeratu 'gorde esteka'"
+
+#: templates/podcasting/_current_episode.html:19
+#: templates/podcasting/_episode_detail.html:15
+#: templates/podcasting/_episode_list.html:17
+msgid "Download / Stream"
+msgstr "Deskargatu / Erreproduzitu"
+
+#: templates/podcasting/_current_episode.html:26
+#: templates/podcasting/_current_episode.html:29
+#: templates/podcasting/_episode_detail.html:37
+#: templates/podcasting/_episode_list.html:24
+#: templates/podcasting/_episode_list.html:27
+msgid "Tracklist"
+msgstr "Audio zerrenda"
+
+#: templates/podcasting/_current_episode.html:46
+#: templates/podcasting/_episode_list.html:44
+msgid "read more"
+msgstr "irakurri gehiago"
+
+#: templates/podcasting/_current_episode.html:54
+#: templates/podcasting/_episode_detail.html:44
+#: templates/podcasting/_episode_list.html:54
+msgid "Coming soon..."
+msgstr "Laster..."
+
+#: templates/podcasting/_feeds.html:7
+msgid "Feedburner"
+msgstr "Feedburner"
+
+#: templates/podcasting/_feeds.html:12
+msgid "Atom"
+msgstr "Atom"
+
+#: templates/podcasting/_feeds.html:13
+msgid "RSS"
+msgstr "RSS"
+
+#: templates/podcasting/_show_detail.html:17
+msgid "There is no such show."
+msgstr "Ez da Podcast hori existitzen."
+
+#: templates/podcasting/_show_list.html:4
+#: templates/podcasting/show_list.html:5
+msgid "Podcast Shows"
+msgstr "Podcast"
+
+#: templates/podcasting/_show_list.html:17
+msgid "There are no shows."
+msgstr "Ez da Podcastik existitzen."
+
+#: templates/podcasting/admin_thumbnail_css.html:8
+#: templates/podcasting/admin_thumbnail_easy-thumbnails.html:9
+#: templates/podcasting/admin_thumbnail_sorl.html:8
+msgid "No image"
+msgstr "Irudirik ez"
+
+#: templates/podcasting/current_episode.html:5
+msgid "Current Edition"
+msgstr "Momentuko edizioa"
+
+#: templates/podcasting/episode_list.html:5
+msgid "Archive"
+msgstr "Fitxategia"
+
