@@ -80,6 +80,7 @@ class EnclosureAdmin(admin.ModelAdmin):
 class EmbedMediaAdmin(admin.ModelAdmin):
     model = EmbedMedia
 
+
 admin.site.register(Show, ShowAdmin)
 admin.site.register(Episode, EpisodeAdmin)
 admin.site.register(Enclosure, EnclosureAdmin)
