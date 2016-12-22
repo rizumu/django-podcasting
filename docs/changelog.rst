@@ -4,6 +4,12 @@ Changelog
 master
 ------
 -
+
+1.2.0
+------
+- Basque Translation - thanks @urtzai
+- Add next/prev methods to episode.
+
 1.1.0
 ------
 - Multiple bugfixes
