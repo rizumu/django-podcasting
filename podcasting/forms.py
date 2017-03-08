@@ -15,9 +15,10 @@ from podcasting.models import Enclosure, Episode, Show
 
 class BaseShowForm(forms.ModelForm):
 
-    original_image = forms.ImageField(
-        widget=CustomAdminThumbnailWidget,
-        help_text=Show._meta.get_field("original_image").help_text)
+    if 'photologue' in settings.INSTALLED_APPS:
+        original_image = forms.ImageField(
+            widget=CustomAdminThumbnailWidget,
+            help_text=Show._meta.get_field("original_image").help_text)
 
     publish = forms.BooleanField(
         required=False,
@@ -70,9 +71,10 @@ class ShowChangeForm(BaseShowForm):
 
 class BaseEpisodeForm(forms.ModelForm):
 
-    original_image = forms.ImageField(
-        widget=CustomAdminThumbnailWidget,
-        help_text=Episode._meta.get_field("original_image").help_text)
+    if 'photologue' in settings.INSTALLED_APPS:
+        original_image = forms.ImageField(
+            widget=CustomAdminThumbnailWidget,
+            help_text=Episode._meta.get_field("original_image").help_text)
 
     publish = forms.BooleanField(
         required=False,

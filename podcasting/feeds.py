@@ -19,6 +19,14 @@ except ImportError:
     pass
 
 try:
+    import photologue
+    imagekit = False  # noqa
+    easy_thumbnails = False
+    sorl = False
+except ImportError:
+    pass
+
+try:
     import easy_thumbnails
     imagekit = False  # noqa
     sorl = False
@@ -53,6 +61,9 @@ class ITunesElements(object):
             if imagekit:
                 itunes_sm_url = show.img_itunes_sm.url
                 itunes_lg_url = show.img_itunes_lg.url
+            elif photologue:
+                itunes_sm_url = show.original_image.get_img_itunes_sm_url()
+                itunes_lg_url = show.original_image.get_img_itunes_lg_url()
             elif easy_thumbnails:
                 aliases = settings.THUMBNAIL_ALIASES["podcasting.Show.original_image"]
                 thumbnailer = easy_thumbnails.files.get_thumbnailer(show.original_image)
@@ -115,6 +126,9 @@ class ITunesElements(object):
             if imagekit:
                 itunes_sm_url = episode.img_itunes_sm.url
                 itunes_lg_url = episode.img_itunes_lg.url
+            elif photologue:
+                itunes_sm_url = episode.original_image.get_img_itunes_sm_url()
+                itunes_lg_url = episode.original_image.get_img_itunes_lg_url()
             elif easy_thumbnails:
                 aliases = settings.THUMBNAIL_ALIASES["podcasting.Episode.original_image"]
                 thumbnailer = easy_thumbnails.files.get_thumbnailer(episode.original_image)
