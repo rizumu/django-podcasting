@@ -481,7 +481,7 @@ msgstr "Ez da Podcast hori existitzen."
 #: templates/podcasting/_show_list.html:4
 #: templates/podcasting/show_list.html:5
 msgid "Podcast Shows"
-msgstr "Podcast"
+msgstr "Podcast saioak"
 
 #: templates/podcasting/_show_list.html:17
 msgid "There are no shows."
@@ -500,4 +500,3 @@ msgstr "Momentuko edizioa"
 #: templates/podcasting/episode_list.html:5
 msgid "Archive"
 msgstr "Fitxategia"
-
