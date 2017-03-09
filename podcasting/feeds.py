@@ -8,6 +8,7 @@ from django.utils.feedgenerator import rfc2822_date, Rss201rev2Feed, Atom1Feed
 from django.shortcuts import get_object_or_404
 
 from django.contrib.sites.shortcuts import get_current_site
+from django.contrib.sites.models import Site
 from django.contrib.syndication.views import Feed
 from django.views.generic.base import RedirectView
 
@@ -15,6 +16,7 @@ try:
     import imagekit
     easy_thumbnails = False
     sorl = False
+    photologue = False
 except ImportError:
     pass
 
@@ -30,6 +32,7 @@ try:
     import easy_thumbnails
     imagekit = False  # noqa
     sorl = False
+    photologue = False
 except ImportError:
     pass
 
@@ -37,6 +40,7 @@ try:
     import sorl
     imagekit = False
     easy_thumbnails = False  # noqa
+    photologue = False
 except ImportError:
     pass
 
@@ -62,8 +66,9 @@ class ITunesElements(object):
                 itunes_sm_url = show.img_itunes_sm.url
                 itunes_lg_url = show.img_itunes_lg.url
             elif photologue:
-                itunes_sm_url = show.original_image.get_img_itunes_sm_url()
-                itunes_lg_url = show.original_image.get_img_itunes_lg_url()
+                site = Site.objects.get_current()
+                itunes_sm_url = "%s%s" % (site.domain, show.original_image.get_img_itunes_sm_url())
+                itunes_lg_url = "%s%s" % (site.domain, show.original_image.get_img_itunes_lg_url())
             elif easy_thumbnails:
                 aliases = settings.THUMBNAIL_ALIASES["podcasting.Show.original_image"]
                 thumbnailer = easy_thumbnails.files.get_thumbnailer(show.original_image)
