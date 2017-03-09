@@ -185,7 +185,7 @@ class Show(models.Model):
             to 4000 characters."""))
 
     if 'photologue' in settings.INSTALLED_APPS:
-        original_image = models.ForeignKey(Photo, verbose_name=_("image"), blank=True, help_text=_("""
+        original_image = models.ForeignKey(Photo, verbose_name=_("image"), default=None, null=True, blank=True, help_text=_("""
                 A podcast must have 1400 x 1400 pixel cover art in JPG or PNG
                 format using RGB color space. See our technical spec for
                 details. To be eligible for featuring on iTunes Stores,
@@ -344,7 +344,7 @@ class Episode(models.Model):
     tweet_text = models.CharField(_("tweet text"), max_length=140, editable=False)
 
     if 'photologue' in settings.INSTALLED_APPS:
-        original_image = models.ForeignKey(Photo, verbose_name=_("image"), blank=True, help_text=_("""
+        original_image = models.ForeignKey(Photo, verbose_name=_("image"), default=None, null=True, blank=True, help_text=_("""
                 A podcast must have 1400 x 1400 pixel cover art in JPG or PNG
                 format using RGB color space. See our technical spec for
                 details. To be eligible for featuring on iTunes Stores,
