@@ -9,6 +9,11 @@ try:
     import licenses
 except ImportError:
     licenses = False
+    
+try:
+    import photologue
+except ImportError:
+    photologue = False
 
 
 DEFAULT_SETTINGS = dict(
@@ -38,6 +43,8 @@ DEFAULT_SETTINGS = dict(
 if licenses:
     DEFAULT_SETTINGS["INSTALLED_APPS"] += ("licenses",)
 
+if photologue:
+    DEFAULT_SETTINGS["INSTALLED_APPS"] += ("photologue",)
 
 def runtests(*test_args):
     if not settings.configured:
