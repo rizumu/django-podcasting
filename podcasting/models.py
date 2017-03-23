@@ -42,6 +42,12 @@ try:
 except ImportError:
     custom_image_field = False
 
+try:
+    from photologue.models import Photo
+    custom_image_field = True
+except ImportError:
+    custom_image_field = False
+
 if not custom_image_field:
     try:
         from sorl.thumbnail import ImageField  # noqa
@@ -178,21 +184,37 @@ class Show(models.Model):
             description, or itunes:keywords tags. This field can be up
             to 4000 characters."""))
 
-    original_image = ImageField(
-        _("image"), upload_to=get_show_upload_folder, blank=True, help_text=_("""
-            A podcast must have 1400 x 1400 pixel cover art in JPG or PNG
-            format using RGB color space. See our technical spec for
-            details. To be eligible for featuring on iTunes Stores,
-            choose an attractive, original, and square JPEG (.jpg) or
-            PNG (.png) image at a size of 1400x1400 pixels. The image
-            will be scaled down to 50x50 pixels at smallest in iTunes.
-            For reference see the <a
-            href="http://www.apple.com/itunes/podcasts/specs.html#metadata">iTunes
-            Podcast specs</a>.<br /><br /> For episode artwork to
-            display in iTunes, image must be <a
-            href="http://answers.yahoo.com/question/index?qid=20080501164348AAjvBvQ">
-            saved to file's <strong>metadata</strong></a> before
-            enclosure uploading!"""))
+    if 'photologue' in settings.INSTALLED_APPS:
+        original_image = models.ForeignKey(Photo, verbose_name=_("image"), default=None, null=True, blank=True, help_text=_("""
+                A podcast must have 1400 x 1400 pixel cover art in JPG or PNG
+                format using RGB color space. See our technical spec for
+                details. To be eligible for featuring on iTunes Stores,
+                choose an attractive, original, and square JPEG (.jpg) or
+                PNG (.png) image at a size of 1400x1400 pixels. The image
+                will be scaled down to 50x50 pixels at smallest in iTunes.
+                For reference see the <a
+                href="http://www.apple.com/itunes/podcasts/specs.html#metadata">iTunes
+                Podcast specs</a>.<br /><br /> For episode artwork to
+                display in iTunes, image must be <a
+                href="http://answers.yahoo.com/question/index?qid=20080501164348AAjvBvQ">
+                saved to file's <strong>metadata</strong></a> before
+                enclosure uploading!"""))
+    else:
+        original_image = ImageField(
+            _("image"), upload_to=get_show_upload_folder, blank=True, help_text=_("""
+                A podcast must have 1400 x 1400 pixel cover art in JPG or PNG
+                format using RGB color space. See our technical spec for
+                details. To be eligible for featuring on iTunes Stores,
+                choose an attractive, original, and square JPEG (.jpg) or
+                PNG (.png) image at a size of 1400x1400 pixels. The image
+                will be scaled down to 50x50 pixels at smallest in iTunes.
+                For reference see the <a
+                href="http://www.apple.com/itunes/podcasts/specs.html#metadata">iTunes
+                Podcast specs</a>.<br /><br /> For episode artwork to
+                display in iTunes, image must be <a
+                href="http://answers.yahoo.com/question/index?qid=20080501164348AAjvBvQ">
+                saved to file's <strong>metadata</strong></a> before
+                enclosure uploading!"""))
 
     if ResizeToFill:
         admin_thumb_sm = ImageSpecField(source="original_image",
@@ -321,21 +343,37 @@ class Episode(models.Model):
 
     tweet_text = models.CharField(_("tweet text"), max_length=140, editable=False)
 
-    original_image = ImageField(
-        _("image"), upload_to=get_episode_upload_folder, blank=True, help_text=_("""
-            A podcast must have 1400 x 1400 pixel cover art in JPG or PNG
-            format using RGB color space. See our technical spec for
-            details. To be eligible for featuring on iTunes Stores,
-            choose an attractive, original, and square JPEG (.jpg) or
-            PNG (.png) image at a size of 1400x1400 pixels. The image
-            will be scaled down to 50x50 pixels at smallest in iTunes.
-            For reference see the <a
-            href="http://www.apple.com/itunes/podcasts/specs.html#metadata">iTunes
-            Podcast specs</a>.<br /><br /> For episode artwork to
-            display in iTunes, image must be <a
-            href="http://answers.yahoo.com/question/index?qid=20080501164348AAjvBvQ">
-            saved to file's <strong>metadata</strong></a> before
-            enclosure uploading!"""))
+    if 'photologue' in settings.INSTALLED_APPS:
+        original_image = models.ForeignKey(Photo, verbose_name=_("image"), default=None, null=True, blank=True, help_text=_("""
+                A podcast must have 1400 x 1400 pixel cover art in JPG or PNG
+                format using RGB color space. See our technical spec for
+                details. To be eligible for featuring on iTunes Stores,
+                choose an attractive, original, and square JPEG (.jpg) or
+                PNG (.png) image at a size of 1400x1400 pixels. The image
+                will be scaled down to 50x50 pixels at smallest in iTunes.
+                For reference see the <a
+                href="http://www.apple.com/itunes/podcasts/specs.html#metadata">iTunes
+                Podcast specs</a>.<br /><br /> For episode artwork to
+                display in iTunes, image must be <a
+                href="http://answers.yahoo.com/question/index?qid=20080501164348AAjvBvQ">
+                saved to file's <strong>metadata</strong></a> before
+                enclosure uploading!"""))
+    else:
+        original_image = ImageField(
+            _("image"), upload_to=get_episode_upload_folder, blank=True, help_text=_("""
+                A podcast must have 1400 x 1400 pixel cover art in JPG or PNG
+                format using RGB color space. See our technical spec for
+                details. To be eligible for featuring on iTunes Stores,
+                choose an attractive, original, and square JPEG (.jpg) or
+                PNG (.png) image at a size of 1400x1400 pixels. The image
+                will be scaled down to 50x50 pixels at smallest in iTunes.
+                For reference see the <a
+                href="http://www.apple.com/itunes/podcasts/specs.html#metadata">iTunes
+                Podcast specs</a>.<br /><br /> For episode artwork to
+                display in iTunes, image must be <a
+                href="http://answers.yahoo.com/question/index?qid=20080501164348AAjvBvQ">
+                saved to file's <strong>metadata</strong></a> before
+                enclosure uploading!"""))
 
     if ImageSpecField:
         admin_thumb_sm = ImageSpecField(source="original_image",
