@@ -15,6 +15,11 @@ try:
 except ImportError:
     photologue = False
 
+try:
+    import photologue
+except ImportError:
+    photologue = False
+
 
 DEFAULT_SETTINGS = dict(
     INSTALLED_APPS=(

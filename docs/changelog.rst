@@ -4,6 +4,10 @@ Changelog
 master
 ------
 -
+1.3.0
+----
+- Django 1.10 compatibility - thanks @urtzai
+- Add support for Photologue - thanks @urtzai
 
 1.2.0
 ------
