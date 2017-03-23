@@ -5,14 +5,16 @@ import datetime
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.utils.feedgenerator import rfc2822_date, Rss201rev2Feed, Atom1Feed
+from django.views.generic.base import RedirectView
 from django.shortcuts import get_object_or_404
 
+from django.contrib.sites.models import Site
 try:
     from django.contrib.sites.models import get_current_site
 except ImportError:
     from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.syndication.views import Feed
-from django.views.generic.base import RedirectView
+
 
 try:
     import imagekit
@@ -34,7 +36,7 @@ try:
     import easy_thumbnails
     imagekit = False  # noqa
     sorl = False
-    photologue = False
+    photologue = False  # noqa
 except ImportError:
     pass
 
