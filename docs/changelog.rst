@@ -3,7 +3,11 @@ Changelog
 
 master
 ------
--
+
+1.3.1
+----
+- Bugfix for imports
+
 1.3.0
 ----
 - Django 1.10 compatibility - thanks @urtzai
