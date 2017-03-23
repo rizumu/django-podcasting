@@ -9,7 +9,7 @@ try:
     import licenses
 except ImportError:
     licenses = False
-    
+
 try:
     import photologue
 except ImportError:
