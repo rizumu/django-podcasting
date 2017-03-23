@@ -2,7 +2,7 @@
 # Packging guide: http://guide.python-distribute.org/quickstart.html
 __version_info__ = {
     "major": 1,
-    "minor": 2,
+    "minor": 3,
     "micro": 0,
     "releaselevel": "final",
     "serial": 0,
