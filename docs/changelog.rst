@@ -1,8 +1,10 @@
 Changelog
 =========
 
-master
-------
+1.3.2
+----
+- Fix for initial migration with photologue - @urtzai
+
 
 1.3.1
 ----
