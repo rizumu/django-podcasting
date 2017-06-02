@@ -75,24 +75,20 @@ and Shows:
 
 * django-taggit_: ``pip install django-taggit``
 
-
-If python-twiiter is installed, automatic posts for new tweets is possible:
-
-Tagging
--------
+Licencing
+---------
 
 If django-licenses is installed, the show will contain the license
 field which which is helpful for publishing podcasts on iTunes:
 
 * django-licenses_: ``pip install django-licenses``
 
-
-If python-twiiter is installed, automatic posts for new tweets is possible:
-
 Tweeting
 --------
 
 Want to send a tweet every time a new Episode is created?
+
+If python-twiiter is installed, automatic posts for new tweets is possible:
 
 * python-twitter_: ``pip install python-twitter``
 
