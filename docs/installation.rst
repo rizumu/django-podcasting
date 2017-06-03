@@ -88,7 +88,7 @@ Tweeting
 
 Want to send a tweet every time a new Episode is created?
 
-If python-twiiter is installed, automatic posts for new tweets is possible:
+If python-twitter is installed, automatic posts for new tweets is possible:
 
 * python-twitter_: ``pip install python-twitter``
 
