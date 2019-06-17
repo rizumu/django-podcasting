@@ -22,7 +22,7 @@ def get_license_field():
 
 def get_original_image_field():
     if 'photologue' in settings.INSTALLED_APPS:
-        original_image = ('original_image', models.ForeignKey(to='photologue.Photo', verbose_name=_("image"), default=None, null=True, blank=True, help_text='\n            A podcast must have 1400 x 1400 pixel cover art in JPG or PNG\n            format using RGB color space. See our technical spec for\n            details. To be eligible for featuring on iTunes Stores,\n            choose an attractive, original, and square JPEG (.jpg) or\n            PNG (.png) image at a size of 1400x1400 pixels. The image\n            will be scaled down to 50x50 pixels at smallest in iTunes.\n            For reference see the <a\n            href="http://www.apple.com/itunes/podcasts/specs.html#metadata">iTunes\n            Podcast specs</a>.<br /><br /> For episode artwork to\n            display in iTunes, image must be <a\n            href="http://answers.yahoo.com/question/index?qid=20080501164348AAjvBvQ">\n            saved to file\'s <strong>metadata</strong></a> before\n            enclosure uploading!'))
+        original_image = ('original_image', models.ForeignKey(to='photologue.Photo', verbose_name=_("image"), default=None, null=True, blank=True, on_delete=models.SET_NULL,help_text='\n            A podcast must have 1400 x 1400 pixel cover art in JPG or PNG\n            format using RGB color space. See our technical spec for\n            details. To be eligible for featuring on iTunes Stores,\n            choose an attractive, original, and square JPEG (.jpg) or\n            PNG (.png) image at a size of 1400x1400 pixels. The image\n            will be scaled down to 50x50 pixels at smallest in iTunes.\n            For reference see the <a\n            href="http://www.apple.com/itunes/podcasts/specs.html#metadata">iTunes\n            Podcast specs</a>.<br /><br /> For episode artwork to\n            display in iTunes, image must be <a\n            href="http://answers.yahoo.com/question/index?qid=20080501164348AAjvBvQ">\n            saved to file\'s <strong>metadata</strong></a> before\n            enclosure uploading!'))
     else:
         original_image = ('original_image', models.ImageField(help_text='\n            A podcast must have 1400 x 1400 pixel cover art in JPG or PNG\n            format using RGB color space. See our technical spec for\n            details. To be eligible for featuring on iTunes Stores,\n            choose an attractive, original, and square JPEG (.jpg) or\n            PNG (.png) image at a size of 1400x1400 pixels. The image\n            will be scaled down to 50x50 pixels at smallest in iTunes.\n            For reference see the <a\n            href="http://www.apple.com/itunes/podcasts/specs.html#metadata">iTunes\n            Podcast specs</a>.<br /><br /> For episode artwork to\n            display in iTunes, image must be <a\n            href="http://answers.yahoo.com/question/index?qid=20080501164348AAjvBvQ">\n            saved to file\'s <strong>metadata</strong></a> before\n            enclosure uploading!', upload_to=podcasting.models.get_episode_upload_folder, verbose_name='image', blank=True))
     return original_image
@@ -126,8 +126,8 @@ class Migration(migrations.Migration):
                 ('keywords', models.CharField(help_text='A comma-demlimitedlist of up to 12 words for iTunes\n            searches. Perhaps include misspellings of the title.', max_length=255, verbose_name='keywords', blank=True)),
                 ('itunes', models.URLField(help_text='Fill this out after saving this show and at least one\n            episode. URL should look like:\n            "http://phobos.apple.com/WebObjects/MZStore.woa/wa/viewPodcast?id=000000000".\n            See <a href="http://code.google.com/p/django-podcast/">documentation</a> for more.', verbose_name='itunes store url', blank=True)),
                 ('twitter_tweet_prefix', models.CharField(help_text='Enter a short ``tweet_text`` prefix for new episodes on this show.', max_length=80, verbose_name='Twitter tweet prefix', blank=True)),
-                ('owner', models.ForeignKey(related_name=b'podcast_shows', verbose_name='owner', to=settings.AUTH_USER_MODEL, help_text='Make certain the user account has a name and e-mail address.')),
-                ('site', models.ForeignKey(verbose_name='Site', to='sites.Site')),
+                ('owner', models.ForeignKey(related_name=b'podcast_shows', verbose_name='owner', to=settings.AUTH_USER_MODEL, on_delete=models.PROTECT, help_text='Make certain the user account has a name and e-mail address.')),
+                ('site', models.ForeignKey(verbose_name='Site', to='sites.Site', on_delete=models.PROTECT)),
                 get_license_field(),
             ],
             options={
@@ -140,13 +140,13 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='episode',
             name='show',
-            field=models.ForeignKey(verbose_name='Podcast', to='podcasting.Show'),
+            field=models.ForeignKey(verbose_name='Podcast', to='podcasting.Show', on_delete=models.PROTECT),
             preserve_default=True,
         ),
         migrations.AddField(
             model_name='enclosure',
             name='episode',
-            field=models.ForeignKey(verbose_name='episode', to='podcasting.Episode'),
+            field=models.ForeignKey(verbose_name='episode', to='podcasting.Episode', on_delete=models.PROTECT),
             preserve_default=True,
         ),
         migrations.AlterUniqueTogether(
@@ -156,7 +156,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='embedmedia',
             name='episode',
-            field=models.ForeignKey(verbose_name='episode', to='podcasting.Episode'),
+            field=models.ForeignKey(verbose_name='episode', to='podcasting.Episode', on_delete=models.PROTECT),
             preserve_default=True,
         ),
         migrations.AlterUniqueTogether(
