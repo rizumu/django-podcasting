@@ -125,6 +125,7 @@ class Show(models.Model):
     owner = models.ForeignKey(
         settings.AUTH_USER_MODEL, related_name="podcast_shows",
         verbose_name=_("owner"),
+        on_delete=models.PROTECT,
         help_text=_("""Make certain the user account has a name and e-mail address."""))
 
     editor_email = models.EmailField(
@@ -188,7 +189,9 @@ class Show(models.Model):
             to 4000 characters."""))
 
     if 'photologue' in settings.INSTALLED_APPS:
-        original_image = models.ForeignKey(Photo, verbose_name=_("image"), default=None, null=True, blank=True, help_text=_("""
+        original_image = models.ForeignKey(Photo, verbose_name=_("image"), default=None, null=True, blank=True, 
+        on_delete=models.SET_NULL,
+        help_text=_("""
                 A podcast must have 1400 x 1400 pixel cover art in JPG or PNG
                 format using RGB color space. See our technical spec for
                 details. To be eligible for featuring on iTunes Stores,
@@ -347,7 +350,9 @@ class Episode(models.Model):
     tweet_text = models.CharField(_("tweet text"), max_length=140, editable=False)
 
     if 'photologue' in settings.INSTALLED_APPS:
-        original_image = models.ForeignKey(Photo, verbose_name=_("image"), default=None, null=True, blank=True, help_text=_("""
+        original_image = models.ForeignKey(Photo, verbose_name=_("image"), default=None, null=True, blank=True,
+        on_delete=models.PROTECT,
+        help_text=_("""
                 A podcast must have 1400 x 1400 pixel cover art in JPG or PNG
                 format using RGB color space. See our technical spec for
                 details. To be eligible for featuring on iTunes Stores,
@@ -564,7 +569,7 @@ class EmbedMedia(models.Model):
     Ideally this will be used with django-embed-video which supports
     easy embeding for YouTube and Vimeo videos and music from SoundCloud.
     """
-    episode = models.ForeignKey(Episode, verbose_name=_("episode"))
+    episode = models.ForeignKey(Episode, verbose_name=_("episode"), on_delete=models.PROTECT)
 
     if EmbedVideoField:
         url = EmbedVideoField(_("url"), help_text=_("URL of the media file"))

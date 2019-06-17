@@ -80,12 +80,12 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='episode',
             name='slug',
-            field=AutoSlugField(verbose_name='slug', unique=b'True', editable=False),
+            field=AutoSlugField(verbose_name='slug', unique='True', editable=False),
         ),
         migrations.AlterField(
             model_name='show',
             name='slug',
-            field=AutoSlugField(verbose_name='slug', unique=b'True', editable=False),
+            field=AutoSlugField(verbose_name='slug', unique='True', editable=False),
         ),
 
         migrations.RunPython(move_enclosure_episode),
