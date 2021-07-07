@@ -9,3 +9,4 @@ MANIFEST
 .eggs
 docs/_build/
 htmlcov/
+.DS_Store
