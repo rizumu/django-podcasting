@@ -16,7 +16,7 @@ except ImportError:
     from django.core.urlresolvers import reverse
 from django.db import models
 from django.template.defaultfilters import slugify
-from django.utils.encoding import python_2_unicode_compatible
+
 from django.utils.translation import ugettext_lazy as _
 
 from django.contrib.sites.models import Site
@@ -99,7 +99,6 @@ def get_episode_upload_folder(instance, pathname):
         )
 
 
-@python_2_unicode_compatible
 class Show(models.Model):
     """
     A podcast show, which has many episodes.
@@ -299,7 +298,6 @@ class Show(models.Model):
             return None
 
 
-@python_2_unicode_compatible
 class Episode(models.Model):
     """
     An individual podcast episode and it's unique attributes.
@@ -498,7 +496,6 @@ class Episode(models.Model):
         return False
 
 
-@python_2_unicode_compatible
 class Enclosure(models.Model):
     """
     An enclosure is one, of possibly many, files/filetypes of an episode.
@@ -558,7 +555,6 @@ class Enclosure(models.Model):
         return "{0} - {1}".format(self.url, self.mime)
 
 
-@python_2_unicode_compatible
 class EmbedMedia(models.Model):
     """
     Associate a media URL to an Episode.
