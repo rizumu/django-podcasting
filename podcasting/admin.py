@@ -1,4 +1,7 @@
-from django.utils.translation import ugettext_lazy as _
+try:
+    from django.utils.translation import gettext_lazy as _
+except ImportError:
+    from django.utils.translation import ugettext_lazy as _
 
 from django.contrib import admin
 
@@ -7,7 +10,11 @@ try:
 except ImportError:
     AdminThumbnail = None
 
-from podcasting.forms import AdminShowForm, AdminEpisodeForm, EnclosureForm as AdminEnclosureForm
+from podcasting.forms import (
+    AdminShowForm,
+    AdminEpisodeForm,
+    EnclosureForm as AdminEnclosureForm,
+)
 from podcasting.models import Show, Episode, Enclosure, EmbedMedia
 from podcasting.utils.twitter import can_tweet
 
@@ -26,11 +33,13 @@ class ShowAdmin(admin.ModelAdmin):
 
     def published_flag(self, obj):
         return bool(obj.published)
+
     published_flag.short_description = _("Published")
     published_flag.boolean = True
 
     def show_sites(self, obj):
-        return ', '.join([site.name for site in obj.sites.all()])
+        return ", ".join([site.name for site in obj.sites.all()])
+
     show_sites.short_description = "Sites"
 
 
@@ -48,11 +57,13 @@ class EpisodeAdmin(admin.ModelAdmin):
 
     def published_flag(self, obj):
         return bool(obj.published)
+
     published_flag.short_description = _("Published")
     published_flag.boolean = True
 
     def episode_shows(self, obj):
-        return ', '.join([show.title for show in obj.shows.all()])
+        return ", ".join([show.title for show in obj.shows.all()])
+
     episode_shows.short_description = "Shows"
 
     def episode_sites(self, obj):
@@ -61,7 +72,8 @@ class EpisodeAdmin(admin.ModelAdmin):
             for site in show.sites.all():
                 if site not in sites:
                     sites.append(site)
-        return ', '.join([site.name for site in sites])
+        return ", ".join([site.name for site in sites])
+
     episode_sites.short_description = "Sites"
 
     def save_form(self, request, form, change):
