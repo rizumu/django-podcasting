@@ -3,9 +3,14 @@ try:
 except ImportError:
     from datetime.datetime import now  # noqa
 
+try:
+    from django.utils.translation import gettext_lazy as _
+except ImportError:
+    from django.utils.translation import ugettext_lazy as _
+
 from django import forms
 from django.conf import settings
-from django.utils.translation import ugettext_lazy as _
+
 from django.core.exceptions import ObjectDoesNotExist
 
 from podcasting.utils.twitter import can_tweet
@@ -15,14 +20,17 @@ from podcasting.models import Enclosure, Episode, Show
 
 class BaseShowForm(forms.ModelForm):
 
-    if 'photologue' in settings.INSTALLED_APPS:
+    if "photologue" in settings.INSTALLED_APPS:
         original_image = forms.ImageField(
             widget=CustomAdminThumbnailWidget,
-            help_text=Show._meta.get_field("original_image").help_text)
+            help_text=Show._meta.get_field("original_image").help_text,
+        )
 
     publish = forms.BooleanField(
         required=False,
-        help_text=_("Checking this will publish this show on the site, no turning back."),
+        help_text=_(
+            "Checking this will publish this show on the site, no turning back."
+        ),
     )
 
     class Meta:
@@ -33,11 +41,17 @@ class BaseShowForm(forms.ModelForm):
             "owner",
             "editor_email",
             "webmaster_email",
-            "title", "subtitle", "description",
+            "title",
+            "subtitle",
+            "description",
             "twitter_tweet_prefix",
-            "feedburner", "itunes",
-            "keywords", "organization", "license",
-            "explicit", "link",
+            "feedburner",
+            "itunes",
+            "keywords",
+            "organization",
+            "license",
+            "explicit",
+            "link",
             "on_itunes",
             "publish",
         ]
@@ -46,14 +60,12 @@ class BaseShowForm(forms.ModelForm):
 
 
 class ShowAddForm(BaseShowForm):
-
     def clean_publish(self):
         if self.cleaned_data["publish"]:
             self.instance.published = now()
 
 
 class ShowChangeForm(BaseShowForm):
-
     def __init__(self, *args, **kwargs):
         super(ShowChangeForm, self).__init__(*args, **kwargs)
         self.fields["publish"].initial = bool(self.instance.published)
@@ -71,30 +83,37 @@ class ShowChangeForm(BaseShowForm):
 
 class BaseEpisodeForm(forms.ModelForm):
 
-    if 'photologue' in settings.INSTALLED_APPS:
+    if "photologue" in settings.INSTALLED_APPS:
         original_image = forms.ImageField(
             widget=CustomAdminThumbnailWidget,
-            help_text=Episode._meta.get_field("original_image").help_text)
+            help_text=Episode._meta.get_field("original_image").help_text,
+        )
 
     publish = forms.BooleanField(
         required=False,
-        help_text=_("Checking this will publish this episode on the site, no turning back."),
+        help_text=_(
+            "Checking this will publish this episode on the site, no turning back."
+        ),
     )
 
     if can_tweet():
         tweet = forms.BooleanField(
             required=False,
-            help_text=_("Checking this will send out a tweet announcing the episode."))
+            help_text=_("Checking this will send out a tweet announcing the episode."),
+        )
 
     class Meta:
         model = Episode
         fields = [
             "original_image",
             "author_text",
-            "title", "subtitle",
+            "title",
+            "subtitle",
             "description",
             "tracklist",
-            "hours", "minutes", "seconds",
+            "hours",
+            "minutes",
+            "seconds",
             "publish",
         ]
         if "taggit" in settings.INSTALLED_APPS:
@@ -122,17 +141,24 @@ class BaseEpisodeForm(forms.ModelForm):
         return instance
 
     def validate_published(self):
-        if not self.instance.enclosure_set.count() or not self.instance.embedmedia_set.count():
+        if (
+            not self.instance.enclosure_set.count()
+            or not self.instance.embedmedia_set.count()
+        ):
             raise forms.ValidationError(
-                _("An episode must have at least one enclosure or media file before publishing.\n "
-                  "Uncheck, save this episode, and add an encoslure before publishing."))
+                _(
+                    "An episode must have at least one enclosure or media file before publishing.\n "
+                    "Uncheck, save this episode, and add an encoslure before publishing."
+                )
+            )
         elif not self.instance.is_show_published:
-            raise forms.ValidationError(_("The show for this episode is not yet published"))
+            raise forms.ValidationError(
+                _("The show for this episode is not yet published")
+            )
         self.instance.published = now()
 
 
 class EpisodeChangeForm(BaseEpisodeForm):
-
     def __init__(self, *args, **kwargs):
         super(EpisodeChangeForm, self).__init__(*args, **kwargs)
         self.fields["publish"].initial = bool(self.instance.published)
@@ -155,11 +181,12 @@ class EpisodeITunesChangeForm(EpisodeChangeForm):
             self.fields[key].required = True
 
     class Meta(EpisodeChangeForm.Meta):
-        fields = EpisodeChangeForm.Meta.fields + EpisodeChangeForm.Meta.extra_fields_itunes
+        fields = (
+            EpisodeChangeForm.Meta.fields + EpisodeChangeForm.Meta.extra_fields_itunes
+        )
 
 
 class EpisodeAddForm(BaseEpisodeForm):
-
     def clean_publish(self):
         if self.cleaned_data["publish"]:
             self.validate_published()
@@ -176,7 +203,6 @@ class EpisodeITunesAddForm(EpisodeAddForm):
 
 
 class EnclosureForm(forms.ModelForm):
-
     class Meta:
         model = Enclosure
         fields = [
@@ -192,13 +218,16 @@ class EnclosureForm(forms.ModelForm):
 
     def clean(self):
         cleaned_data = super(EnclosureForm, self).clean()
-        for episode in cleaned_data.get('episodes'):
+        for episode in cleaned_data.get("episodes"):
             try:
-                episode.enclosure_set.get(mime=cleaned_data.get('mime'))
+                episode.enclosure_set.get(mime=cleaned_data.get("mime"))
                 raise forms.ValidationError(
-                    _("An episode can only have one enclosure of a specific mimetype. \n "
-                      "Episode '%(item)s' already has an enclosure of mimetype %(mimetype)s"),
-                    params={'item': episode, 'mimetype': cleaned_data.get('mime')})
+                    _(
+                        "An episode can only have one enclosure of a specific mimetype. \n "
+                        "Episode '%(item)s' already has an enclosure of mimetype %(mimetype)s"
+                    ),
+                    params={"item": episode, "mimetype": cleaned_data.get("mime")},
+                )
             except ObjectDoesNotExist:
                 pass
 
@@ -216,7 +245,9 @@ class AdminShowForm(forms.ModelForm):
     publish = forms.BooleanField(
         label=_("publish"),
         required=False,
-        help_text=_("Checking this will publish this show on the site, no turning back."),
+        help_text=_(
+            "Checking this will publish this show on the site, no turning back."
+        ),
     )
 
     class Meta:
@@ -228,11 +259,17 @@ class AdminShowForm(forms.ModelForm):
             "owner",
             "editor_email",
             "webmaster_email",
-            "title", "subtitle", "description",
+            "title",
+            "subtitle",
+            "description",
             "twitter_tweet_prefix",
-            "feedburner", "itunes",
-            "keywords", "organization", "license",
-            "explicit", "link",
+            "feedburner",
+            "itunes",
+            "keywords",
+            "organization",
+            "license",
+            "explicit",
+            "link",
             "on_itunes",
             "publish",
         ]
@@ -259,12 +296,16 @@ class AdminEpisodeForm(forms.ModelForm):
     publish = forms.BooleanField(
         label=_("publish"),
         required=False,
-        help_text=_("Checking this will publish this episode on the site, no turning back."))
+        help_text=_(
+            "Checking this will publish this episode on the site, no turning back."
+        ),
+    )
 
     if can_tweet():
         tweet = forms.BooleanField(
             required=False,
-            help_text=_("Checking this will send out a tweet announcing the episode."))
+            help_text=_("Checking this will send out a tweet announcing the episode."),
+        )
 
     class Meta:
         model = Episode
@@ -272,10 +313,13 @@ class AdminEpisodeForm(forms.ModelForm):
             "shows",
             "original_image",
             "author_text",
-            "title", "subtitle",
+            "title",
+            "subtitle",
             "description",
             "tracklist",
-            "hours", "minutes", "seconds",
+            "hours",
+            "minutes",
+            "seconds",
             "publish",
             "keywords",
             "explicit",
@@ -289,12 +333,20 @@ class AdminEpisodeForm(forms.ModelForm):
         self.fields["publish"].initial = bool(self.instance.published)
 
     def validate_published(self):
-        if not self.instance.enclosure_set.count() and not self.instance.embedmedia_set.count():
+        if (
+            not self.instance.enclosure_set.count()
+            and not self.instance.embedmedia_set.count()
+        ):
             raise forms.ValidationError(
-                _("An episode must have at least one enclosure or media file before publishing.\n "
-                  "Uncheck, save this episode, and add an encoslure before publishing."))
+                _(
+                    "An episode must have at least one enclosure or media file before publishing.\n "
+                    "Uncheck, save this episode, and add an encoslure before publishing."
+                )
+            )
         elif not self.instance.is_show_published:
-            raise forms.ValidationError(_("The show for this episode is not yet published"))
+            raise forms.ValidationError(
+                _("The show for this episode is not yet published")
+            )
         self.instance.published = now()
 
     def clean_publish(self):
