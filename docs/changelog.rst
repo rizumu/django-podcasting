@@ -1,6 +1,12 @@
 Changelog
 =========
 
+1.3.3
+----
+- Updated Import Logic To Support Django 4 (#31) - @Seth
+- Make it compatible with Python 3 (#30) - @boatcoder
+- Doc fix in installation.rst (#26) - @batisteo
+
 1.3.2
 ----
 - Fix for initial migration with photologue - @urtzai
