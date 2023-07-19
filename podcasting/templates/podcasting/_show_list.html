@@ -6,8 +6,8 @@
     {% for show in show_list %}
         <div class="podcast-show">
             <h3><a href="{{ show.get_absolute_url }}">{{ show.title }}</a></h3>
-            <a href="{{ show.img_show_lg.url }}" rel="facebox">
-                <img src="{{ show.img_show_sm.url }}" alt="{{ show.title }}" class="left" />
+            <a href="{{ show.itunes_lg.url }}" rel="facebox">
+                <img src="{{ show.itunes_sm.url }}" alt="{{ show.title }}" class="left" />
             </a>
             <h4>{{ show.subtitle }}</h4>
             <p><a href="{{ show.link }}">{{ show.link }}</a></p>

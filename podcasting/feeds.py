@@ -67,13 +67,14 @@ class ITunesElements(object):
         super(ITunesElements, self).add_root_elements(handler)
 
         show = self.feed["show"]
+        site = Site.objects.get_current()
 
         if show.original_image:
             if imagekit:
                 itunes_sm_url = show.img_itunes_sm.url
                 itunes_lg_url = show.img_itunes_lg.url
             elif photologue:
-                site = Site.objects.get_current()
+                #site = Site.objects.get_current()
                 itunes_sm_url = "%s%s" % (site.domain, show.original_image.get_img_itunes_sm_url())
                 itunes_lg_url = "%s%s" % (site.domain, show.original_image.get_img_itunes_lg_url())
             elif easy_thumbnails:
@@ -96,9 +97,9 @@ class ITunesElements(object):
                 itunes_sm_url = show.original_image.url
                 itunes_lg_url = show.original_image.url
             if itunes_sm_url and itunes_lg_url:
-                handler.addQuickElement("itunes:image", attrs={"href": itunes_lg_url})
+                handler.addQuickElement("itunes:image", attrs={"href": 'https://{0}{1}'.format(site.domain,itunes_lg_url)})
                 handler.startElement("image", {})
-                handler.addQuickElement("url", itunes_sm_url)
+                handler.addQuickElement("url", 'https://{0}{1}'.format(site.domain,itunes_sm_url))
                 handler.addQuickElement("title", self.feed["title"])
                 handler.addQuickElement("link", self.feed["link"])
                 handler.endElement("image")
@@ -110,7 +111,10 @@ class ITunesElements(object):
         handler.addQuickElement("itunes:name", show.owner.get_full_name())
         handler.addQuickElement("itunes:email", show.owner.email)
         handler.endElement("itunes:owner")
-        handler.addQuickElement("itunes:category", attrs={"text": self.feed["categories"][0]})
+        #CATEGORY/SUBCATEGORY SETUP
+        handler.startElement("itunes:category",attrs={"text": self.feed["categories"][0]})
+        handler.addQuickElement("itunes:category", attrs={"text": self.feed["categories"][1]})
+        handler.endElement("itunes:category")
         handler.addQuickElement("itunes:summary", show.description)
         handler.addQuickElement("itunes:explicit", show.get_explicit_display())
         if show.redirect:
@@ -134,6 +138,8 @@ class ITunesElements(object):
 
         show = item["show"]
         episode = item["episode"]
+        site = Site.objects.get_current()
+
         if episode.original_image:
             if imagekit:
                 itunes_sm_url = episode.img_itunes_sm.url
@@ -161,9 +167,9 @@ class ITunesElements(object):
                 itunes_sm_url = episode.original_image.url
                 itunes_lg_url = episode.original_image.url
             if itunes_sm_url and itunes_lg_url:
-                handler.addQuickElement("itunes:image", attrs={"href": itunes_lg_url})
+                handler.addQuickElement("itunes:image", attrs={"href":'https://{0}{1}'.format(site.domain,itunes_lg_url)})
                 handler.startElement("image", {})
-                handler.addQuickElement("url", itunes_sm_url)
+                handler.addQuickElement("url", 'https://{0}{1}'.format(site.domain,itunes_sm_url))
                 handler.addQuickElement("title", episode.title)
                 handler.addQuickElement("link", episode.get_absolute_url())
                 handler.endElement("image")
@@ -216,7 +222,10 @@ class ShowFeed(Feed):
         return show.link
 
     def categories(self, show):
-        return ("Music",)
+        categories = show.show_categories.split(",")
+        #print("Show Catgories = {0}{1}".format(categories[0],categories[1]))
+        return (categories)
+        #return ("Sports","Golf",)
 
     def feed_copyright(self, show):
         if licenses:
@@ -263,7 +272,10 @@ class ShowFeed(Feed):
     def item_enclosure_url(self, episode):
         try:
             e = episode.enclosure_set.get(mime=self.mime)
-            return e.url
+            enclosureSite = Site.objects.get_current()
+            enclosureShow = enclosureSite.domain
+            enclosure_url = "https://{0}/media/{1}".format(enclosureShow,e.url)
+            return enclosure_url
         except Enclosure.DoesNotExist:
             pass
 
