@@ -111,6 +111,21 @@ def get_episode_upload_folder(instance, pathname):
             settings.PODCASTING_IMG_PATH, instance.slug, slugify(root), ext
         )
 
+def get_enclosure_upload_folder(instance, pathname):
+    "A standardized pathname for uploaded enclosure files."
+    root, ext = os.path.splitext(pathname)
+    if instance.episodes.count() == 1:
+        return "audio/{1}/{2}{3}".format(
+            settings.PODCASTING_AUDIO_PATH,
+            instance.episodes.all()[0].slug,
+            slugify(root),
+            ext
+        )
+    else:
+        return "{0}/podcasts/episodes/{1}/{2}{3}".format(
+            settings.PODCASTING_AUDIO_PATH, instance.slug, slugify(root), ext
+        )
+
 
 class Show(models.Model):
     """
@@ -239,6 +254,15 @@ class Show(models.Model):
             include lists of irrelevant words in the itunes:summary,
             description, or itunes:keywords tags. This field can be up
             to 4000 characters."""
+        ),
+    )
+
+    show_categories = models.CharField(
+        _("Categories"),
+        max_length=255,
+        blank=True,
+        help_text=_(
+            """Enter the category/subcategory of the show, separated by a comma."""
         ),
     )
 
@@ -390,7 +414,7 @@ class Show(models.Model):
         return self.title
 
     def get_share_url(self):
-        return "http://{0}{1}".format(
+        return "{0}{1}".format(
             Site.objects.get_current(), self.get_absolute_url()
         )
 
@@ -638,6 +662,7 @@ class Episode(models.Model):
                 self.title,
                 result["url"],
             )
+            print(self.tweet_text)
         return self.tweet_text
 
     def tweet(self):
@@ -659,7 +684,7 @@ class Episode(models.Model):
             return 0
 
     def get_share_url(self):
-        return "http://{0}{1}".format(
+        return "{0}{1}".format(
             Site.objects.get_current(), self.get_absolute_url()
         )
 
@@ -696,8 +721,8 @@ class Enclosure(models.Model):
 
     episodes = models.ManyToManyField(Episode, verbose_name=_("Episodes"))
 
-    url = models.URLField(
-        _("url"),
+    url = models.FileField(
+        upload_to=get_enclosure_upload_folder,
         help_text=_(
             """URL of the media file. <br /> It is <strong>very</strong>
             important to remember that for episode artwork to display in iTunes, image must be
